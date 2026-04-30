@@ -24,31 +24,34 @@
 - LD2410C + LD2450 mesmos sensores radar
 - Ficheiros em `hardware/v2/`
 
-## Analise da v2 — Problemas Encontrados
+## Analise da v2 — Problemas Encontrados e Correcoes
 
-### CRITICOS
+### CRITICOS (PCB — pendente)
 1. **Routing nao iniciado** — 0 tracks, 0 vias, 16/17 nets unrouted
 2. **Single layer** — so F.Cu, precisa minimo 2 camadas (ground plane para RF)
 3. **5V/3.3V domain crossing** — UART e RADAR_OUT entre ESP32 (3.3V) e radares (5V VCC)
-   - **Nota**: LD2410C/LD2450 provavelmente IO a 3.3V internamente (regulador interno) — verificar datasheets
+   - **Aceitavel**: LD2410C/LD2450 usam regulador interno, IO a 3.3V — sem level shifter necessario
 4. **ESP32 EPAD sem thermal vias** — precisa minimo 9 vias 0.3mm drill
 
-### ALTOS
-5. **10uF em 0402** — C3/C5/C7 muito pequenos para 10uF, derating severo a 5V. Mudar para 0603/0805
-6. **Sem ESD no USB** — adicionar TVS (USBLC6-2SC6 ou similar)
-7. **71% partes sem MPN** — so 7/24 tem MPN atribuido
-8. **U4 EN pin** — analyzer reporta floating mas **e FALSE POSITIVE** — EN esta tied a VIN (always-on)
+### CORRIGIDOS no schematic (2026-04-30)
+5. ~~**10uF em 0402**~~ — **CORRIGIDO**: C3/C5/C7 mudados para `C_0805_2012Metric`
+6. ~~**Sem ESD no USB**~~ — **CORRIGIDO**: Adicionado U5 USBLC6-2SC6 (SOT-23-6) com MPN
+7. **53% partes sem MPN** — 8/17 unique parts tem MPN (melhorado de 7/24 apos remocao de TPs/MHs)
+8. ~~**U4 EN pin floating**~~ — **CORRIGIDO**: Wire reconectado de EN (56.11, 37.54) a IN via +5V net
+   - Nao era false positive — wire endpoint estava 5mm desalinhado do pin
+9. ~~**Sem fiducials**~~ — **CORRIGIDO**: Adicionados FID1/FID2/FID3 (Fiducial_1mm_Dia_2mm_Outer)
+10. ~~**LEDs desconectados**~~ — **CORRIGIDO**: LED1 rotacao 90°→180°, LED2 rotacao 0°→270°
+    - Nao eram false positives — pins nao alinhavam com wires due to rotacao errada
+    - Polaridade verificada: STAT_LED→R5→LED1.A→LED1.K→GND, +3V3→R6→LED2.A→LED2.K→GND
+11. ~~**Test points e mounting holes**~~ — **REMOVIDOS**: TP1-TP8 e H1-H4 removidos per design decisions
+    - Componentes reduzidos de 36 para 28
 
-### MEDIOS
-9. **Courtyard overlaps** — C2/U3 (1.4mm2), C1/U2, C3/U2
-10. **Sem fiducials** — precisa 3 para SMD assembly
-11. **LEDs e switches** — analyzer reporta desconectados mas **sao FALSE POSITIVES** — wiring confirmado no raw schematic
+### MEDIOS (PCB — pendente)
+12. **Courtyard overlaps** — C2/U3 (1.4mm2), C1/U2, C3/U2 — resolver no layout
 
-### FALSE POSITIVES do analyzer (wire-snapping issues)
+### Analyzer false positives remanescentes
 - SW1/SW2 aparecem floating — estao conectados via wires no schematic
-- LED1/LED2 sem resistor — R5/R6 estao ligados, confirmado manualmente
-- TP1-TP8 floating — estao conectados via labels
-- U4.EN floating — tied a VIN
+- U4.EN ainda reporta floating — limitacao do analyzer com T-junctions (wire correto em 56.11, 35)
 
 ## Plano v2 Compacta — Decisoes do Utilizador
 
@@ -104,7 +107,7 @@
   └──────────────────────────────────────┘
 ```
 
-## Componentes v2
+## Componentes v2 (28 total — atualizado 2026-04-30)
 
 | Ref | Valor | Footprint | Funcao | MPN |
 |-----|-------|-----------|--------|-----|
@@ -112,6 +115,7 @@
 | U2 | LD2410C | Custom THT 5-pin | Radar presenca 24GHz | LD2410C |
 | U3 | LD2450 | Custom THT 8-pin | Radar multi-target 24GHz | LD2450 |
 | U4 | AP2112K-3.3 | SOT-23-5 | LDO 5V->3.3V 600mA | AP2112K-3.3TRG1 |
+| U5 | USBLC6-2SC6 | SOT-23-6 | USB ESD protection | USBLC6-2SC6 |
 | J1 | USB_C_Receptacle | GCT USB4085 | Alimentacao + USB data | USB4085-GF-A |
 | R1 | 10k | 0402 | Pull-up ESP_EN | - |
 | R2 | 5.1k | 0402 | CC1 pull-down USB-C | - |
@@ -121,17 +125,20 @@
 | R6 | 330R | 0402 | LED2 current limit | - |
 | C1 | 100nF | 0402 | Decoupling U2 +5V | - |
 | C2 | 100nF | 0402 | Decoupling U3 +5V | - |
-| C3 | 10uF | **0805** (mudar de 0402!) | Bulk U3 +5V | - |
+| C3 | 10uF | 0805 | Bulk U3 +5V | - |
 | C4 | 100nF | 0402 | Decoupling U4 IN | - |
-| C5 | 10uF | **0805** (mudar de 0402!) | Bulk U4 IN | - |
+| C5 | 10uF | 0805 | Bulk U4 IN | - |
 | C6 | 100nF | 0402 | Decoupling U4 OUT | - |
-| C7 | 10uF | **0805** (mudar de 0402!) | Bulk U4 OUT | - |
+| C7 | 10uF | 0805 | Bulk U4 OUT | - |
 | C8 | 1uF | 0402 | Reset RC filter | - |
 | C9 | 22uF | 0805 | VBUS bulk (Espressif ref) | - |
 | LED1 | LED_G | 0402 | Status/Zigbee (IO2) | - |
 | LED2 | LED_R | 0402 | Power OK (+3V3) | - |
 | SW1 | B3U-1000P | SMD | Reset button | B3U-1000P |
 | SW2 | B3U-1000P | SMD | Boot button | B3U-1000P |
+| FID1 | Fiducial | 1mm/2mm | SMD assembly ref | - |
+| FID2 | Fiducial | 1mm/2mm | SMD assembly ref | - |
+| FID3 | Fiducial | 1mm/2mm | SMD assembly ref | - |
 
 ## Wiring (GPIO assignments — compativel com firmware v1)
 
