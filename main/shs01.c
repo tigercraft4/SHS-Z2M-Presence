@@ -35,6 +35,7 @@
 
 #include "esp_zigbee_attribute.h"
 #include "esp_zigbee_cluster.h"
+#include "esp_task_wdt.h"
 
 #if !defined CONFIG_ZB_ZCZR
 #error "Enable Router: set CONFIG_ZB_ZCZR=y (menuconfig)"
@@ -147,6 +148,11 @@ static uint32_t shs_lock_fail_count = 0;
 static uint32_t shs_lock_consecutive_fails = 0;
 static uint32_t shs_tx_success_count = 0;
 static uint32_t shs_tx_fail_count = 0;
+
+/* LD2410C health monitoring — frame-based disconnect detection (D-06) */
+static uint32_t shs_ld2410c_last_frame_ms = 0;
+static bool shs_ld2410c_connected = false;
+#define SHS_LD2410C_FRAME_TIMEOUT_MS  3000  /* 3s = ~30 missed frames at 100ms interval */
 
 /* Helper macro: acquire Zigbee lock with retry + exponential backoff, returns on failure */
 #define SHS_ZB_LOCK_ACQUIRE_OR_RETURN() \
@@ -2174,12 +2180,16 @@ static void shs_ld2410_task(void *pvParameters) {
     vTaskDelay(pdMS_TO_TICKS(500));
     shs_apply_ld2410_config();
 
+    /* Subscribe this task to TWDT (per D-02) */
+    ESP_ERROR_CHECK(esp_task_wdt_add(NULL));
+
     uint32_t last_connected_time = 0;
     bool was_connected = false;
     const uint32_t RECOVERY_INTERVAL_MS = 30000;  // Try recovery every 30s if disconnected
 
     while (1) {
         ld2410_process();
+        esp_task_wdt_reset();
 
         /* Monitor connection state and attempt recovery if needed */
         bool connected = ld2410_is_connected();
@@ -2201,6 +2211,20 @@ static void shs_ld2410_task(void *pvParameters) {
             shs_apply_ld2410_config();  // Re-apply configuration
         }
 
+        /* Update LD2410C frame timestamp for disconnect detection (D-06) */
+        if (connected) {
+            shs_ld2410c_last_frame_ms = now;
+            if (!shs_ld2410c_connected) {
+                shs_ld2410c_connected = true;
+                ESP_LOGI(SHS_TAG, "LD2410C connected (frame received)");
+            }
+        } else if (shs_ld2410c_connected && shs_ld2410c_last_frame_ms > 0 &&
+                   (now - shs_ld2410c_last_frame_ms) > SHS_LD2410C_FRAME_TIMEOUT_MS) {
+            shs_ld2410c_connected = false;
+            ESP_LOGW(SHS_TAG, "LD2410C disconnected (no frame for %lu ms)",
+                     (unsigned long)(now - shs_ld2410c_last_frame_ms));
+        }
+
         was_connected = connected;
         vTaskDelay(pdMS_TO_TICKS(20));  /* 20ms delay - priority 4 gives Zigbee room */
     }
@@ -2218,6 +2242,9 @@ static void shs_ld2450_task(void *pvParameters) {
     vTaskDelay(pdMS_TO_TICKS(2500));
     shs_zone_cfg_apply_to_sensor();
 
+    /* Subscribe this task to TWDT (per D-02) */
+    ESP_ERROR_CHECK(esp_task_wdt_add(NULL));
+
     uint32_t last_connected_time = 0;
     bool was_connected = false;
     const uint32_t RECOVERY_INTERVAL_MS = 30000;  // Try recovery every 30s if disconnected
@@ -2227,6 +2254,7 @@ static void shs_ld2450_task(void *pvParameters) {
 
     while (1) {
         ld2450_process();
+        esp_task_wdt_reset();
 
         /* Check if zone config needs to be applied (debounced) */
         shs_zone_cfg_check_pending();
@@ -3183,6 +3211,15 @@ void app_main(void) {
 
     /* Initialize light driver */
     light_driver_init(LIGHT_DEFAULT_OFF);
+
+    /* Initialize Task Watchdog Timer (per D-01, D-03, D-04) */
+    esp_task_wdt_config_t twdt_config = {
+        .timeout_ms = 10000,
+        .idle_core_mask = 0,
+        .trigger_panic = true,
+    };
+    ESP_ERROR_CHECK(esp_task_wdt_init(&twdt_config));
+    ESP_LOGI(SHS_TAG, "Task watchdog initialized (10s timeout, panic on trigger)");
 
     /* Start Zigbee task FIRST — must be responsive before coordinator interview */
     xTaskCreate(shs_zigbee_task, "shs_zigbee_main", 8192, NULL, 5, NULL);
