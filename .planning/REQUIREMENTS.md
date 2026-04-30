@@ -78,6 +78,29 @@ Explicitly excluded. Documented to prevent scope creep.
 
 ## Traceability
 
-| Requirement | Phase |
-|-------------|-------|
-| *(filled by roadmap)* | |
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| TS-01 | Phase 1 | Pending |
+| TS-02 | Phase 1 | Pending |
+| TS-03 | Phase 1 | Pending |
+| TS-04 | Phase 1 | Pending |
+| NVS-01 | Phase 1 | Pending |
+| ZB-01 | Phase 1 | Pending |
+| ZB-02 | Phase 1 | Pending |
+| SF-01 | Phase 2 | Pending |
+| SF-02 | Phase 2 | Pending |
+| SF-03 | Phase 2 | Pending |
+| CC-01 | Phase 2 | Pending |
+| CC-02 | Phase 2 | Pending |
+| SH-01 | Phase 3 | Pending |
+| SH-02 | Phase 3 | Pending |
+| SH-03 | Phase 3 | Pending |
+| NVS-02 | Phase 3 | Pending |
+| NVS-03 | Phase 3 | Pending |
+| ZB-03 | Phase 3 | Pending |
+| ZB-04 | Phase 3 | Pending |
+| CS-01 | Phase 4 | Pending |
+| CS-02 | Phase 4 | Pending |
+| CS-03 | Phase 4 | Pending |
+| CS-04 | Phase 4 | Pending |
+| CC-03 | Phase 4 | Pending |
