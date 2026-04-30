@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [ ] **Phase 1: Critical Bug Fixes & Concurrency Safety** - Eliminate crashes, race conditions, and silent Zigbee data loss
 - [ ] **Phase 2: Sensor Filters & Converter Fix** - Re-enable disabled smoothing/filtering and fix coordinate encoding
 - [x] **Phase 3: Reliability & Diagnostics** - Add watchdog, health monitoring, NVS batching, and diagnostic counters
-- [ ] **Phase 4: Code Restructuring** - Split monolith into modules with preserved endpoint compatibility
+- [x] **Phase 4: Code Restructuring** - Split monolith into modules with preserved endpoint compatibility
 
 ## Phase Details
 
@@ -73,9 +73,9 @@ Plans:
   4. All 25 endpoints created in preserved registration order — verified by Zigbee interview match
 **Plans**: 3 plans
 Plans:
-- [ ] 04-01-PLAN.md — Shared state struct (shs_state.h/c) (CS-01)
-- [ ] 04-02-PLAN.md — Zigbee module with endpoint factories (CS-04, CC-03)
-- [ ] 04-03-PLAN.md — Config, sensor, button modules + slim shs01.c (CS-02, CS-03)
+- [x] 04-01-PLAN.md — Shared state struct (shs_state.h/c) (CS-01)
+- [x] 04-02-PLAN.md — Zigbee module with endpoint factories (CS-04, CC-03)
+- [x] 04-03-PLAN.md — Config, sensor, button modules + slim shs01.c (CS-02, CS-03)
 
 ## Progress
 
@@ -87,4 +87,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | 1. Critical Bug Fixes & Concurrency Safety | 2/2 | Complete | 2026-04-30 |
 | 2. Sensor Filters & Converter Fix | 0/? | Not started | - |
 | 3. Reliability & Diagnostics | 2/2 | Complete | 2026-04-30 |
-| 4. Code Restructuring | 0/3 | Planned | - |
+| 4. Code Restructuring | 3/3 | Complete | 2025-01-XX |
