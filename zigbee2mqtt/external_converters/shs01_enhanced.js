@@ -110,6 +110,19 @@ const ATTR_ZONE5_X2_CFG = 0x0063;
 const ATTR_ZONE5_Y2_CFG = 0x0064;
 const ATTR_ZONE5_TARGETS_CFG = 0x0065;  // uint8, read-only from firmware
 
+// Health attributes (on Config cluster 0xFDCD)
+const ATTR_LD2410C_CONNECTED = 0x0070;
+const ATTR_LD2450_CONNECTED = 0x0071;
+
+// Diagnostic attributes (on Config cluster 0xFDCD)
+const ATTR_DIAG_LOCK_SUCCESS = 0x0080;
+const ATTR_DIAG_LOCK_FAIL = 0x0081;
+const ATTR_DIAG_LOCK_CONSEC_FAIL = 0x0082;
+const ATTR_DIAG_TX_SUCCESS = 0x0083;
+const ATTR_DIAG_TX_FAIL = 0x0084;
+const ATTR_DIAG_UPTIME = 0x0085;
+const ATTR_DIAG_FREE_HEAP = 0x0086;
+
 // Manufacturer-specific attributes on Occupancy cluster (EP2) - minimal set
 const ATTR_MS_MOVING = 0xF001;
 const ATTR_MS_STATIC = 0xF002;
@@ -357,6 +370,35 @@ const definition = {
                 }
                 if (msg.data.hasOwnProperty(ATTR_ZONE5_TARGETS_CFG)) {
                     result.zone_5_targets = msg.data[ATTR_ZONE5_TARGETS_CFG];
+                }
+                // Health status
+                if (msg.data.hasOwnProperty(ATTR_LD2410C_CONNECTED)) {
+                    result.ld2410c_connected = msg.data[ATTR_LD2410C_CONNECTED] ? true : false;
+                }
+                if (msg.data.hasOwnProperty(ATTR_LD2450_CONNECTED)) {
+                    result.ld2450_connected = msg.data[ATTR_LD2450_CONNECTED] ? true : false;
+                }
+                // Diagnostic counters
+                if (msg.data.hasOwnProperty(ATTR_DIAG_LOCK_SUCCESS)) {
+                    result.diag_lock_success = msg.data[ATTR_DIAG_LOCK_SUCCESS];
+                }
+                if (msg.data.hasOwnProperty(ATTR_DIAG_LOCK_FAIL)) {
+                    result.diag_lock_fail = msg.data[ATTR_DIAG_LOCK_FAIL];
+                }
+                if (msg.data.hasOwnProperty(ATTR_DIAG_LOCK_CONSEC_FAIL)) {
+                    result.diag_lock_consecutive_fails = msg.data[ATTR_DIAG_LOCK_CONSEC_FAIL];
+                }
+                if (msg.data.hasOwnProperty(ATTR_DIAG_TX_SUCCESS)) {
+                    result.diag_tx_success = msg.data[ATTR_DIAG_TX_SUCCESS];
+                }
+                if (msg.data.hasOwnProperty(ATTR_DIAG_TX_FAIL)) {
+                    result.diag_tx_fail = msg.data[ATTR_DIAG_TX_FAIL];
+                }
+                if (msg.data.hasOwnProperty(ATTR_DIAG_UPTIME)) {
+                    result.diag_uptime_seconds = msg.data[ATTR_DIAG_UPTIME];
+                }
+                if (msg.data.hasOwnProperty(ATTR_DIAG_FREE_HEAP)) {
+                    result.diag_free_heap = msg.data[ATTR_DIAG_FREE_HEAP];
                 }
                 return result;
             },
@@ -678,6 +720,28 @@ const definition = {
         exposes.binary('position_reporting', ea.ALL, true, false)
             .withDescription('Enable position reporting for zone configuration (increases Zigbee traffic)'),
 
+        // Health status
+        e.binary('ld2410c_connected', ea.STATE, true, false)
+            .withDescription('LD2410C sensor connected'),
+        e.binary('ld2450_connected', ea.STATE, true, false)
+            .withDescription('LD2450 sensor connected'),
+
+        // Diagnostics
+        exposes.numeric('diag_lock_success', ea.STATE)
+            .withDescription('Zigbee lock acquisition successes'),
+        exposes.numeric('diag_lock_fail', ea.STATE)
+            .withDescription('Zigbee lock acquisition failures'),
+        exposes.numeric('diag_lock_consecutive_fails', ea.STATE)
+            .withDescription('Consecutive Zigbee lock failures'),
+        exposes.numeric('diag_tx_success', ea.STATE)
+            .withDescription('Zigbee TX successes'),
+        exposes.numeric('diag_tx_fail', ea.STATE)
+            .withDescription('Zigbee TX failures'),
+        exposes.numeric('diag_uptime_seconds', ea.STATE)
+            .withUnit('s').withDescription('Device uptime in seconds'),
+        exposes.numeric('diag_free_heap', ea.STATE)
+            .withUnit('bytes').withDescription('Free heap memory'),
+
         // Zone configuration - composite object that accepts all zone settings at once
         exposes.composite('zone_config', 'zone_config', ea.SET)
             .withDescription('Zone configuration object from web configurator')
@@ -952,6 +1016,17 @@ const definition = {
             ]);
         } catch (e) {
             console.log('SHS01: Failed to read zone target counts on EP1:', e.message);
+        }
+
+        // Read health + diagnostic attributes
+        try {
+            await endpoint1.read(CLUSTER_CONFIG, [
+                ATTR_LD2410C_CONNECTED, ATTR_LD2450_CONNECTED,
+                ATTR_DIAG_LOCK_SUCCESS, ATTR_DIAG_LOCK_FAIL, ATTR_DIAG_LOCK_CONSEC_FAIL,
+                ATTR_DIAG_TX_SUCCESS, ATTR_DIAG_TX_FAIL, ATTR_DIAG_UPTIME, ATTR_DIAG_FREE_HEAP,
+            ]);
+        } catch (e) {
+            console.log('SHS01: Failed to read health/diagnostic attributes on EP1:', e.message);
         }
 
         // Read initial LD2410C occupancy and target states (EP2)
