@@ -30,8 +30,8 @@ Decimal phases appear between their surrounding integers in numeric order.
   4. Sensor callbacks complete without NVS blocking — all writes routed through save_worker task
 **Plans:** 2 plans
 Plans:
-- [ ] 01-01-PLAN.md — Mutex protection for shared state (TS-02, TS-03, TS-04)
-- [ ] 01-02-PLAN.md — Zigbee lock retry + NVS zone save routing (ZB-01, ZB-02, NVS-01)
+- [x] 01-01-PLAN.md — Mutex protection for shared state (TS-02, TS-03, TS-04)
+- [x] 01-02-PLAN.md — Zigbee lock retry + NVS zone save routing (ZB-01, ZB-02, NVS-01)
 
 ### Phase 2: Sensor Filters & Converter Fix
 **Goal**: Clean, accurate position data with proper encoding across firmware and converter
@@ -74,7 +74,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Critical Bug Fixes & Concurrency Safety | 0/? | Not started | - |
+| 1. Critical Bug Fixes & Concurrency Safety | 2/2 | Complete | 2026-04-30 |
 | 2. Sensor Filters & Converter Fix | 0/? | Not started | - |
 | 3. Reliability & Diagnostics | 0/? | Not started | - |
 | 4. Code Restructuring | 0/? | Not started | - |
