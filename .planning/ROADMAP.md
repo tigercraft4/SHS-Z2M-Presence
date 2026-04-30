@@ -57,7 +57,10 @@ Plans:
   3. LD2450 UART reconnection resumes reporting without requiring device reboot
   4. Zone configuration save completes in a single NVS transaction — no partial writes on power loss
   5. Zigbee lock/TX statistics accessible via Z2M for remote troubleshooting
-**Plans**: TBD
+**Plans:** 2 plans
+Plans:
+- [ ] 03-01-PLAN.md — Task watchdog + NVS zone config batching (SH-01, NVS-02, NVS-03)
+- [ ] 03-02-PLAN.md — Sensor health + diagnostics Zigbee exposure + converter (SH-02, SH-03, ZB-03, ZB-04)
 
 ### Phase 4: Code Restructuring
 **Goal**: Monolithic shs01.c replaced by focused modules without breaking any existing functionality
