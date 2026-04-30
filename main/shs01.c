@@ -2209,6 +2209,63 @@ static void shs_boot_button_task(void *pv) {
 }
 
 /* ============================================================================
+ * HEALTH & DIAGNOSTICS REPORTING
+ * ============================================================================ */
+
+/* Static initial values for diagnostic attribute registration */
+static uint32_t shs_diag_init_zero = 0;
+static bool shs_health_init_false = false;
+
+/* Report sensor health status via Zigbee (per D-05) */
+static void shs_zb_report_sensor_health(void) {
+    SHS_ZB_LOCK_ACQUIRE_OR_RETURN();
+
+    bool ld2410c = shs_ld2410c_connected;
+    bool ld2450 = shs_ld2450_connected;
+
+    esp_zb_zcl_set_attribute_val(SHS_EP_LIGHT, SHS_CL_CFG_ID,
+        ESP_ZB_ZCL_CLUSTER_SERVER_ROLE, SHS_ATTR_LD2410C_CONNECTED,
+        &ld2410c, false);
+    esp_zb_zcl_set_attribute_val(SHS_EP_LIGHT, SHS_CL_CFG_ID,
+        ESP_ZB_ZCL_CLUSTER_SERVER_ROLE, SHS_ATTR_LD2450_CONNECTED,
+        &ld2450, false);
+
+    esp_zb_lock_release();
+}
+
+/* Report diagnostic counters via Zigbee (per D-12, D-13) */
+static void shs_zb_report_diagnostics(void) {
+    SHS_ZB_LOCK_ACQUIRE_OR_RETURN();
+
+    uint32_t uptime = (uint32_t)(esp_timer_get_time() / 1000000);
+    uint32_t heap = (uint32_t)esp_get_free_heap_size();
+
+    esp_zb_zcl_set_attribute_val(SHS_EP_LIGHT, SHS_CL_CFG_ID,
+        ESP_ZB_ZCL_CLUSTER_SERVER_ROLE, SHS_ATTR_DIAG_LOCK_SUCCESS,
+        &shs_lock_success_count, false);
+    esp_zb_zcl_set_attribute_val(SHS_EP_LIGHT, SHS_CL_CFG_ID,
+        ESP_ZB_ZCL_CLUSTER_SERVER_ROLE, SHS_ATTR_DIAG_LOCK_FAIL,
+        &shs_lock_fail_count, false);
+    esp_zb_zcl_set_attribute_val(SHS_EP_LIGHT, SHS_CL_CFG_ID,
+        ESP_ZB_ZCL_CLUSTER_SERVER_ROLE, SHS_ATTR_DIAG_LOCK_CONSEC_FAIL,
+        &shs_lock_consecutive_fails, false);
+    esp_zb_zcl_set_attribute_val(SHS_EP_LIGHT, SHS_CL_CFG_ID,
+        ESP_ZB_ZCL_CLUSTER_SERVER_ROLE, SHS_ATTR_DIAG_TX_SUCCESS,
+        &shs_tx_success_count, false);
+    esp_zb_zcl_set_attribute_val(SHS_EP_LIGHT, SHS_CL_CFG_ID,
+        ESP_ZB_ZCL_CLUSTER_SERVER_ROLE, SHS_ATTR_DIAG_TX_FAIL,
+        &shs_tx_fail_count, false);
+    esp_zb_zcl_set_attribute_val(SHS_EP_LIGHT, SHS_CL_CFG_ID,
+        ESP_ZB_ZCL_CLUSTER_SERVER_ROLE, SHS_ATTR_DIAG_UPTIME_S,
+        &uptime, false);
+    esp_zb_zcl_set_attribute_val(SHS_EP_LIGHT, SHS_CL_CFG_ID,
+        ESP_ZB_ZCL_CLUSTER_SERVER_ROLE, SHS_ATTR_DIAG_FREE_HEAP,
+        &heap, false);
+
+    esp_zb_lock_release();
+}
+
+/* ============================================================================
  * LD2410 PROCESSING TASK
  * ============================================================================ */
 
@@ -2312,9 +2369,17 @@ static void shs_ld2450_task(void *pvParameters) {
                 /* Read firmware version on first connection */
                 vTaskDelay(pdMS_TO_TICKS(500));  // Wait for sensor to stabilize
                 ld2450_read_firmware_version();
+                /* Report updated sensor health on reconnection (per D-08) */
+                if (shs_zb_ready) {
+                    shs_zb_report_sensor_health();
+                }
             }
         } else if (was_connected) {
             ESP_LOGW(SHS_TAG, "LD2450 disconnected - will attempt recovery");
+            /* Report disconnection (per D-08) */
+            if (shs_zb_ready) {
+                shs_zb_report_sensor_health();
+            }
         } else if ((now - last_connected_time) > RECOVERY_INTERVAL_MS && last_connected_time > 0) {
             /* Periodically try to restart LD2450 if it stays disconnected */
             ESP_LOGW(SHS_TAG, "LD2450 still disconnected - sending restart command");
@@ -2344,6 +2409,10 @@ static void shs_ld2450_task(void *pvParameters) {
                 ESP_LOGD(SHS_TAG, "Zigbee heartbeat sent (target_count=%d)", shs_ld2450_target_count);
             }
 
+            /* Report health and diagnostics to Z2M (every 60s) */
+            shs_zb_report_sensor_health();
+            shs_zb_report_diagnostics();
+
             /* Check if we haven't had a successful TX in a while (3 minutes) */
             /* This should now only trigger if heartbeat also fails */
             if (time_since_last_tx > 180000 && shs_last_successful_tx > 0 && !shs_zb_rejoin_pending) {
@@ -2352,6 +2421,8 @@ static void shs_ld2450_task(void *pvParameters) {
                 ESP_LOGW(SHS_TAG, "Zigbee: consecutive lock fails: %lu", (unsigned long)shs_lock_consecutive_fails);
                 shs_zb_rejoin_pending = true;
                 shs_zb_connected = false;
+                /* Update health attrs to reflect connectivity loss */
+                shs_zb_report_sensor_health();
                 /* Reset counters after rejoin attempt */
                 shs_lock_fail_count = 0;
                 shs_lock_success_count = 0;
@@ -2653,6 +2724,28 @@ static void shs_zigbee_task(void *pvParameters) {
             ESP_ZB_ZCL_ATTR_TYPE_U8, ESP_ZB_ZCL_ATTR_ACCESS_READ_ONLY | ESP_ZB_ZCL_ATTR_ACCESS_REPORTING, &shs_zone5_targets);
         esp_zb_custom_cluster_add_custom_attr(cfg_cl, SHS_ATTR_ZONE5_TYPE_CFG,
             ESP_ZB_ZCL_ATTR_TYPE_U8, ESP_ZB_ZCL_ATTR_ACCESS_READ_WRITE, &shs_zone5_type);
+
+        /* Health attributes (read-only) */
+        esp_zb_custom_cluster_add_custom_attr(cfg_cl, SHS_ATTR_LD2410C_CONNECTED,
+            ESP_ZB_ZCL_ATTR_TYPE_BOOL, ESP_ZB_ZCL_ATTR_ACCESS_READ_ONLY | ESP_ZB_ZCL_ATTR_ACCESS_REPORTING, &shs_health_init_false);
+        esp_zb_custom_cluster_add_custom_attr(cfg_cl, SHS_ATTR_LD2450_CONNECTED,
+            ESP_ZB_ZCL_ATTR_TYPE_BOOL, ESP_ZB_ZCL_ATTR_ACCESS_READ_ONLY | ESP_ZB_ZCL_ATTR_ACCESS_REPORTING, &shs_health_init_false);
+
+        /* Diagnostic counters (read-only) */
+        esp_zb_custom_cluster_add_custom_attr(cfg_cl, SHS_ATTR_DIAG_LOCK_SUCCESS,
+            ESP_ZB_ZCL_ATTR_TYPE_U32, ESP_ZB_ZCL_ATTR_ACCESS_READ_ONLY | ESP_ZB_ZCL_ATTR_ACCESS_REPORTING, &shs_diag_init_zero);
+        esp_zb_custom_cluster_add_custom_attr(cfg_cl, SHS_ATTR_DIAG_LOCK_FAIL,
+            ESP_ZB_ZCL_ATTR_TYPE_U32, ESP_ZB_ZCL_ATTR_ACCESS_READ_ONLY | ESP_ZB_ZCL_ATTR_ACCESS_REPORTING, &shs_diag_init_zero);
+        esp_zb_custom_cluster_add_custom_attr(cfg_cl, SHS_ATTR_DIAG_LOCK_CONSEC_FAIL,
+            ESP_ZB_ZCL_ATTR_TYPE_U32, ESP_ZB_ZCL_ATTR_ACCESS_READ_ONLY | ESP_ZB_ZCL_ATTR_ACCESS_REPORTING, &shs_diag_init_zero);
+        esp_zb_custom_cluster_add_custom_attr(cfg_cl, SHS_ATTR_DIAG_TX_SUCCESS,
+            ESP_ZB_ZCL_ATTR_TYPE_U32, ESP_ZB_ZCL_ATTR_ACCESS_READ_ONLY | ESP_ZB_ZCL_ATTR_ACCESS_REPORTING, &shs_diag_init_zero);
+        esp_zb_custom_cluster_add_custom_attr(cfg_cl, SHS_ATTR_DIAG_TX_FAIL,
+            ESP_ZB_ZCL_ATTR_TYPE_U32, ESP_ZB_ZCL_ATTR_ACCESS_READ_ONLY | ESP_ZB_ZCL_ATTR_ACCESS_REPORTING, &shs_diag_init_zero);
+        esp_zb_custom_cluster_add_custom_attr(cfg_cl, SHS_ATTR_DIAG_UPTIME_S,
+            ESP_ZB_ZCL_ATTR_TYPE_U32, ESP_ZB_ZCL_ATTR_ACCESS_READ_ONLY | ESP_ZB_ZCL_ATTR_ACCESS_REPORTING, &shs_diag_init_zero);
+        esp_zb_custom_cluster_add_custom_attr(cfg_cl, SHS_ATTR_DIAG_FREE_HEAP,
+            ESP_ZB_ZCL_ATTR_TYPE_U32, ESP_ZB_ZCL_ATTR_ACCESS_READ_ONLY | ESP_ZB_ZCL_ATTR_ACCESS_REPORTING, &shs_diag_init_zero);
 
         esp_zb_cluster_list_add_custom_cluster(cl, cfg_cl, ESP_ZB_ZCL_CLUSTER_SERVER_ROLE);
 

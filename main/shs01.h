@@ -140,6 +140,23 @@
 #define SHS_ATTR_ZONE5_TYPE_CFG         0x0066  /* uint8: per-zone type (0=off, 1=detection, 2=filter, 3=interference) */
 
 /* ============================================================================
+ * HEALTH & DIAGNOSTICS ATTRIBUTES (0xFDCD on EP1)
+ * ============================================================================ */
+
+/* Sensor health (per D-05, D-06, D-07) */
+#define SHS_ATTR_LD2410C_CONNECTED      0x0070  /* bool, read-only */
+#define SHS_ATTR_LD2450_CONNECTED       0x0071  /* bool, read-only */
+
+/* Diagnostic counters (per D-12, D-13 — 5 existing + uptime + free heap) */
+#define SHS_ATTR_DIAG_LOCK_SUCCESS      0x0080  /* uint32, read-only */
+#define SHS_ATTR_DIAG_LOCK_FAIL         0x0081  /* uint32, read-only */
+#define SHS_ATTR_DIAG_LOCK_CONSEC_FAIL  0x0082  /* uint32, read-only */
+#define SHS_ATTR_DIAG_TX_SUCCESS        0x0083  /* uint32, read-only */
+#define SHS_ATTR_DIAG_TX_FAIL           0x0084  /* uint32, read-only */
+#define SHS_ATTR_DIAG_UPTIME_S          0x0085  /* uint32, read-only, seconds since boot */
+#define SHS_ATTR_DIAG_FREE_HEAP         0x0086  /* uint32, read-only, bytes */
+
+/* ============================================================================
  * OCCUPANCY CLUSTER CUSTOM ATTRIBUTES (on EP2)
  * ============================================================================ */
 
