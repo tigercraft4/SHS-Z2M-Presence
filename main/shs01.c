@@ -312,7 +312,8 @@ static inline bool shs_time_reached(uint32_t now, uint32_t deadline) {
 
 static void shs_cfg_save_u16(const char *key, uint16_t v) {
     nvs_handle_t h;
-    if (nvs_open(SHS_NVS_NAMESPACE, NVS_READWRITE, &h) != ESP_OK) return;
+    esp_err_t err = nvs_open(SHS_NVS_NAMESPACE, NVS_READWRITE, &h);
+    if (err != ESP_OK) { ESP_LOGW(SHS_TAG, "NVS save_u16 open failed: %s", esp_err_to_name(err)); return; }
     nvs_set_u16(h, key, v);
     nvs_commit(h);
     nvs_close(h);
@@ -320,7 +321,8 @@ static void shs_cfg_save_u16(const char *key, uint16_t v) {
 
 static void shs_cfg_save_u8(const char *key, uint8_t v) {
     nvs_handle_t h;
-    if (nvs_open(SHS_NVS_NAMESPACE, NVS_READWRITE, &h) != ESP_OK) return;
+    esp_err_t err = nvs_open(SHS_NVS_NAMESPACE, NVS_READWRITE, &h);
+    if (err != ESP_OK) { ESP_LOGW(SHS_TAG, "NVS save_u8 open failed: %s", esp_err_to_name(err)); return; }
     nvs_set_u8(h, key, v);
     nvs_commit(h);
     nvs_close(h);
@@ -328,7 +330,8 @@ static void shs_cfg_save_u8(const char *key, uint8_t v) {
 
 __attribute__((unused)) static void shs_cfg_save_i16(const char *key, int16_t v) {
     nvs_handle_t h;
-    if (nvs_open(SHS_NVS_NAMESPACE, NVS_READWRITE, &h) != ESP_OK) return;
+    esp_err_t err = nvs_open(SHS_NVS_NAMESPACE, NVS_READWRITE, &h);
+    if (err != ESP_OK) { ESP_LOGW(SHS_TAG, "NVS save_i16 open failed: %s", esp_err_to_name(err)); return; }
     nvs_set_i16(h, key, v);
     nvs_commit(h);
     nvs_close(h);
@@ -392,50 +395,59 @@ static void shs_cfg_load_from_nvs(void) {
  * ============================================================================ */
 
 /* Save zone config to NVS (debounced, called after zone apply) */
+/* Packed zone config for atomic NVS blob save (D-10) */
+typedef struct __attribute__((packed)) {
+    uint8_t zone_type;
+    struct __attribute__((packed)) {
+        uint8_t enabled;
+        int16_t x1, y1, x2, y2;
+        uint8_t type;
+    } zones[5];
+} shs_zone_cfg_blob_t;  /* 51 bytes — safe for 3072B save_worker stack */
+
+#define SHS_NVS_KEY_ZONE_BLOB "zone_blob"
+
 static void shs_zone_cfg_save_to_nvs(void) {
+    shs_zone_cfg_blob_t blob;
+    blob.zone_type = shs_zone_type;
+
+    /* Pack zone data — read under zone_config_mutex assumed by caller (save_worker) */
+    const bool     *en[]  = {&shs_zone1_enabled, &shs_zone2_enabled, &shs_zone3_enabled, &shs_zone4_enabled, &shs_zone5_enabled};
+    const int16_t  *x1[]  = {&shs_zone1_x1, &shs_zone2_x1, &shs_zone3_x1, &shs_zone4_x1, &shs_zone5_x1};
+    const int16_t  *y1[]  = {&shs_zone1_y1, &shs_zone2_y1, &shs_zone3_y1, &shs_zone4_y1, &shs_zone5_y1};
+    const int16_t  *x2[]  = {&shs_zone1_x2, &shs_zone2_x2, &shs_zone3_x2, &shs_zone4_x2, &shs_zone5_x2};
+    const int16_t  *y2[]  = {&shs_zone1_y2, &shs_zone2_y2, &shs_zone3_y2, &shs_zone4_y2, &shs_zone5_y2};
+    const uint8_t  *tp[]  = {&shs_zone1_type, &shs_zone2_type, &shs_zone3_type, &shs_zone4_type, &shs_zone5_type};
+
+    for (int i = 0; i < 5; i++) {
+        blob.zones[i].enabled = *en[i] ? 1 : 0;
+        blob.zones[i].x1 = *x1[i];
+        blob.zones[i].y1 = *y1[i];
+        blob.zones[i].x2 = *x2[i];
+        blob.zones[i].y2 = *y2[i];
+        blob.zones[i].type = *tp[i];
+    }
+
     nvs_handle_t h;
-    if (nvs_open("shs_cfg", NVS_READWRITE, &h) != ESP_OK) return;
+    esp_err_t err = nvs_open("shs_cfg", NVS_READWRITE, &h);
+    if (err != ESP_OK) {
+        ESP_LOGW(SHS_TAG, "NVS open failed for zone save: %s", esp_err_to_name(err));
+        return;
+    }
 
-    nvs_set_u8(h, SHS_NVS_KEY_ZONE_TYPE, shs_zone_type);
-    /* Zone 1 */
-    nvs_set_u8(h, SHS_NVS_KEY_Z1_EN, shs_zone1_enabled ? 1 : 0);
-    nvs_set_i16(h, SHS_NVS_KEY_Z1_X1, shs_zone1_x1);
-    nvs_set_i16(h, SHS_NVS_KEY_Z1_Y1, shs_zone1_y1);
-    nvs_set_i16(h, SHS_NVS_KEY_Z1_X2, shs_zone1_x2);
-    nvs_set_i16(h, SHS_NVS_KEY_Z1_Y2, shs_zone1_y2);
-    nvs_set_u8(h, SHS_NVS_KEY_Z1_TYPE, shs_zone1_type);
-    /* Zone 2 */
-    nvs_set_u8(h, SHS_NVS_KEY_Z2_EN, shs_zone2_enabled ? 1 : 0);
-    nvs_set_i16(h, SHS_NVS_KEY_Z2_X1, shs_zone2_x1);
-    nvs_set_i16(h, SHS_NVS_KEY_Z2_Y1, shs_zone2_y1);
-    nvs_set_i16(h, SHS_NVS_KEY_Z2_X2, shs_zone2_x2);
-    nvs_set_i16(h, SHS_NVS_KEY_Z2_Y2, shs_zone2_y2);
-    nvs_set_u8(h, SHS_NVS_KEY_Z2_TYPE, shs_zone2_type);
-    /* Zone 3 */
-    nvs_set_u8(h, SHS_NVS_KEY_Z3_EN, shs_zone3_enabled ? 1 : 0);
-    nvs_set_i16(h, SHS_NVS_KEY_Z3_X1, shs_zone3_x1);
-    nvs_set_i16(h, SHS_NVS_KEY_Z3_Y1, shs_zone3_y1);
-    nvs_set_i16(h, SHS_NVS_KEY_Z3_X2, shs_zone3_x2);
-    nvs_set_i16(h, SHS_NVS_KEY_Z3_Y2, shs_zone3_y2);
-    nvs_set_u8(h, SHS_NVS_KEY_Z3_TYPE, shs_zone3_type);
-    /* Zone 4 */
-    nvs_set_u8(h, SHS_NVS_KEY_Z4_EN, shs_zone4_enabled ? 1 : 0);
-    nvs_set_i16(h, SHS_NVS_KEY_Z4_X1, shs_zone4_x1);
-    nvs_set_i16(h, SHS_NVS_KEY_Z4_Y1, shs_zone4_y1);
-    nvs_set_i16(h, SHS_NVS_KEY_Z4_X2, shs_zone4_x2);
-    nvs_set_i16(h, SHS_NVS_KEY_Z4_Y2, shs_zone4_y2);
-    nvs_set_u8(h, SHS_NVS_KEY_Z4_TYPE, shs_zone4_type);
-    /* Zone 5 */
-    nvs_set_u8(h, SHS_NVS_KEY_Z5_EN, shs_zone5_enabled ? 1 : 0);
-    nvs_set_i16(h, SHS_NVS_KEY_Z5_X1, shs_zone5_x1);
-    nvs_set_i16(h, SHS_NVS_KEY_Z5_Y1, shs_zone5_y1);
-    nvs_set_i16(h, SHS_NVS_KEY_Z5_X2, shs_zone5_x2);
-    nvs_set_i16(h, SHS_NVS_KEY_Z5_Y2, shs_zone5_y2);
-    nvs_set_u8(h, SHS_NVS_KEY_Z5_TYPE, shs_zone5_type);
+    err = nvs_set_blob(h, SHS_NVS_KEY_ZONE_BLOB, &blob, sizeof(blob));
+    if (err != ESP_OK) {
+        ESP_LOGW(SHS_TAG, "NVS zone blob write failed: %s", esp_err_to_name(err));
+        nvs_close(h);
+        return;
+    }
 
-    nvs_commit(h);
+    err = nvs_commit(h);
+    if (err != ESP_OK) {
+        ESP_LOGW(SHS_TAG, "NVS zone blob commit failed: %s", esp_err_to_name(err));
+    }
     nvs_close(h);
-    ESP_LOGI(SHS_TAG, "Zone config saved to NVS");
+    ESP_LOGI(SHS_TAG, "Zone config saved to NVS (atomic blob, %u bytes)", (unsigned)sizeof(blob));
 }
 
 /* Load zone config from NVS on boot */
@@ -445,6 +457,34 @@ static void shs_zone_cfg_load_from_nvs(void) {
         ESP_LOGI(SHS_TAG, "No zone config in NVS, using defaults");
         return;
     }
+
+    /* Try blob format first (new atomic format) */
+    shs_zone_cfg_blob_t blob;
+    size_t blob_len = sizeof(blob);
+    esp_err_t err = nvs_get_blob(h, SHS_NVS_KEY_ZONE_BLOB, &blob, &blob_len);
+    if (err == ESP_OK && blob_len == sizeof(blob)) {
+        shs_zone_type = blob.zone_type;
+        bool     *en[]  = {&shs_zone1_enabled, &shs_zone2_enabled, &shs_zone3_enabled, &shs_zone4_enabled, &shs_zone5_enabled};
+        int16_t  *x1[]  = {&shs_zone1_x1, &shs_zone2_x1, &shs_zone3_x1, &shs_zone4_x1, &shs_zone5_x1};
+        int16_t  *y1[]  = {&shs_zone1_y1, &shs_zone2_y1, &shs_zone3_y1, &shs_zone4_y1, &shs_zone5_y1};
+        int16_t  *x2[]  = {&shs_zone1_x2, &shs_zone2_x2, &shs_zone3_x2, &shs_zone4_x2, &shs_zone5_x2};
+        int16_t  *y2[]  = {&shs_zone1_y2, &shs_zone2_y2, &shs_zone3_y2, &shs_zone4_y2, &shs_zone5_y2};
+        uint8_t  *tp[]  = {&shs_zone1_type, &shs_zone2_type, &shs_zone3_type, &shs_zone4_type, &shs_zone5_type};
+        for (int i = 0; i < 5; i++) {
+            *en[i] = blob.zones[i].enabled ? true : false;
+            *x1[i] = blob.zones[i].x1;
+            *y1[i] = blob.zones[i].y1;
+            *x2[i] = blob.zones[i].x2;
+            *y2[i] = blob.zones[i].y2;
+            *tp[i] = blob.zones[i].type;
+        }
+        nvs_close(h);
+        ESP_LOGI(SHS_TAG, "Zone config loaded from NVS (blob format)");
+        return;
+    }
+
+    /* Fall back to legacy per-key format (migration path) */
+    ESP_LOGI(SHS_TAG, "No zone blob in NVS, trying legacy keys...");
 
     uint8_t u8tmp;
     int16_t i16tmp;
@@ -524,9 +564,9 @@ static void shs_zone_cfg_load_from_nvs(void) {
 
     nvs_close(h);
 
-    ESP_LOGI(SHS_TAG, "Zone config loaded: type=%d, z1=%d, z2=%d, z3=%d, z4=%d, z5=%d",
-             shs_zone_type, shs_zone1_enabled, shs_zone2_enabled, shs_zone3_enabled,
-             shs_zone4_enabled, shs_zone5_enabled);
+    ESP_LOGI(SHS_TAG, "Zone config loaded from NVS (legacy format, will migrate to blob)");
+    /* Migrate to blob format on next save */
+    shs_zone_cfg_save_to_nvs();
 }
 
 /* Forward declaration for zone config apply */
