@@ -145,15 +145,26 @@ static uint32_t shs_lock_consecutive_fails = 0;
 static uint32_t shs_tx_success_count = 0;
 static uint32_t shs_tx_fail_count = 0;
 
-/* Helper macro: acquire Zigbee lock with timeout, returns on failure */
+/* Helper macro: acquire Zigbee lock with retry + exponential backoff, returns on failure */
 #define SHS_ZB_LOCK_ACQUIRE_OR_RETURN() \
     do { \
-        if (esp_zb_lock_acquire(pdMS_TO_TICKS(SHS_ZB_LOCK_TIMEOUT_MS)) != true) { \
+        bool _lock_ok = false; \
+        static const TickType_t _backoff[] = { \
+            pdMS_TO_TICKS(50), pdMS_TO_TICKS(100), pdMS_TO_TICKS(200) \
+        }; \
+        for (int _try = 0; _try < 3; _try++) { \
+            if (esp_zb_lock_acquire(_backoff[_try]) == true) { \
+                _lock_ok = true; \
+                break; \
+            } \
+            ESP_LOGD(SHS_TAG, "Zigbee lock retry %d/3", _try + 1); \
+        } \
+        if (!_lock_ok) { \
             shs_lock_fail_count++; \
             shs_lock_consecutive_fails++; \
             if (shs_lock_consecutive_fails == 1 || shs_lock_consecutive_fails == 10 || \
                 shs_lock_consecutive_fails == 50 || (shs_lock_consecutive_fails % 100) == 0) { \
-                ESP_LOGW(SHS_TAG, "Zigbee lock timeout #%lu (consecutive: %lu)", \
+                ESP_LOGW(SHS_TAG, "Zigbee lock FAILED after 3 retries #%lu (consecutive: %lu)", \
                          (unsigned long)shs_lock_fail_count, (unsigned long)shs_lock_consecutive_fails); \
             } \
             return; \
@@ -162,15 +173,26 @@ static uint32_t shs_tx_fail_count = 0;
         shs_lock_consecutive_fails = 0; \
     } while(0)
 
-/* Helper macro: acquire Zigbee lock with timeout, returns false on failure (for bool functions) */
+/* Helper macro: acquire Zigbee lock with retry + exponential backoff, returns false on failure */
 #define SHS_ZB_LOCK_ACQUIRE_OR_RETURN_FALSE() \
     do { \
-        if (esp_zb_lock_acquire(pdMS_TO_TICKS(SHS_ZB_LOCK_TIMEOUT_MS)) != true) { \
+        bool _lock_ok = false; \
+        static const TickType_t _backoff[] = { \
+            pdMS_TO_TICKS(50), pdMS_TO_TICKS(100), pdMS_TO_TICKS(200) \
+        }; \
+        for (int _try = 0; _try < 3; _try++) { \
+            if (esp_zb_lock_acquire(_backoff[_try]) == true) { \
+                _lock_ok = true; \
+                break; \
+            } \
+            ESP_LOGD(SHS_TAG, "Zigbee lock retry %d/3", _try + 1); \
+        } \
+        if (!_lock_ok) { \
             shs_lock_fail_count++; \
             shs_lock_consecutive_fails++; \
             if (shs_lock_consecutive_fails == 1 || shs_lock_consecutive_fails == 10 || \
                 shs_lock_consecutive_fails == 50 || (shs_lock_consecutive_fails % 100) == 0) { \
-                ESP_LOGW(SHS_TAG, "Zigbee lock timeout #%lu (consecutive: %lu)", \
+                ESP_LOGW(SHS_TAG, "Zigbee lock FAILED after 3 retries #%lu (consecutive: %lu)", \
                          (unsigned long)shs_lock_fail_count, (unsigned long)shs_lock_consecutive_fails); \
             } \
             return false; \
