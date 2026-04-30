@@ -28,7 +28,10 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. Zone occupancy state never shows phantom occupancy from stale target counts
   3. Every Zigbee attribute update reaches the coordinator — failed locks retry with backoff instead of being silently dropped
   4. Sensor callbacks complete without NVS blocking — all writes routed through save_worker task
-**Plans**: TBD
+**Plans:** 2 plans
+Plans:
+- [ ] 01-01-PLAN.md — Mutex protection for shared state (TS-02, TS-03, TS-04)
+- [ ] 01-02-PLAN.md — Zigbee lock retry + NVS zone save routing (ZB-01, ZB-02, NVS-01)
 
 ### Phase 2: Sensor Filters & Converter Fix
 **Goal**: Clean, accurate position data with proper encoding across firmware and converter
