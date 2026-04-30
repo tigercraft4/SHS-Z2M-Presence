@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [ ] **Phase 1: Critical Bug Fixes & Concurrency Safety** - Eliminate crashes, race conditions, and silent Zigbee data loss
 - [ ] **Phase 2: Sensor Filters & Converter Fix** - Re-enable disabled smoothing/filtering and fix coordinate encoding
-- [ ] **Phase 3: Reliability & Diagnostics** - Add watchdog, health monitoring, NVS batching, and diagnostic counters
+- [x] **Phase 3: Reliability & Diagnostics** - Add watchdog, health monitoring, NVS batching, and diagnostic counters
 - [ ] **Phase 4: Code Restructuring** - Split monolith into modules with preserved endpoint compatibility
 
 ## Phase Details
@@ -59,8 +59,8 @@ Plans:
   5. Zigbee lock/TX statistics accessible via Z2M for remote troubleshooting
 **Plans:** 2 plans
 Plans:
-- [ ] 03-01-PLAN.md — Task watchdog + NVS zone config batching (SH-01, NVS-02, NVS-03)
-- [ ] 03-02-PLAN.md — Sensor health + diagnostics Zigbee exposure + converter (SH-02, SH-03, ZB-03, ZB-04)
+- [x] 03-01-PLAN.md — Task watchdog + NVS zone config batching (SH-01, NVS-02, NVS-03) ✓ 2026-04-30
+- [x] 03-02-PLAN.md — Sensor health + diagnostics Zigbee exposure + converter (SH-02, SH-03, ZB-03, ZB-04) ✓ 2026-04-30
 
 ### Phase 4: Code Restructuring
 **Goal**: Monolithic shs01.c replaced by focused modules without breaking any existing functionality
@@ -82,5 +82,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 |-------|----------------|--------|-----------|
 | 1. Critical Bug Fixes & Concurrency Safety | 2/2 | Complete | 2026-04-30 |
 | 2. Sensor Filters & Converter Fix | 0/? | Not started | - |
-| 3. Reliability & Diagnostics | 0/? | Not started | - |
+| 3. Reliability & Diagnostics | 2/2 | Complete | 2026-04-30 |
 | 4. Code Restructuring | 0/? | Not started | - |
