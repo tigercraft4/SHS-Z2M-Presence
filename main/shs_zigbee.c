@@ -38,8 +38,6 @@ void shs_zigbee_init(shs_state_t *state) {
  * LOCK MACROS (reference module-static s_state)
  * ============================================================================ */
 
-#define SHS_ZB_LOCK_TIMEOUT_MS     100
-
 #define SHS_ZB_LOCK_ACQUIRE_OR_RETURN() \
     do { \
         bool _lock_ok = false; \
@@ -412,6 +410,11 @@ static void shs_bdb_start_top_level_commissioning_cb(uint8_t mode_mask) {
     if (esp_zb_bdb_start_top_level_commissioning(mode_mask) != ESP_OK) {
         ESP_LOGW(TAG, "Failed to start Zigbee commissioning");
     }
+}
+
+void shs_zb_schedule_rejoin(void) {
+    esp_zb_scheduler_alarm((esp_zb_callback_t)shs_bdb_start_top_level_commissioning_cb,
+                           ESP_ZB_BDB_MODE_NETWORK_STEERING, 1000);
 }
 
 static void shs_basic_publish_metadata_ep1(void) {

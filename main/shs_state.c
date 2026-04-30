@@ -13,7 +13,7 @@ void shs_state_init(shs_state_t *state) {
     state->zone_config_mutex = xSemaphoreCreateMutex();
 
     /* Create save worker queue */
-    state->save_q = xQueueCreate(8, sizeof(shs_save_msg_t));
+    state->save_q = xQueueCreate(16, sizeof(shs_save_msg_t));
 
     /* LD2410C config defaults */
     state->moving_sens_0_100 = 60;

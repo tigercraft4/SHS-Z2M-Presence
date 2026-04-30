@@ -176,6 +176,20 @@
 #define SHS_NVS_DEBOUNCE_MS             500
 #define SHS_COOLDOWN_MAX_SEC            300
 
+/* Zigbee lock timeout */
+#define SHS_ZB_LOCK_TIMEOUT_MS          100
+
+/* LD2410C connectivity detection */
+#define SHS_LD2410C_FRAME_TIMEOUT_MS    3000   /* 3s = ~30 missed frames at 100ms interval */
+
+/* Boot button timing */
+#define SHS_FACTORY_RESET_PRESS_MS      6000   /* 6 seconds for factory reset */
+#define SHS_TRIPLE_CLICK_WINDOW_MS      800    /* 800ms window for triple-click */
+#define SHS_CLICK_MIN_MS                50     /* Minimum press duration for a click */
+#define SHS_CLICK_MAX_MS                400    /* Maximum press duration for a click */
+#define SHS_STARTUP_IGNORE_MS           2000   /* Ignore button for 2s after boot */
+#define SHS_DEBOUNCE_MS                 50     /* Debounce time between state changes */
+
 /* ============================================================================
  * LD2450 TARGET CLUSTER ATTRIBUTES (0xFDCF on EP3)
  * ============================================================================ */

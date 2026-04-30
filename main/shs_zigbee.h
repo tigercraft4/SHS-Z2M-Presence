@@ -36,4 +36,7 @@ void shs_zb_report_diagnostics(void);
 void shs_ld2450_force_update(void);
 void shs_ld2410c_force_update(void);
 
+/* Schedule network rejoin via esp_zb_scheduler_alarm (thread-safe) */
+void shs_zb_schedule_rejoin(void);
+
 #endif /* SHS_ZIGBEE_H */
