@@ -531,50 +531,77 @@ static void shs_zone_cfg_check_pending(void) {
 }
 
 static void shs_zone_cfg_apply_to_sensor(void) {
+    /* Copy all zone config to locals under mutex for consistent snapshot */
+    uint8_t zt;
+    bool z1_en, z2_en, z3_en, z4_en, z5_en;
+    int16_t z1_x1, z1_y1, z1_x2, z1_y2;
+    int16_t z2_x1, z2_y1, z2_x2, z2_y2;
+    int16_t z3_x1, z3_y1, z3_x2, z3_y2;
+    int16_t z4_x1, z4_y1, z4_x2, z4_y2;
+    int16_t z5_x1, z5_y1, z5_x2, z5_y2;
+    uint8_t z1_type, z2_type, z3_type, z4_type, z5_type;
+
+    if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+        zt = shs_zone_type;
+        z1_en = shs_zone1_enabled; z1_x1 = shs_zone1_x1; z1_y1 = shs_zone1_y1;
+        z1_x2 = shs_zone1_x2; z1_y2 = shs_zone1_y2; z1_type = shs_zone1_type;
+        z2_en = shs_zone2_enabled; z2_x1 = shs_zone2_x1; z2_y1 = shs_zone2_y1;
+        z2_x2 = shs_zone2_x2; z2_y2 = shs_zone2_y2; z2_type = shs_zone2_type;
+        z3_en = shs_zone3_enabled; z3_x1 = shs_zone3_x1; z3_y1 = shs_zone3_y1;
+        z3_x2 = shs_zone3_x2; z3_y2 = shs_zone3_y2; z3_type = shs_zone3_type;
+        z4_en = shs_zone4_enabled; z4_x1 = shs_zone4_x1; z4_y1 = shs_zone4_y1;
+        z4_x2 = shs_zone4_x2; z4_y2 = shs_zone4_y2; z4_type = shs_zone4_type;
+        z5_en = shs_zone5_enabled; z5_x1 = shs_zone5_x1; z5_y1 = shs_zone5_y1;
+        z5_x2 = shs_zone5_x2; z5_y2 = shs_zone5_y2; z5_type = shs_zone5_type;
+        xSemaphoreGive(zone_config_mutex);
+    } else {
+        ESP_LOGW(SHS_TAG, "Zone config mutex timeout - skipping apply");
+        return;
+    }
+
     ESP_LOGI(SHS_TAG, "Applying zone config to LD2450: type=%d, z1=%d, z2=%d, z3=%d, z4=%d, z5=%d",
-             shs_zone_type, shs_zone1_enabled, shs_zone2_enabled, shs_zone3_enabled,
-             shs_zone4_enabled, shs_zone5_enabled);
+             zt, z1_en, z2_en, z3_en, z4_en, z5_en);
 
     /* Set global zone type (disabled/detection/filter) */
-    ld2450_set_zone_type((ld2450_zone_type_t)shs_zone_type);
+    ld2450_set_zone_type((ld2450_zone_type_t)zt);
 
     /* Configure each zone */
-    if (shs_zone1_enabled) {
-        ld2450_set_zone(0, shs_zone1_x1, shs_zone1_y1, shs_zone1_x2, shs_zone1_y2);
+    if (z1_en) {
+        ld2450_set_zone(0, z1_x1, z1_y1, z1_x2, z1_y2);
         ESP_LOGI(SHS_TAG, "Zone 1: (%d,%d) to (%d,%d) type=%d",
-                 shs_zone1_x1, shs_zone1_y1, shs_zone1_x2, shs_zone1_y2, shs_zone1_type);
+                 z1_x1, z1_y1, z1_x2, z1_y2, z1_type);
     } else {
         ld2450_clear_zone(0);
     }
 
-    if (shs_zone2_enabled) {
-        ld2450_set_zone(1, shs_zone2_x1, shs_zone2_y1, shs_zone2_x2, shs_zone2_y2);
+    if (z2_en) {
+        ld2450_set_zone(1, z2_x1, z2_y1, z2_x2, z2_y2);
         ESP_LOGI(SHS_TAG, "Zone 2: (%d,%d) to (%d,%d) type=%d",
-                 shs_zone2_x1, shs_zone2_y1, shs_zone2_x2, shs_zone2_y2, shs_zone2_type);
+                 z2_x1, z2_y1, z2_x2, z2_y2, z2_type);
     } else {
         ld2450_clear_zone(1);
     }
 
-    if (shs_zone3_enabled) {
-        ld2450_set_zone(2, shs_zone3_x1, shs_zone3_y1, shs_zone3_x2, shs_zone3_y2);
+    if (z3_en) {
+        ld2450_set_zone(2, z3_x1, z3_y1, z3_x2, z3_y2);
         ESP_LOGI(SHS_TAG, "Zone 3: (%d,%d) to (%d,%d) type=%d",
-                 shs_zone3_x1, shs_zone3_y1, shs_zone3_x2, shs_zone3_y2, shs_zone3_type);
+                 z3_x1, z3_y1, z3_x2, z3_y2, z3_type);
     } else {
         ld2450_clear_zone(2);
     }
 
-    if (shs_zone4_enabled) {
-        ld2450_set_zone(3, shs_zone4_x1, shs_zone4_y1, shs_zone4_x2, shs_zone4_y2);
+    if (z4_en) {
+        ld2450_set_zone(3, z4_x1, z4_y1, z4_x2, z4_y2);
         ESP_LOGI(SHS_TAG, "Zone 4: (%d,%d) to (%d,%d) type=%d",
-                 shs_zone4_x1, shs_zone4_y1, shs_zone4_x2, shs_zone4_y2, shs_zone4_type);
+                 z4_x1, z4_y1, z4_x2, z4_y2, z4_type);
     } else {
         ld2450_clear_zone(3);
     }
 
-    if (shs_zone5_enabled) {
-        ld2450_set_zone(4, shs_zone5_x1, shs_zone5_y1, shs_zone5_x2, shs_zone5_y2);
+    if (z5_en) {
+        ld2450_set_zone(4, z5_x1, z5_y1, z5_x2, z5_y2);
         ESP_LOGI(SHS_TAG, "Zone 5: (%d,%d) to (%d,%d) type=%d",
-                 shs_zone5_x1, shs_zone5_y1, shs_zone5_x2, shs_zone5_y2, shs_zone5_type);
+                 z5_x1, z5_y1, z5_x2, z5_y2, z5_type);
     } else {
         ld2450_clear_zone(4);
     }
@@ -1674,7 +1701,10 @@ static esp_err_t shs_zb_attribute_handler(const esp_zb_zcl_set_attr_value_messag
             /* Zone configuration attributes - received from web configurator via MQTT/Z2M */
             /* Uses debounced apply to wait for all attributes before configuring LD2450 */
             case SHS_ATTR_ZONE_TYPE_CFG:
-                shs_zone_type = v8;
+                if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+                    shs_zone_type = v8;
+                    xSemaphoreGive(zone_config_mutex);
+                }
                 ESP_LOGI(SHS_TAG, "Zone Type = %d (%s)", shs_zone_type,
                          shs_zone_type == 0 ? "disabled" :
                          shs_zone_type == 1 ? "detection" : "filter");
@@ -1683,160 +1713,250 @@ static esp_err_t shs_zb_attribute_handler(const esp_zb_zcl_set_attr_value_messag
 
             /* Zone 1 configuration */
             case SHS_ATTR_ZONE1_ENABLED:
-                shs_zone1_enabled = (v8 != 0);
+                if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+                    shs_zone1_enabled = (v8 != 0);
+                    xSemaphoreGive(zone_config_mutex);
+                }
                 ESP_LOGI(SHS_TAG, "Zone 1 Enabled = %d", shs_zone1_enabled);
                 shs_zone_cfg_schedule_apply();
                 return ESP_OK;
             case SHS_ATTR_ZONE1_X1_CFG:
-                shs_zone1_x1 = v16s;
+                if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+                    shs_zone1_x1 = v16s;
+                    xSemaphoreGive(zone_config_mutex);
+                }
                 ESP_LOGI(SHS_TAG, "Zone 1 X1 = %d", shs_zone1_x1);
                 shs_zone_cfg_schedule_apply();
                 return ESP_OK;
             case SHS_ATTR_ZONE1_Y1_CFG:
-                shs_zone1_y1 = v16s;
+                if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+                    shs_zone1_y1 = v16s;
+                    xSemaphoreGive(zone_config_mutex);
+                }
                 ESP_LOGI(SHS_TAG, "Zone 1 Y1 = %d", shs_zone1_y1);
                 shs_zone_cfg_schedule_apply();
                 return ESP_OK;
             case SHS_ATTR_ZONE1_X2_CFG:
-                shs_zone1_x2 = v16s;
+                if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+                    shs_zone1_x2 = v16s;
+                    xSemaphoreGive(zone_config_mutex);
+                }
                 ESP_LOGI(SHS_TAG, "Zone 1 X2 = %d", shs_zone1_x2);
                 shs_zone_cfg_schedule_apply();
                 return ESP_OK;
             case SHS_ATTR_ZONE1_Y2_CFG:
-                shs_zone1_y2 = v16s;
+                if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+                    shs_zone1_y2 = v16s;
+                    xSemaphoreGive(zone_config_mutex);
+                }
                 ESP_LOGI(SHS_TAG, "Zone 1 Y2 = %d", shs_zone1_y2);
                 shs_zone_cfg_schedule_apply();
                 return ESP_OK;
             case SHS_ATTR_ZONE1_TYPE_CFG:
-                shs_zone1_type = v8;
+                if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+                    shs_zone1_type = v8;
+                    xSemaphoreGive(zone_config_mutex);
+                }
                 ESP_LOGI(SHS_TAG, "Zone 1 Type = %d", shs_zone1_type);
                 shs_zone_cfg_schedule_apply();
                 return ESP_OK;
 
             /* Zone 2 configuration */
             case SHS_ATTR_ZONE2_ENABLED:
-                shs_zone2_enabled = (v8 != 0);
+                if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+                    shs_zone2_enabled = (v8 != 0);
+                    xSemaphoreGive(zone_config_mutex);
+                }
                 ESP_LOGI(SHS_TAG, "Zone 2 Enabled = %d", shs_zone2_enabled);
                 shs_zone_cfg_schedule_apply();
                 return ESP_OK;
             case SHS_ATTR_ZONE2_X1_CFG:
-                shs_zone2_x1 = v16s;
+                if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+                    shs_zone2_x1 = v16s;
+                    xSemaphoreGive(zone_config_mutex);
+                }
                 ESP_LOGI(SHS_TAG, "Zone 2 X1 = %d", shs_zone2_x1);
                 shs_zone_cfg_schedule_apply();
                 return ESP_OK;
             case SHS_ATTR_ZONE2_Y1_CFG:
-                shs_zone2_y1 = v16s;
+                if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+                    shs_zone2_y1 = v16s;
+                    xSemaphoreGive(zone_config_mutex);
+                }
                 ESP_LOGI(SHS_TAG, "Zone 2 Y1 = %d", shs_zone2_y1);
                 shs_zone_cfg_schedule_apply();
                 return ESP_OK;
             case SHS_ATTR_ZONE2_X2_CFG:
-                shs_zone2_x2 = v16s;
+                if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+                    shs_zone2_x2 = v16s;
+                    xSemaphoreGive(zone_config_mutex);
+                }
                 ESP_LOGI(SHS_TAG, "Zone 2 X2 = %d", shs_zone2_x2);
                 shs_zone_cfg_schedule_apply();
                 return ESP_OK;
             case SHS_ATTR_ZONE2_Y2_CFG:
-                shs_zone2_y2 = v16s;
+                if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+                    shs_zone2_y2 = v16s;
+                    xSemaphoreGive(zone_config_mutex);
+                }
                 ESP_LOGI(SHS_TAG, "Zone 2 Y2 = %d", shs_zone2_y2);
                 shs_zone_cfg_schedule_apply();
                 return ESP_OK;
             case SHS_ATTR_ZONE2_TYPE_CFG:
-                shs_zone2_type = v8;
+                if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+                    shs_zone2_type = v8;
+                    xSemaphoreGive(zone_config_mutex);
+                }
                 ESP_LOGI(SHS_TAG, "Zone 2 Type = %d", shs_zone2_type);
                 shs_zone_cfg_schedule_apply();
                 return ESP_OK;
 
             /* Zone 3 configuration */
             case SHS_ATTR_ZONE3_ENABLED:
-                shs_zone3_enabled = (v8 != 0);
+                if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+                    shs_zone3_enabled = (v8 != 0);
+                    xSemaphoreGive(zone_config_mutex);
+                }
                 ESP_LOGI(SHS_TAG, "Zone 3 Enabled = %d", shs_zone3_enabled);
                 shs_zone_cfg_schedule_apply();
                 return ESP_OK;
             case SHS_ATTR_ZONE3_X1_CFG:
-                shs_zone3_x1 = v16s;
+                if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+                    shs_zone3_x1 = v16s;
+                    xSemaphoreGive(zone_config_mutex);
+                }
                 ESP_LOGI(SHS_TAG, "Zone 3 X1 = %d", shs_zone3_x1);
                 shs_zone_cfg_schedule_apply();
                 return ESP_OK;
             case SHS_ATTR_ZONE3_Y1_CFG:
-                shs_zone3_y1 = v16s;
+                if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+                    shs_zone3_y1 = v16s;
+                    xSemaphoreGive(zone_config_mutex);
+                }
                 ESP_LOGI(SHS_TAG, "Zone 3 Y1 = %d", shs_zone3_y1);
                 shs_zone_cfg_schedule_apply();
                 return ESP_OK;
             case SHS_ATTR_ZONE3_X2_CFG:
-                shs_zone3_x2 = v16s;
+                if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+                    shs_zone3_x2 = v16s;
+                    xSemaphoreGive(zone_config_mutex);
+                }
                 ESP_LOGI(SHS_TAG, "Zone 3 X2 = %d", shs_zone3_x2);
                 shs_zone_cfg_schedule_apply();
                 return ESP_OK;
             case SHS_ATTR_ZONE3_Y2_CFG:
-                shs_zone3_y2 = v16s;
+                if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+                    shs_zone3_y2 = v16s;
+                    xSemaphoreGive(zone_config_mutex);
+                }
                 ESP_LOGI(SHS_TAG, "Zone 3 Y2 = %d", shs_zone3_y2);
                 shs_zone_cfg_schedule_apply();
                 return ESP_OK;
             case SHS_ATTR_ZONE3_TYPE_CFG:
-                shs_zone3_type = v8;
+                if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+                    shs_zone3_type = v8;
+                    xSemaphoreGive(zone_config_mutex);
+                }
                 ESP_LOGI(SHS_TAG, "Zone 3 Type = %d", shs_zone3_type);
                 shs_zone_cfg_schedule_apply();
                 return ESP_OK;
 
             /* Zone 4 configuration */
             case SHS_ATTR_ZONE4_ENABLED:
-                shs_zone4_enabled = (v8 != 0);
+                if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+                    shs_zone4_enabled = (v8 != 0);
+                    xSemaphoreGive(zone_config_mutex);
+                }
                 ESP_LOGI(SHS_TAG, "Zone 4 Enabled = %d", shs_zone4_enabled);
                 shs_zone_cfg_schedule_apply();
                 return ESP_OK;
             case SHS_ATTR_ZONE4_X1_CFG:
-                shs_zone4_x1 = v16s;
+                if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+                    shs_zone4_x1 = v16s;
+                    xSemaphoreGive(zone_config_mutex);
+                }
                 ESP_LOGI(SHS_TAG, "Zone 4 X1 = %d", shs_zone4_x1);
                 shs_zone_cfg_schedule_apply();
                 return ESP_OK;
             case SHS_ATTR_ZONE4_Y1_CFG:
-                shs_zone4_y1 = v16s;
+                if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+                    shs_zone4_y1 = v16s;
+                    xSemaphoreGive(zone_config_mutex);
+                }
                 ESP_LOGI(SHS_TAG, "Zone 4 Y1 = %d", shs_zone4_y1);
                 shs_zone_cfg_schedule_apply();
                 return ESP_OK;
             case SHS_ATTR_ZONE4_X2_CFG:
-                shs_zone4_x2 = v16s;
+                if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+                    shs_zone4_x2 = v16s;
+                    xSemaphoreGive(zone_config_mutex);
+                }
                 ESP_LOGI(SHS_TAG, "Zone 4 X2 = %d", shs_zone4_x2);
                 shs_zone_cfg_schedule_apply();
                 return ESP_OK;
             case SHS_ATTR_ZONE4_Y2_CFG:
-                shs_zone4_y2 = v16s;
+                if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+                    shs_zone4_y2 = v16s;
+                    xSemaphoreGive(zone_config_mutex);
+                }
                 ESP_LOGI(SHS_TAG, "Zone 4 Y2 = %d", shs_zone4_y2);
                 shs_zone_cfg_schedule_apply();
                 return ESP_OK;
             case SHS_ATTR_ZONE4_TYPE_CFG:
-                shs_zone4_type = v8;
+                if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+                    shs_zone4_type = v8;
+                    xSemaphoreGive(zone_config_mutex);
+                }
                 ESP_LOGI(SHS_TAG, "Zone 4 Type = %d", shs_zone4_type);
                 shs_zone_cfg_schedule_apply();
                 return ESP_OK;
 
             /* Zone 5 configuration */
             case SHS_ATTR_ZONE5_ENABLED:
-                shs_zone5_enabled = (v8 != 0);
+                if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+                    shs_zone5_enabled = (v8 != 0);
+                    xSemaphoreGive(zone_config_mutex);
+                }
                 ESP_LOGI(SHS_TAG, "Zone 5 Enabled = %d", shs_zone5_enabled);
                 shs_zone_cfg_schedule_apply();
                 return ESP_OK;
             case SHS_ATTR_ZONE5_X1_CFG:
-                shs_zone5_x1 = v16s;
+                if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+                    shs_zone5_x1 = v16s;
+                    xSemaphoreGive(zone_config_mutex);
+                }
                 ESP_LOGI(SHS_TAG, "Zone 5 X1 = %d", shs_zone5_x1);
                 shs_zone_cfg_schedule_apply();
                 return ESP_OK;
             case SHS_ATTR_ZONE5_Y1_CFG:
-                shs_zone5_y1 = v16s;
+                if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+                    shs_zone5_y1 = v16s;
+                    xSemaphoreGive(zone_config_mutex);
+                }
                 ESP_LOGI(SHS_TAG, "Zone 5 Y1 = %d", shs_zone5_y1);
                 shs_zone_cfg_schedule_apply();
                 return ESP_OK;
             case SHS_ATTR_ZONE5_X2_CFG:
-                shs_zone5_x2 = v16s;
+                if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+                    shs_zone5_x2 = v16s;
+                    xSemaphoreGive(zone_config_mutex);
+                }
                 ESP_LOGI(SHS_TAG, "Zone 5 X2 = %d", shs_zone5_x2);
                 shs_zone_cfg_schedule_apply();
                 return ESP_OK;
             case SHS_ATTR_ZONE5_Y2_CFG:
-                shs_zone5_y2 = v16s;
+                if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+                    shs_zone5_y2 = v16s;
+                    xSemaphoreGive(zone_config_mutex);
+                }
                 ESP_LOGI(SHS_TAG, "Zone 5 Y2 = %d", shs_zone5_y2);
                 shs_zone_cfg_schedule_apply();
                 return ESP_OK;
             case SHS_ATTR_ZONE5_TYPE_CFG:
-                shs_zone5_type = v8;
+                if (xSemaphoreTake(zone_config_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
+                    shs_zone5_type = v8;
+                    xSemaphoreGive(zone_config_mutex);
+                }
                 ESP_LOGI(SHS_TAG, "Zone 5 Type = %d", shs_zone5_type);
                 shs_zone_cfg_schedule_apply();
                 return ESP_OK;
