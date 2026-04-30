@@ -286,6 +286,7 @@ typedef enum {
     SHS_SAVE_DEBOUNCE_SENS_STATIC,
     SHS_SAVE_DEBOUNCE_GATE_MOVE,
     SHS_SAVE_DEBOUNCE_GATE_STATIC,
+    SHS_SAVE_ZONE_CONFIG,
 } shs_save_evt_t;
 
 typedef struct {
@@ -633,7 +634,7 @@ static void shs_zone_cfg_apply_to_sensor(void) {
 
     /* Save zone config to NVS only if changed via Zigbee (not on startup) */
     if (shs_zone_cfg_save_needed) {
-        shs_zone_cfg_save_to_nvs();
+        shs_save_enqueue(SHS_SAVE_ZONE_CONFIG, 0);
         shs_zone_cfg_save_needed = false;
     }
 }
@@ -3143,6 +3144,10 @@ static void shs_save_worker(void *pv) {
                     break;
                 case SHS_SAVE_DEBOUNCE_GATE_STATIC:
                     st_gate_val = (uint8_t)m.u16; pend_st_gate = true; last_st_gate = xTaskGetTickCount();
+                    break;
+                case SHS_SAVE_ZONE_CONFIG:
+                    shs_zone_cfg_save_to_nvs();
+                    ESP_LOGI(SHS_TAG, "Zone config saved to NVS (via worker)");
                     break;
             }
         }
