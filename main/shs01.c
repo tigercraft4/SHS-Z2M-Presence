@@ -46,6 +46,7 @@ static const char *SHS_TAG = "SHS01";
 static ld2450_target_t current_targets[3] = {0};
 static uint8_t current_target_count = 0;
 static SemaphoreHandle_t target_data_mutex = NULL;
+static SemaphoreHandle_t zone_config_mutex = NULL;
 
 /* ============================================================================
  * NVS KEYS
@@ -109,7 +110,7 @@ static uint16_t shs_sens_mv_0_10          = 4;  /* Matches threshold 60: 10 - (6
 static uint16_t shs_sens_st_0_10          = 5;  /* Matches threshold 50: 10 - (50/10) = 5 */
 
 /* Position reporting mode - controls X/Y coordinate reporting for zone configuration */
-static bool     shs_position_reporting    = false;
+static volatile bool     shs_position_reporting    = false;
 
 /* Energy thresholds for false positive filtering (DISABLED - see #if 0 block in callback) */
 static uint16_t shs_min_moving_energy     = 40;   /* 0-100, NOT ACTIVE - kept for Zigbee attribute compatibility */
@@ -3031,6 +3032,12 @@ void app_main(void) {
     target_data_mutex = xSemaphoreCreateMutex();
     if (target_data_mutex == NULL) {
         ESP_LOGE(SHS_TAG, "Failed to create target data mutex");
+    }
+
+    /* Create mutex for zone configuration access */
+    zone_config_mutex = xSemaphoreCreateMutex();
+    if (zone_config_mutex == NULL) {
+        ESP_LOGE(SHS_TAG, "Failed to create zone config mutex");
     }
 
     /* Initialize light driver */
