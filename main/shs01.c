@@ -262,12 +262,9 @@ static bool shs_zone_cfg_pending = false;
 static bool shs_zone_cfg_save_needed = false;  /* Only save to NVS when config was changed via Zigbee */
 
 /* LD2450 position smoothing and rate limiting */
-#define POSITION_UPDATE_INTERVAL_MS  300   /* Minimum ms between Zigbee updates */
+#define POSITION_UPDATE_INTERVAL_MS  200   /* Minimum ms between Zigbee updates */
 #define POSITION_CHANGE_THRESHOLD    30    /* Minimum mm change to trigger update */
-/* DIAGNOSTIC: Smoothing disabled to test raw sensor data
- * Normal value: 0.3f (range: 0.1=very smooth, 0.9=responsive)
- * Value of 1.0f = no smoothing, raw sensor data passed through */
-#define EMA_ALPHA                    1.0f  /* DIAGNOSTIC: Disabled for raw data testing */
+#define EMA_ALPHA                    0.3f  /* EMA smoothing: 0.1=very smooth, 0.9=responsive */
 
 static uint32_t last_position_update_ms = 0;
 static float smoothed_x[3] = {0, 0, 0};
