@@ -698,7 +698,7 @@ static void shs_zb_report_attr(uint8_t endpoint, uint16_t cluster, uint16_t attr
 }
 
 /* Generic Zigbee attribute setters for signed int16 values (for position reporting) */
-__attribute__((unused)) static void shs_zb_set_i16_attr(uint8_t endpoint, uint16_t cluster, uint16_t attr_id, int16_t value) {
+static void shs_zb_set_i16_attr(uint8_t endpoint, uint16_t cluster, uint16_t attr_id, int16_t value) {
     if (!shs_zb_ready) return;
     SHS_ZB_LOCK_ACQUIRE_OR_RETURN();
     esp_zb_zcl_set_attribute_val(endpoint, cluster, ESP_ZB_ZCL_CLUSTER_SERVER_ROLE, attr_id, &value, true);
@@ -1095,18 +1095,14 @@ static void shs_on_ld2450_target_update(const ld2450_target_t *targets, uint8_t 
                     if (dd < 0) dd = -dd;
 
                     if (dx >= POSITION_CHANGE_THRESHOLD || dy >= POSITION_CHANGE_THRESHOLD || dd >= POSITION_CHANGE_THRESHOLD) {
-                        /* WORKAROUND: Add 3000mm bias to X coordinate to avoid negative float
-                         * transmission issues in Zigbee stack. Z2M converter subtracts 3000.
-                         * Original range: -3000 to +3000 → Biased range: 0 to 6000 */
-                        float x_biased = (float)(new_x + 3000);
-                        ESP_LOGI(SHS_TAG, "ZB T%d: X=%d (biased=%d) Y=%d D=%d",
-                                 i+1, new_x, (int)x_biased, new_y, new_dist);
+                        ESP_LOGI(SHS_TAG, "ZB T%d: X=%d Y=%d D=%d",
+                                 i+1, new_x, new_y, new_dist);
 
-                        /* Send biased X coordinate (Z2M converter will subtract 3000) */
-                        shs_zb_set_analog_value(ep_base, x_biased);
+                        /* Send X coordinate directly (no bias) */
+                        shs_zb_set_analog_value(ep_base, (float)new_x);
                         shs_zb_report_analog_attr(ep_base);
 
-                        /* Send smoothed Y coordinate */
+                        /* Send Y coordinate */
                         shs_zb_set_analog_value(ep_base + 1, (float)new_y);
                         shs_zb_report_analog_attr(ep_base + 1);
 
@@ -1119,9 +1115,8 @@ static void shs_on_ld2450_target_update(const ld2450_target_t *targets, uint8_t 
                         last_reported_dist[i] = new_dist;
                     }
                 } else if (last_reported_x[i] != 0 || last_reported_y[i] != 0 || last_reported_dist[i] != 0) {
-                    /* Target became inactive - send zeros to clear
-                     * Apply same 3000 bias to X so Z2M converter gets 0 after subtracting 3000 */
-                    shs_zb_set_analog_value(ep_base, 3000.0f);  /* 3000 - 3000 = 0 in Z2M */
+                    /* Target became inactive - send zeros to clear */
+                    shs_zb_set_analog_value(ep_base, 0.0f);
                     shs_zb_set_analog_value(ep_base + 1, 0.0f);
                     shs_zb_set_analog_value(ep_base + 2, 0.0f);
                     shs_zb_report_analog_attr(ep_base);
