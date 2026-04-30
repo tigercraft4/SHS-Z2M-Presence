@@ -42,7 +42,10 @@ Plans:
   2. Device reports valid presence from LD2410C alone when LD2450 is disconnected
   3. Target coordinates in Z2M show correct signed values (−3000..+3000mm) without bias artifacts
   4. Z2M external converter decodes all attributes correctly after int16 encoding change
-**Plans**: TBD
+**Plans:** 2 plans
+Plans:
+- [ ] 02-01-PLAN.md — EMA smoothing, LD2410C standalone filter, int16 coordinate encoding
+- [ ] 02-02-PLAN.md — Z2M converter bias removal (.js + .mjs)
 
 ### Phase 3: Reliability & Diagnostics
 **Goal**: Device self-monitors, recovers from sensor failures, and exposes health status
