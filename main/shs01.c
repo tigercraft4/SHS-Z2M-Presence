@@ -112,9 +112,12 @@ static uint16_t shs_sens_st_0_10          = 5;  /* Matches threshold 50: 10 - (5
 /* Position reporting mode - controls X/Y coordinate reporting for zone configuration */
 static volatile bool     shs_position_reporting    = false;
 
-/* Energy thresholds for false positive filtering (DISABLED - see #if 0 block in callback) */
-static uint16_t shs_min_moving_energy     = 40;   /* 0-100, NOT ACTIVE - kept for Zigbee attribute compatibility */
-static uint16_t shs_min_static_energy     = 40;   /* 0-100, NOT ACTIVE - kept for Zigbee attribute compatibility */
+/* Energy thresholds for false positive filtering */
+static uint16_t shs_min_moving_energy     = 40;   /* 0-100, used for standalone LD2410C mode */
+static uint16_t shs_min_static_energy     = 40;   /* 0-100, used for standalone LD2410C mode */
+
+/* LD2450 connectivity tracking — set true on first target callback */
+static bool shs_ld2450_connected = false;
 
 /* Firmware version (read from LD2410) */
 static char     shs_firmware_version[20]  = "Unknown";
@@ -722,47 +725,31 @@ static void shs_on_state_change(const ld2410_state_t *state) {
     bool raw_moving = (state->target.target_state & 0x01) != 0;
     bool raw_static = (state->target.target_state & 0x02) != 0;
 
-    /* DISABLED: Gate 0 and energy filters - relying on LD2450 cross-validation instead.
+    /* DISABLED: Gate 0 hard block - relying on LD2450 cross-validation when connected.
      * Uncomment if false positives occur when LD2450 sees targets.
      */
-#if 0
-    /* Gate 0 hard block:
-     * Always ignore detections at gate 0 (< 75cm) - these are PCB/housing reflections.
-     * The LD2410's hardware gate 0 sensitivity setting is unreliable on some firmware.
-     */
-    if (raw_moving && state->target.moving_distance < 75) {
-        raw_moving = false;
-    }
-    if (raw_static && state->target.static_distance < 75) {
-        raw_static = false;
-    }
 
-    /* Minimum energy filter:
-     * Filter out low-energy ghost detections at ANY distance.
-     * This catches remaining interference when LD2450 also sees targets.
-     * Default threshold is 40 (background noise is typically 13-25).
-     */
-    if (raw_moving && state->target.moving_energy < shs_min_moving_energy) {
-        raw_moving = false;
-    }
-    if (raw_static && state->target.static_energy < shs_min_static_energy) {
-        raw_static = false;
-    }
-#endif
-
-    /* LD2450 cross-validation:
-     * If LD2450 sees 0 targets, ignore LD2410 detections - they're likely interference.
-     * The LD2450 is more accurate and doesn't suffer from the same noise issues.
-     * This effectively uses LD2450 as a "sanity check" for LD2410.
+    /* LD2450 cross-validation / standalone fallback:
+     * When LD2450 is connected and sees 0 targets, LD2410C detections are likely interference.
+     * When LD2450 is offline, use energy filters as standalone fallback.
      */
     uint8_t ld2450_count = 0;
     if (xSemaphoreTake(target_data_mutex, pdMS_TO_TICKS(5)) == pdTRUE) {
         ld2450_count = shs_ld2450_target_count;
         xSemaphoreGive(target_data_mutex);
     }
-    if (ld2450_count == 0) {
+    if (shs_ld2450_connected && ld2450_count == 0) {
+        /* LD2450 is connected but sees 0 targets — LD2410C detections are likely interference */
         raw_moving = false;
         raw_static = false;
+    } else if (!shs_ld2450_connected) {
+        /* LD2450 offline — use LD2410C standalone with energy filters as fallback */
+        if (raw_moving && state->target.moving_energy < shs_min_moving_energy) {
+            raw_moving = false;
+        }
+        if (raw_static && state->target.static_energy < shs_min_static_energy) {
+            raw_static = false;
+        }
     }
 
     uint32_t now_ms = (uint32_t)(esp_timer_get_time() / 1000);
@@ -997,6 +984,8 @@ static bool shs_target_in_interference_zone(int16_t x, int16_t y) {
 }
 
 static void shs_on_ld2450_target_update(const ld2450_target_t *targets, uint8_t active_count) {
+    shs_ld2450_connected = true;
+
     /* Calculate effective count excluding targets in interference zones */
     uint8_t effective_count = 0;
     for (int i = 0; i < 3; i++) {
