@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "project": "SHS-Z2M-Presence-v2.kicad_pro",
+  "current": "2026-04-30_2000",
+  "runs": {
+    "2026-04-30_1950": {
+      "source_hashes": {
+        "SHS-Z2M-Presence-v2.kicad_sch": "sha256:c32c9e9e35e10a710584eb3a7cc341b1352da2e79824283bd9e266699374db99",
+        "SHS-Z2M-Presence-v2.kicad_pcb": "sha256:eb54851bc00a9f8ef3d2db822963be29cdf79393d07f3010cc5e34e456abd2fe"
+      },
+      "outputs": {
+        "schematic": "schematic.json",
+        "pcb": "pcb.json",
+        "cross_analysis": "cross_analysis.json",
+        "thermal": "thermal.json"
+      },
+      "scripts": {
+        "schematic": "analyze_schematic.py SHS-Z2M-Presence-v2.kicad_sch"
+      },
+      "generated": "2026-04-30T19:51:10+01:00",
+      "pinned": false
+    },
+    "2026-04-30_2000": {
+      "source_hashes": {
+        "SHS-Z2M-Presence-v2.kicad_sch": "sha256:303db80e7618fffedcb0647a02e8e5c68dc27536af4f48d922a22f9976789c7f"
+      },
+      "outputs": {
+        "schematic": "schematic.json",
+        "pcb": "pcb.json",
+        "cross_analysis": "cross_analysis.json",
+        "thermal": "thermal.json"
+      },
+      "scripts": {
+        "schematic": "analyze_schematic.py SHS-Z2M-Presence-v2.kicad_sch"
+      },
+      "generated": "2026-04-30T20:00:21+01:00",
+      "pinned": false
+    }
+  }
+}
