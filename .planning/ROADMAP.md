@@ -71,7 +71,11 @@ Plans:
   2. Existing Z2M device pairings remain valid — no re-interview or re-pair needed after firmware update
   3. Zone attribute handler uses computed offsets — adding a 6th zone requires changing one constant, not 30 switch cases
   4. All 25 endpoints created in preserved registration order — verified by Zigbee interview match
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 04-01-PLAN.md — Shared state struct (shs_state.h/c) (CS-01)
+- [ ] 04-02-PLAN.md — Zigbee module with endpoint factories (CS-04, CC-03)
+- [ ] 04-03-PLAN.md — Config, sensor, button modules + slim shs01.c (CS-02, CS-03)
 
 ## Progress
 
@@ -83,4 +87,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | 1. Critical Bug Fixes & Concurrency Safety | 2/2 | Complete | 2026-04-30 |
 | 2. Sensor Filters & Converter Fix | 0/? | Not started | - |
 | 3. Reliability & Diagnostics | 2/2 | Complete | 2026-04-30 |
-| 4. Code Restructuring | 0/? | Not started | - |
+| 4. Code Restructuring | 0/3 | Planned | - |
