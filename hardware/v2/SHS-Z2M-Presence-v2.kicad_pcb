@@ -2817,6 +2817,7 @@
 		(uuid "a606d87c-f409-4190-a6f2-1905d6ea1c89")
 	)
 	(zone
+		(net "GND")
 		(layer "F.Cu")
 		(uuid "2aa131d1-1d23-4b1a-896f-5b029bd6b1ae")
 		(hatch edge 0.508)
@@ -2836,6 +2837,7 @@
 		)
 	)
 	(zone
+		(net "GND")
 		(layer "B.Cu")
 		(uuid "9399248e-27e8-4b3f-883c-ec9241d5097c")
 		(hatch edge 0.508)
@@ -2855,6 +2857,7 @@
 		)
 	)
 	(zone
+		(net "GND")
 		(layer "In1.Cu")
 		(uuid "a1b2c3d4-in1g-4lay-gnd0-000000000001")
 		(hatch edge 0.508)
@@ -2874,6 +2877,7 @@
 		)
 	)
 	(zone
+		(net "+3V3")
 		(layer "In2.Cu")
 		(uuid "a1b2c3d4-in2p-4lay-pwr0-000000000001")
 		(hatch edge 0.508)
