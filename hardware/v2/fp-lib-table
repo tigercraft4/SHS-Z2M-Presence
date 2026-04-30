@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "SHS-Z2M-Presence-v2") (type "KiCad") (uri "${KIPRJMOD}/SHS-Z2M-Presence-v2.pretty") (options "") (descr "Project-local footprints"))
+)

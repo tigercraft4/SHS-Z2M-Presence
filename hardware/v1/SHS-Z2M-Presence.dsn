@@ -1,0 +1,218 @@
+(pcb "C:\Users\z004shhs\Documents\temp\SHS-Z2M-Presence-PCB\SHS-Z2M-Presence.dsn"
+  (parser
+    (string_quote ")
+    (space_in_quoted_tokens on)
+    (host_cad "KiCad's Pcbnew")
+    (host_version "10.0.0")
+  )
+  (resolution um 10)
+  (unit um)
+  (structure
+    (layer F.Cu
+      (type signal)
+      (property
+        (index 0)
+      )
+    )
+    (layer B.Cu
+      (type signal)
+      (property
+        (index 1)
+      )
+    )
+    (boundary
+      (path pcb 0  210000 -126000  155500 -126000  155500 -50000  210000 -50000
+            210000 -126000)
+    )
+    (via "Via[0-1]_600:300_um" "Via[0-1]_800:400_um")
+    (rule
+      (width 250)
+      (clearance 200)
+      (clearance 50 (type smd_smd))
+    )
+  )
+  (placement
+    (component "SHS-Z2M-Presence:LD2450"
+      (place U3 198000 -76500 front -90 (PN LD2450))
+    )
+    (component "SHS-Z2M-Presence:LD2410C"
+      (place U2 200850 -110500 front 90 (PN LD2410C))
+    )
+    (component Capacitor_SMD:C_0805_2012Metric
+      (place C2 188000 -96000 front 90 (PN 100nF))
+    )
+    (component Capacitor_SMD:C_0805_2012Metric::1
+      (place C1 208500 -106500 front -90 (PN 100nF))
+    )
+    (component "SHS-Z2M-Presence:ESP32_C6_DEVKITC1"
+      (place U1 172930 -87550 front 0 (PN ESP32_C6_DEVKITC1))
+    )
+  )
+  (library
+    (image "SHS-Z2M-Presence:LD2450"
+      (outline (polygon signal 0  22745 8245  22745 -8995  -22745 -8995  -22745 8245))
+      (outline (path signal 100  -22000 7500  -22000 -7500  22000 -7500  22000 7500  -22000 7500))
+      (outline (path signal 150  16000 -8000  16134.9 -8018.54  16259.8 -8072.79  16365.4 -8158.72
+            16443.9 -8269.97  16489.5 -8398.27  16498.8 -8534.12  16471.1 -8667.44
+            16408.5 -8788.34  16315.5 -8887.86  16199.2 -8958.61  16068.1 -8995.34
+            15931.9 -8995.34  15800.8 -8958.61  15684.5 -8887.86  15591.5 -8788.34
+            15528.9 -8667.44  15501.2 -8534.12  15510.5 -8398.27  15556.1 -8269.97
+            15634.6 -8158.72  15740.2 -8072.79  15865.1 -8018.54  16000 -8000))
+      (outline (path signal 150  -22250 7750  -22250 -7750  22250 -7750  22250 7750  -22250 7750))
+      (outline (path signal 150  -20000 5000  20000 5000))
+      (pin Round[A]Pad_1200.000000_um (rotate 90) 4 10000 -7000)
+      (pin Round[A]Pad_1200.000000_um (rotate 90) 3 12000 -7000)
+      (pin Round[A]Pad_1200.000000_um (rotate 90) 2 14000 -7000)
+      (pin Round[A]Pad_1200.000000_um (rotate 90) 1 16000 -7000)
+    )
+    (image "SHS-Z2M-Presence:LD2410C"
+      (outline (polygon signal 0  -8745 -6495  -8745 11745  8745 11745  8745 -6495))
+      (outline (path signal 150  -7000 8000  7000 8000))
+      (outline (path signal 150  -8250 11250  -8250 -5250  8250 -5250  8250 11250  -8250 11250))
+      (outline (path signal 150  -5580 -7000  -5714.9 -6981.46  -5839.79 -6927.21  -5945.42 -6841.28
+            -6023.94 -6730.03  -6069.54 -6601.73  -6078.83 -6465.88  -6051.13 -6332.56
+            -5988.48 -6211.66  -5895.54 -6112.14  -5779.2 -6041.39  -5648.08 -6004.66
+            -5511.92 -6004.66  -5380.8 -6041.39  -5264.46 -6112.14  -5171.52 -6211.66
+            -5108.87 -6332.56  -5081.17 -6465.88  -5090.46 -6601.73  -5136.06 -6730.03
+            -5214.58 -6841.28  -5320.21 -6927.21  -5445.1 -6981.46  -5580 -7000))
+      (outline (path signal 100  -8000 11000  -8000 -5000  8000 -5000  8000 11000  -8000 11000))
+      (pin Round[A]Pad_1600.000000_um (rotate 270) 1 -5080 -4500)
+      (pin Round[A]Pad_1600.000000_um (rotate 270) 2 -2540 -4500)
+      (pin Round[A]Pad_1600.000000_um (rotate 270) 3 0 -4500)
+      (pin Round[A]Pad_1600.000000_um (rotate 270) 4 2540 -4500)
+      (pin Round[A]Pad_1600.000000_um (rotate 270) 5 5080 -4500)
+    )
+    (image Capacitor_SMD:C_0805_2012Metric
+      (outline (polygon signal 0  -1745 -995  -1745 995  1745 995  1745 -995))
+      (outline (path signal 100  -1500 750  -1500 -750  1500 -750  1500 750  -1500 750))
+      (pin Rect[T]Pad_1000.000000x1200.000000_um 1 -1000 0)
+      (pin Rect[T]Pad_1000.000000x1200.000000_um 2 1000 0)
+    )
+    (image Capacitor_SMD:C_0805_2012Metric::1
+      (outline (polygon signal 0  1745 995  1745 -995  -1745 -995  -1745 995))
+      (outline (path signal 100  -1500 750  -1500 -750  1500 -750  1500 750  -1500 750))
+      (pin Rect[T]Pad_1000.000000x1200.000000_um 1 -1000 0)
+      (pin Rect[T]Pad_1000.000000x1200.000000_um 2 1000 0)
+    )
+    (image "SHS-Z2M-Presence:ESP32_C6_DEVKITC1"
+      (outline (polygon signal 0  13495 -34495  -13495 -34495  -13495 34495  13495 34495))
+      (outline (path signal 150  -12950 33900  12950 33900  12950 -33900  -12950 -33900
+            -12950 33900))
+      (outline (path signal 150  -4500 33900  4500 33900  4500 31000  -4500 31000  -4500 33900))
+      (outline (path signal 150  -12000 19050  -12018.5 18915.1  -12072.8 18790.2  -12158.7 18684.6
+            -12270 18606.1  -12398.3 18560.5  -12534.1 18551.2  -12667.4 18578.9
+            -12788.3 18641.5  -12887.9 18734.5  -12958.6 18850.8  -12995.3 18981.9
+            -12995.3 19118.1  -12958.6 19249.2  -12887.9 19365.5  -12788.3 19458.5
+            -12667.4 19521.1  -12534.1 19548.8  -12398.3 19539.5  -12270 19493.9
+            -12158.7 19415.4  -12072.8 19309.8  -12018.5 19184.9  -12000 19050))
+      (outline (path signal 100  -12700 33650  12700 33650  12700 -33650  -12700 -33650
+            -12700 33650))
+      (pin Rect[A]Pad_1700.000000x1700.000000_um 1 -11430 19050)
+      (pin Oval[A]Pad_1700.000000x1700.000000_um 2 -11430 16510)
+      (pin Oval[A]Pad_1700.000000x1700.000000_um 3 -11430 13970)
+      (pin Oval[A]Pad_1700.000000x1700.000000_um 4 -11430 11430)
+      (pin Oval[A]Pad_1700.000000x1700.000000_um 5 -11430 8890)
+      (pin Oval[A]Pad_1700.000000x1700.000000_um 6 -11430 6350)
+      (pin Oval[A]Pad_1700.000000x1700.000000_um 7 -11430 3810)
+      (pin Oval[A]Pad_1700.000000x1700.000000_um 8 -11430 1270)
+      (pin Oval[A]Pad_1700.000000x1700.000000_um 9 -11430 -1270)
+      (pin Oval[A]Pad_1700.000000x1700.000000_um 10 -11430 -3810)
+      (pin Oval[A]Pad_1700.000000x1700.000000_um 11 -11430 -6350)
+      (pin Oval[A]Pad_1700.000000x1700.000000_um 12 -11430 -8890)
+      (pin Oval[A]Pad_1700.000000x1700.000000_um 13 -11430 -11430)
+      (pin Oval[A]Pad_1700.000000x1700.000000_um 14 -11430 -13970)
+      (pin Oval[A]Pad_1700.000000x1700.000000_um 15 -11430 -16510)
+      (pin Oval[A]Pad_1700.000000x1700.000000_um 16 -11430 -19050)
+      (pin Oval[A]Pad_1700.000000x1700.000000_um 17 11430 19050)
+      (pin Oval[A]Pad_1700.000000x1700.000000_um 18 11430 16510)
+      (pin Oval[A]Pad_1700.000000x1700.000000_um 19 11430 13970)
+      (pin Oval[A]Pad_1700.000000x1700.000000_um 20 11430 11430)
+      (pin Oval[A]Pad_1700.000000x1700.000000_um 21 11430 8890)
+      (pin Oval[A]Pad_1700.000000x1700.000000_um 22 11430 6350)
+      (pin Oval[A]Pad_1700.000000x1700.000000_um 23 11430 3810)
+      (pin Oval[A]Pad_1700.000000x1700.000000_um 24 11430 1270)
+      (pin Oval[A]Pad_1700.000000x1700.000000_um 25 11430 -1270)
+      (pin Oval[A]Pad_1700.000000x1700.000000_um 26 11430 -3810)
+      (pin Oval[A]Pad_1700.000000x1700.000000_um 27 11430 -6350)
+      (pin Oval[A]Pad_1700.000000x1700.000000_um 28 11430 -8890)
+      (pin Oval[A]Pad_1700.000000x1700.000000_um 29 11430 -11430)
+      (pin Oval[A]Pad_1700.000000x1700.000000_um 30 11430 -13970)
+      (pin Oval[A]Pad_1700.000000x1700.000000_um 31 11430 -16510)
+      (pin Oval[A]Pad_1700.000000x1700.000000_um 32 11430 -19050)
+    )
+    (padstack Round[A]Pad_1200.000000_um
+      (shape (circle F.Cu 1200))
+      (shape (circle B.Cu 1200))
+      (attach off)
+    )
+    (padstack Round[A]Pad_1600.000000_um
+      (shape (circle F.Cu 1600))
+      (shape (circle B.Cu 1600))
+      (attach off)
+    )
+    (padstack Oval[A]Pad_1700.000000x1700.000000_um
+      (shape (path F.Cu 1700  0 0  0 0))
+      (shape (path B.Cu 1700  0 0  0 0))
+      (attach off)
+    )
+    (padstack Rect[T]Pad_1000.000000x1200.000000_um
+      (shape (rect F.Cu -500 -600 500 600))
+      (attach off)
+    )
+    (padstack Rect[A]Pad_1700.000000x1700.000000_um
+      (shape (rect F.Cu -850 -850 850 850))
+      (shape (rect B.Cu -850 -850 850 850))
+      (attach off)
+    )
+    (padstack "Via[0-1]_600:300_um"
+      (shape (circle F.Cu 600))
+      (shape (circle B.Cu 600))
+      (attach off)
+    )
+    (padstack "Via[0-1]_800:400_um"
+      (shape (circle F.Cu 800))
+      (shape (circle B.Cu 800))
+      (attach off)
+    )
+  )
+  (network
+    (net UART1_TX
+      (pins U2-1 U1-4)
+    )
+    (net UART1_RX
+      (pins U2-2 U1-3)
+    )
+    (net GND
+      (pins U3-4 U2-4 C2-2 C1-2 U1-15 U1-17 U1-28 U1-31)
+    )
+    (net +5V
+      (pins U3-1 U2-5 C2-1 C1-1 U1-14)
+    )
+    (net UART0_RX
+      (pins U3-2 U1-25)
+    )
+    (net UART0_TX
+      (pins U3-3 U1-26)
+    )
+    (class kicad_default UART0_RX UART0_TX UART1_RX UART1_TX
+      (circuit
+        (use_via "Via[0-1]_600:300_um")
+      )
+      (rule
+        (width 250)
+        (clearance 200)
+      )
+    )
+    (class Power +5V GND
+      (circuit
+        (use_via "Via[0-1]_800:400_um")
+      )
+      (rule
+        (width 500)
+        (clearance 200)
+      )
+    )
+  )
+  (wiring
+  )
+)
