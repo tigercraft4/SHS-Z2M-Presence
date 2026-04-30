@@ -1,0 +1,3666 @@
+{
+  "analyzer_type": "pcb",
+  "schema_version": "1.3.0",
+  "file": "C:\\Users\\z004shhs\\Documents\\temp\\SHS-Z2M-Presence-PCB\\v2\\SHS-Z2M-Presence-v2.kicad_pcb",
+  "kicad_version": "8.0",
+  "file_version": "20240108",
+  "statistics": {
+    "footprint_count": 36,
+    "front_side": 36,
+    "back_side": 0,
+    "smd_count": 33,
+    "tht_count": 3,
+    "copper_layers_used": 1,
+    "copper_layer_names": [
+      "F.Cu"
+    ],
+    "track_segments": 0,
+    "via_count": 0,
+    "zone_count": 1,
+    "total_track_length_mm": 0,
+    "board_width_mm": 100.0,
+    "board_height_mm": 70.0,
+    "board_area_mm2": 7000.0,
+    "net_count": 17,
+    "routing_complete": false,
+    "unrouted_net_count": 16
+  },
+  "layers": [
+    {
+      "number": 0,
+      "name": "F.Cu",
+      "type": "signal",
+      "alias": null
+    },
+    {
+      "number": 31,
+      "name": "B.Cu",
+      "type": "signal",
+      "alias": null
+    },
+    {
+      "number": 32,
+      "name": "B.Adhes",
+      "type": "user",
+      "alias": "B.Adhesive"
+    },
+    {
+      "number": 33,
+      "name": "F.Adhes",
+      "type": "user",
+      "alias": "F.Adhesive"
+    },
+    {
+      "number": 34,
+      "name": "B.Paste",
+      "type": "user",
+      "alias": null
+    },
+    {
+      "number": 35,
+      "name": "F.Paste",
+      "type": "user",
+      "alias": null
+    },
+    {
+      "number": 36,
+      "name": "B.SilkS",
+      "type": "user",
+      "alias": "B.Silkscreen"
+    },
+    {
+      "number": 37,
+      "name": "F.SilkS",
+      "type": "user",
+      "alias": "F.Silkscreen"
+    },
+    {
+      "number": 38,
+      "name": "B.Mask",
+      "type": "user",
+      "alias": null
+    },
+    {
+      "number": 39,
+      "name": "F.Mask",
+      "type": "user",
+      "alias": null
+    },
+    {
+      "number": 40,
+      "name": "Dwgs.User",
+      "type": "user",
+      "alias": "User.Drawings"
+    },
+    {
+      "number": 41,
+      "name": "Cmts.User",
+      "type": "user",
+      "alias": "User.Comments"
+    },
+    {
+      "number": 42,
+      "name": "Eco1.User",
+      "type": "user",
+      "alias": "User.Eco1"
+    },
+    {
+      "number": 43,
+      "name": "Eco2.User",
+      "type": "user",
+      "alias": "User.Eco2"
+    },
+    {
+      "number": 44,
+      "name": "Edge.Cuts",
+      "type": "user",
+      "alias": null
+    },
+    {
+      "number": 45,
+      "name": "Margin",
+      "type": "user",
+      "alias": null
+    },
+    {
+      "number": 46,
+      "name": "B.CrtYd",
+      "type": "user",
+      "alias": "B.Courtyard"
+    },
+    {
+      "number": 47,
+      "name": "F.CrtYd",
+      "type": "user",
+      "alias": "F.Courtyard"
+    },
+    {
+      "number": 48,
+      "name": "B.Fab",
+      "type": "user",
+      "alias": "B.Fabrication"
+    },
+    {
+      "number": 49,
+      "name": "F.Fab",
+      "type": "user",
+      "alias": "F.Fabrication"
+    }
+  ],
+  "setup": {
+    "board_thickness_mm": 1.6,
+    "pad_to_mask_clearance": 0.0,
+    "legacy_teardrops": "no",
+    "allow_soldermask_bridges": "no"
+  },
+  "nets": {
+    "1": "GND",
+    "2": "+5V",
+    "3": "+3V3",
+    "4": "USB_DM",
+    "5": "USB_DP",
+    "6": "UART1_TX",
+    "7": "UART1_RX",
+    "8": "UART0_TX",
+    "9": "UART0_RX",
+    "10": "ESP_EN",
+    "11": "BOOT",
+    "12": "STAT_LED",
+    "13": "RADAR_OUT",
+    "14": "CC1",
+    "15": "CC2",
+    "16": "Net-R5-A",
+    "17": "Net-R6-A"
+  },
+  "net_name_to_id": {
+    "GND": 1,
+    "+5V": 2,
+    "+3V3": 3,
+    "USB_DM": 4,
+    "USB_DP": 5,
+    "UART1_TX": 6,
+    "UART1_RX": 7,
+    "UART0_TX": 8,
+    "UART0_RX": 9,
+    "ESP_EN": 10,
+    "BOOT": 11,
+    "STAT_LED": 12,
+    "RADAR_OUT": 13,
+    "CC1": 14,
+    "CC2": 15,
+    "Net-R5-A": 16,
+    "Net-R6-A": 17
+  },
+  "board_outline": {
+    "edge_count": 1,
+    "edges": [
+      {
+        "type": "rect",
+        "start": [
+          0.0,
+          0.0
+        ],
+        "end": [
+          100.0,
+          70.0
+        ]
+      }
+    ],
+    "bounding_box": {
+      "min_x": 0.0,
+      "min_y": 0.0,
+      "max_x": 100.0,
+      "max_y": 70.0,
+      "width": 100.0,
+      "height": 70.0
+    }
+  },
+  "component_groups": {
+    "C": {
+      "count": 9,
+      "references": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5",
+        "C6",
+        "C7",
+        "C8",
+        "C9"
+      ]
+    },
+    "H": {
+      "count": 4,
+      "references": [
+        "H1",
+        "H2",
+        "H3",
+        "H4"
+      ]
+    },
+    "J": {
+      "count": 1,
+      "references": [
+        "J1"
+      ]
+    },
+    "LED": {
+      "count": 2,
+      "references": [
+        "LED1",
+        "LED2"
+      ]
+    },
+    "R": {
+      "count": 6,
+      "references": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6"
+      ]
+    },
+    "SW": {
+      "count": 2,
+      "references": [
+        "SW1",
+        "SW2"
+      ]
+    },
+    "TP": {
+      "count": 8,
+      "references": [
+        "TP1",
+        "TP2",
+        "TP3",
+        "TP4",
+        "TP5",
+        "TP6",
+        "TP7",
+        "TP8"
+      ]
+    },
+    "U": {
+      "count": 4,
+      "references": [
+        "U1",
+        "U2",
+        "U3",
+        "U4"
+      ]
+    }
+  },
+  "footprints": [
+    {
+      "library": "Connector_USB:USB_C_Receptacle_GCT_USB4085",
+      "reference": "J1",
+      "value": "USB_C_Receptacle",
+      "mpn": "",
+      "x": 10.0,
+      "y": 33.0,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "through_hole",
+      "pad_count": 8,
+      "courtyard": {
+        "min_x": 4.8,
+        "min_y": 28.9,
+        "max_x": 15.2,
+        "max_y": 37.1
+      },
+      "footprint": "Connector_USB:USB_C_Receptacle_GCT_USB4085",
+      "pad_nets": {
+        "A4": {
+          "net": "+5V"
+        },
+        "A1": {
+          "net": "GND"
+        },
+        "B7": {
+          "net": "USB_DM"
+        },
+        "B6": {
+          "net": "USB_DP"
+        },
+        "A5": {
+          "net": "CC1"
+        },
+        "B5": {
+          "net": "CC2"
+        },
+        "GND": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "+5V",
+        "CC1",
+        "CC2",
+        "GND",
+        "USB_DM",
+        "USB_DP"
+      ]
+    },
+    {
+      "library": "Capacitor_SMD:C_0805_2012Metric",
+      "reference": "C9",
+      "value": "22uF",
+      "mpn": "",
+      "x": 10.0,
+      "y": 22.0,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 2,
+      "courtyard": {
+        "min_x": 8.12,
+        "min_y": 20.92,
+        "max_x": 11.88,
+        "max_y": 23.08
+      },
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "pad_nets": {
+        "1": {
+          "net": "+5V"
+        },
+        "2": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "+5V",
+        "GND"
+      ]
+    },
+    {
+      "library": "Resistor_SMD:R_0402_1005Metric",
+      "reference": "R2",
+      "value": "5.1k",
+      "mpn": "",
+      "x": 18.0,
+      "y": 39.0,
+      "angle": 90.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 2,
+      "courtyard": {
+        "min_x": 17.52,
+        "min_y": 38.27,
+        "max_x": 18.48,
+        "max_y": 39.73
+      },
+      "footprint": "Resistor_SMD:R_0402_1005Metric",
+      "pad_nets": {
+        "1": {
+          "net": "CC1"
+        },
+        "2": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "CC1",
+        "GND"
+      ]
+    },
+    {
+      "library": "Resistor_SMD:R_0402_1005Metric",
+      "reference": "R3",
+      "value": "5.1k",
+      "mpn": "",
+      "x": 18.0,
+      "y": 43.0,
+      "angle": 90.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 2,
+      "courtyard": {
+        "min_x": 17.52,
+        "min_y": 42.27,
+        "max_x": 18.48,
+        "max_y": 43.73
+      },
+      "footprint": "Resistor_SMD:R_0402_1005Metric",
+      "pad_nets": {
+        "1": {
+          "net": "CC2"
+        },
+        "2": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "CC2",
+        "GND"
+      ]
+    },
+    {
+      "library": "Package_TO_SOT_SMD:SOT-23-5",
+      "reference": "U4",
+      "value": "AP2112K-3.3",
+      "mpn": "",
+      "x": 22.0,
+      "y": 25.0,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 5,
+      "courtyard": {
+        "min_x": 20.1,
+        "min_y": 22.9,
+        "max_x": 23.9,
+        "max_y": 27.1
+      },
+      "footprint": "Package_TO_SOT_SMD:SOT-23-5",
+      "pad_nets": {
+        "1": {
+          "net": "+5V"
+        },
+        "2": {
+          "net": "GND"
+        },
+        "3": {
+          "net": "+5V"
+        },
+        "4": {
+          "net": "+3V3"
+        },
+        "5": {
+          "net": "+3V3"
+        }
+      },
+      "connected_nets": [
+        "+3V3",
+        "+5V",
+        "GND"
+      ]
+    },
+    {
+      "library": "Capacitor_SMD:C_0402_1005Metric",
+      "reference": "C4",
+      "value": "100nF",
+      "mpn": "",
+      "x": 17.0,
+      "y": 20.0,
+      "angle": 90.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 2,
+      "courtyard": {
+        "min_x": 16.52,
+        "min_y": 19.27,
+        "max_x": 17.48,
+        "max_y": 20.73
+      },
+      "footprint": "Capacitor_SMD:C_0402_1005Metric",
+      "pad_nets": {
+        "1": {
+          "net": "+5V"
+        },
+        "2": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "+5V",
+        "GND"
+      ]
+    },
+    {
+      "library": "Capacitor_SMD:C_0402_1005Metric",
+      "reference": "C5",
+      "value": "10uF",
+      "mpn": "",
+      "x": 22.0,
+      "y": 20.0,
+      "angle": 90.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 2,
+      "courtyard": {
+        "min_x": 21.52,
+        "min_y": 19.27,
+        "max_x": 22.48,
+        "max_y": 20.73
+      },
+      "footprint": "Capacitor_SMD:C_0402_1005Metric",
+      "pad_nets": {
+        "1": {
+          "net": "+5V"
+        },
+        "2": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "+5V",
+        "GND"
+      ]
+    },
+    {
+      "library": "Capacitor_SMD:C_0402_1005Metric",
+      "reference": "C6",
+      "value": "100nF",
+      "mpn": "",
+      "x": 28.0,
+      "y": 20.0,
+      "angle": 90.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 2,
+      "courtyard": {
+        "min_x": 27.52,
+        "min_y": 19.27,
+        "max_x": 28.48,
+        "max_y": 20.73
+      },
+      "footprint": "Capacitor_SMD:C_0402_1005Metric",
+      "pad_nets": {
+        "1": {
+          "net": "+3V3"
+        },
+        "2": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "+3V3",
+        "GND"
+      ]
+    },
+    {
+      "library": "Capacitor_SMD:C_0402_1005Metric",
+      "reference": "C7",
+      "value": "10uF",
+      "mpn": "",
+      "x": 33.0,
+      "y": 20.0,
+      "angle": 90.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 2,
+      "courtyard": {
+        "min_x": 32.52,
+        "min_y": 19.27,
+        "max_x": 33.48,
+        "max_y": 20.73
+      },
+      "footprint": "Capacitor_SMD:C_0402_1005Metric",
+      "pad_nets": {
+        "1": {
+          "net": "+3V3"
+        },
+        "2": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "+3V3",
+        "GND"
+      ]
+    },
+    {
+      "library": "Resistor_SMD:R_0402_1005Metric",
+      "reference": "R6",
+      "value": "330R",
+      "mpn": "",
+      "x": 28.0,
+      "y": 12.0,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 2,
+      "courtyard": {
+        "min_x": 27.27,
+        "min_y": 11.52,
+        "max_x": 28.73,
+        "max_y": 12.48
+      },
+      "footprint": "Resistor_SMD:R_0402_1005Metric",
+      "pad_nets": {
+        "1": {
+          "net": "+3V3"
+        },
+        "2": {
+          "net": "Net-R6-A"
+        }
+      },
+      "connected_nets": [
+        "+3V3",
+        "Net-R6-A"
+      ]
+    },
+    {
+      "library": "LED_SMD:LED_0402_1005Metric",
+      "reference": "LED2",
+      "value": "LED_R",
+      "mpn": "",
+      "x": 33.0,
+      "y": 12.0,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 2,
+      "courtyard": {
+        "min_x": 32.27,
+        "min_y": 11.52,
+        "max_x": 33.73,
+        "max_y": 12.48
+      },
+      "footprint": "LED_SMD:LED_0402_1005Metric",
+      "pad_nets": {
+        "1": {
+          "net": "GND"
+        },
+        "2": {
+          "net": "Net-R6-A"
+        }
+      },
+      "connected_nets": [
+        "GND",
+        "Net-R6-A"
+      ]
+    },
+    {
+      "library": "Resistor_SMD:R_0402_1005Metric",
+      "reference": "R1",
+      "value": "10k",
+      "mpn": "",
+      "x": 38.0,
+      "y": 22.0,
+      "angle": 90.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 2,
+      "courtyard": {
+        "min_x": 37.52,
+        "min_y": 21.27,
+        "max_x": 38.48,
+        "max_y": 22.73
+      },
+      "footprint": "Resistor_SMD:R_0402_1005Metric",
+      "pad_nets": {
+        "1": {
+          "net": "+3V3"
+        },
+        "2": {
+          "net": "ESP_EN"
+        }
+      },
+      "connected_nets": [
+        "+3V3",
+        "ESP_EN"
+      ]
+    },
+    {
+      "library": "Capacitor_SMD:C_0402_1005Metric",
+      "reference": "C8",
+      "value": "1uF",
+      "mpn": "",
+      "x": 38.0,
+      "y": 27.0,
+      "angle": 90.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 2,
+      "courtyard": {
+        "min_x": 37.52,
+        "min_y": 26.27,
+        "max_x": 38.48,
+        "max_y": 27.73
+      },
+      "footprint": "Capacitor_SMD:C_0402_1005Metric",
+      "pad_nets": {
+        "1": {
+          "net": "ESP_EN"
+        },
+        "2": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "ESP_EN",
+        "GND"
+      ]
+    },
+    {
+      "library": "Button_Switch_SMD:SW_SPST_B3U-1000P",
+      "reference": "SW1",
+      "value": "RESET",
+      "mpn": "",
+      "x": 38.0,
+      "y": 33.0,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 2,
+      "courtyard": {
+        "min_x": 36.25,
+        "min_y": 31.9,
+        "max_x": 39.75,
+        "max_y": 34.1
+      },
+      "footprint": "Button_Switch_SMD:SW_SPST_B3U-1000P",
+      "pad_nets": {
+        "1": {
+          "net": "ESP_EN"
+        },
+        "2": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "ESP_EN",
+        "GND"
+      ]
+    },
+    {
+      "library": "SHS-Z2M-Presence-v2:ESP32_C6_WROOM1_N8",
+      "reference": "U1",
+      "value": "ESP32-C6-WROOM-1-N8",
+      "mpn": "",
+      "x": 50.0,
+      "y": 35.0,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 29,
+      "courtyard": {
+        "min_x": 40.25,
+        "min_y": 22.0,
+        "max_x": 59.75,
+        "max_y": 44.75
+      },
+      "footprint": "SHS-Z2M-Presence-v2:ESP32_C6_WROOM1_N8",
+      "pad_nets": {
+        "1": {
+          "net": "GND"
+        },
+        "2": {
+          "net": "+3V3"
+        },
+        "3": {
+          "net": "ESP_EN"
+        },
+        "4": {
+          "net": "UART1_TX"
+        },
+        "5": {
+          "net": "UART1_RX"
+        },
+        "13": {
+          "net": "USB_DM"
+        },
+        "14": {
+          "net": "USB_DP"
+        },
+        "15": {
+          "net": "BOOT"
+        },
+        "16": {
+          "net": "UART0_TX"
+        },
+        "17": {
+          "net": "UART0_RX"
+        },
+        "26": {
+          "net": "RADAR_OUT"
+        },
+        "27": {
+          "net": "STAT_LED"
+        },
+        "28": {
+          "net": "GND"
+        },
+        "29": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "+3V3",
+        "BOOT",
+        "ESP_EN",
+        "GND",
+        "RADAR_OUT",
+        "STAT_LED",
+        "UART0_RX",
+        "UART0_TX",
+        "UART1_RX",
+        "UART1_TX",
+        "USB_DM",
+        "USB_DP"
+      ]
+    },
+    {
+      "library": "Resistor_SMD:R_0402_1005Metric",
+      "reference": "R4",
+      "value": "10k",
+      "mpn": "",
+      "x": 63.0,
+      "y": 22.0,
+      "angle": 90.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 2,
+      "courtyard": {
+        "min_x": 62.52,
+        "min_y": 21.27,
+        "max_x": 63.48,
+        "max_y": 22.73
+      },
+      "footprint": "Resistor_SMD:R_0402_1005Metric",
+      "pad_nets": {
+        "1": {
+          "net": "+3V3"
+        },
+        "2": {
+          "net": "BOOT"
+        }
+      },
+      "connected_nets": [
+        "+3V3",
+        "BOOT"
+      ]
+    },
+    {
+      "library": "Button_Switch_SMD:SW_SPST_B3U-1000P",
+      "reference": "SW2",
+      "value": "BOOT",
+      "mpn": "",
+      "x": 63.0,
+      "y": 27.0,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 2,
+      "courtyard": {
+        "min_x": 61.25,
+        "min_y": 25.9,
+        "max_x": 64.75,
+        "max_y": 28.1
+      },
+      "footprint": "Button_Switch_SMD:SW_SPST_B3U-1000P",
+      "pad_nets": {
+        "1": {
+          "net": "BOOT"
+        },
+        "2": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "BOOT",
+        "GND"
+      ]
+    },
+    {
+      "library": "Resistor_SMD:R_0402_1005Metric",
+      "reference": "R5",
+      "value": "330R",
+      "mpn": "",
+      "x": 63.0,
+      "y": 12.0,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 2,
+      "courtyard": {
+        "min_x": 62.27,
+        "min_y": 11.52,
+        "max_x": 63.73,
+        "max_y": 12.48
+      },
+      "footprint": "Resistor_SMD:R_0402_1005Metric",
+      "pad_nets": {
+        "1": {
+          "net": "STAT_LED"
+        },
+        "2": {
+          "net": "Net-R5-A"
+        }
+      },
+      "connected_nets": [
+        "Net-R5-A",
+        "STAT_LED"
+      ]
+    },
+    {
+      "library": "LED_SMD:LED_0402_1005Metric",
+      "reference": "LED1",
+      "value": "LED_G",
+      "mpn": "",
+      "x": 68.0,
+      "y": 12.0,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 2,
+      "courtyard": {
+        "min_x": 67.27,
+        "min_y": 11.52,
+        "max_x": 68.73,
+        "max_y": 12.48
+      },
+      "footprint": "LED_SMD:LED_0402_1005Metric",
+      "pad_nets": {
+        "1": {
+          "net": "GND"
+        },
+        "2": {
+          "net": "Net-R5-A"
+        }
+      },
+      "connected_nets": [
+        "GND",
+        "Net-R5-A"
+      ]
+    },
+    {
+      "library": "Capacitor_SMD:C_0402_1005Metric",
+      "reference": "C1",
+      "value": "100nF",
+      "mpn": "",
+      "x": 66.0,
+      "y": 35.0,
+      "angle": 90.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 2,
+      "courtyard": {
+        "min_x": 65.52,
+        "min_y": 34.27,
+        "max_x": 66.48,
+        "max_y": 35.73
+      },
+      "footprint": "Capacitor_SMD:C_0402_1005Metric",
+      "pad_nets": {
+        "1": {
+          "net": "+5V"
+        },
+        "2": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "+5V",
+        "GND"
+      ]
+    },
+    {
+      "library": "Capacitor_SMD:C_0402_1005Metric",
+      "reference": "C3",
+      "value": "10uF",
+      "mpn": "",
+      "x": 66.0,
+      "y": 40.0,
+      "angle": 90.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 2,
+      "courtyard": {
+        "min_x": 65.52,
+        "min_y": 39.27,
+        "max_x": 66.48,
+        "max_y": 40.73
+      },
+      "footprint": "Capacitor_SMD:C_0402_1005Metric",
+      "pad_nets": {
+        "1": {
+          "net": "+5V"
+        },
+        "2": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "+5V",
+        "GND"
+      ]
+    },
+    {
+      "library": "SHS-Z2M-Presence-v2:LD2410C",
+      "reference": "U2",
+      "value": "LD2410C",
+      "mpn": "",
+      "x": 75.0,
+      "y": 35.0,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "through_hole",
+      "pad_count": 5,
+      "courtyard": {
+        "min_x": 66.25,
+        "min_y": 23.25,
+        "max_x": 83.75,
+        "max_y": 41.5
+      },
+      "footprint": "SHS-Z2M-Presence-v2:LD2410C",
+      "pad_nets": {
+        "1": {
+          "net": "UART1_RX"
+        },
+        "2": {
+          "net": "UART1_TX"
+        },
+        "3": {
+          "net": "RADAR_OUT"
+        },
+        "4": {
+          "net": "GND"
+        },
+        "5": {
+          "net": "+5V"
+        }
+      },
+      "connected_nets": [
+        "+5V",
+        "GND",
+        "RADAR_OUT",
+        "UART1_RX",
+        "UART1_TX"
+      ]
+    },
+    {
+      "library": "Capacitor_SMD:C_0402_1005Metric",
+      "reference": "C2",
+      "value": "100nF",
+      "mpn": "",
+      "x": 62.0,
+      "y": 52.0,
+      "angle": 90.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 2,
+      "courtyard": {
+        "min_x": 61.52,
+        "min_y": 51.27,
+        "max_x": 62.48,
+        "max_y": 52.73
+      },
+      "footprint": "Capacitor_SMD:C_0402_1005Metric",
+      "pad_nets": {
+        "1": {
+          "net": "+5V"
+        },
+        "2": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "+5V",
+        "GND"
+      ]
+    },
+    {
+      "library": "SHS-Z2M-Presence-v2:LD2450",
+      "reference": "U3",
+      "value": "LD2450",
+      "mpn": "",
+      "x": 76.0,
+      "y": 53.0,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "through_hole",
+      "pad_count": 8,
+      "courtyard": {
+        "min_x": 53.25,
+        "min_y": 44.75,
+        "max_x": 98.75,
+        "max_y": 61.25
+      },
+      "footprint": "SHS-Z2M-Presence-v2:LD2450",
+      "pad_nets": {
+        "1": {
+          "net": "+5V"
+        },
+        "4": {
+          "net": "GND"
+        },
+        "2": {
+          "net": "UART0_TX"
+        },
+        "3": {
+          "net": "UART0_RX"
+        }
+      },
+      "connected_nets": [
+        "+5V",
+        "GND",
+        "UART0_RX",
+        "UART0_TX"
+      ]
+    },
+    {
+      "library": "TestPoint:TestPoint_Pad_D1.5mm",
+      "reference": "TP1",
+      "value": "+5V",
+      "mpn": "",
+      "x": 12.0,
+      "y": 62.0,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 1,
+      "courtyard": {
+        "min_x": 12.0,
+        "min_y": 62.0,
+        "max_x": 13.1,
+        "max_y": 62.0
+      },
+      "footprint": "TestPoint:TestPoint_Pad_D1.5mm",
+      "pad_nets": {
+        "1": {
+          "net": "+5V"
+        }
+      },
+      "connected_nets": [
+        "+5V"
+      ]
+    },
+    {
+      "library": "TestPoint:TestPoint_Pad_D1.5mm",
+      "reference": "TP2",
+      "value": "+3V3",
+      "mpn": "",
+      "x": 22.0,
+      "y": 62.0,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 1,
+      "courtyard": {
+        "min_x": 22.0,
+        "min_y": 62.0,
+        "max_x": 23.1,
+        "max_y": 62.0
+      },
+      "footprint": "TestPoint:TestPoint_Pad_D1.5mm",
+      "pad_nets": {
+        "1": {
+          "net": "+3V3"
+        }
+      },
+      "connected_nets": [
+        "+3V3"
+      ]
+    },
+    {
+      "library": "TestPoint:TestPoint_Pad_D1.5mm",
+      "reference": "TP3",
+      "value": "GND",
+      "mpn": "",
+      "x": 32.0,
+      "y": 62.0,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 1,
+      "courtyard": {
+        "min_x": 32.0,
+        "min_y": 62.0,
+        "max_x": 33.1,
+        "max_y": 62.0
+      },
+      "footprint": "TestPoint:TestPoint_Pad_D1.5mm",
+      "pad_nets": {
+        "1": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "GND"
+      ]
+    },
+    {
+      "library": "TestPoint:TestPoint_Pad_D1.5mm",
+      "reference": "TP4",
+      "value": "UART1_TX",
+      "mpn": "",
+      "x": 42.0,
+      "y": 62.0,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 1,
+      "courtyard": {
+        "min_x": 42.0,
+        "min_y": 62.0,
+        "max_x": 43.1,
+        "max_y": 62.0
+      },
+      "footprint": "TestPoint:TestPoint_Pad_D1.5mm",
+      "pad_nets": {
+        "1": {
+          "net": "UART1_TX"
+        }
+      },
+      "connected_nets": [
+        "UART1_TX"
+      ]
+    },
+    {
+      "library": "TestPoint:TestPoint_Pad_D1.5mm",
+      "reference": "TP5",
+      "value": "UART1_RX",
+      "mpn": "",
+      "x": 52.0,
+      "y": 62.0,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 1,
+      "courtyard": {
+        "min_x": 52.0,
+        "min_y": 62.0,
+        "max_x": 53.1,
+        "max_y": 62.0
+      },
+      "footprint": "TestPoint:TestPoint_Pad_D1.5mm",
+      "pad_nets": {
+        "1": {
+          "net": "UART1_RX"
+        }
+      },
+      "connected_nets": [
+        "UART1_RX"
+      ]
+    },
+    {
+      "library": "TestPoint:TestPoint_Pad_D1.5mm",
+      "reference": "TP6",
+      "value": "UART0_TX",
+      "mpn": "",
+      "x": 62.0,
+      "y": 62.0,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 1,
+      "courtyard": {
+        "min_x": 62.0,
+        "min_y": 62.0,
+        "max_x": 63.1,
+        "max_y": 62.0
+      },
+      "footprint": "TestPoint:TestPoint_Pad_D1.5mm",
+      "pad_nets": {
+        "1": {
+          "net": "UART0_TX"
+        }
+      },
+      "connected_nets": [
+        "UART0_TX"
+      ]
+    },
+    {
+      "library": "TestPoint:TestPoint_Pad_D1.5mm",
+      "reference": "TP7",
+      "value": "UART0_RX",
+      "mpn": "",
+      "x": 72.0,
+      "y": 62.0,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 1,
+      "courtyard": {
+        "min_x": 72.0,
+        "min_y": 62.0,
+        "max_x": 73.1,
+        "max_y": 62.0
+      },
+      "footprint": "TestPoint:TestPoint_Pad_D1.5mm",
+      "pad_nets": {
+        "1": {
+          "net": "UART0_RX"
+        }
+      },
+      "connected_nets": [
+        "UART0_RX"
+      ]
+    },
+    {
+      "library": "TestPoint:TestPoint_Pad_D1.5mm",
+      "reference": "TP8",
+      "value": "ESP_EN",
+      "mpn": "",
+      "x": 82.0,
+      "y": 62.0,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 1,
+      "courtyard": {
+        "min_x": 82.0,
+        "min_y": 62.0,
+        "max_x": 83.1,
+        "max_y": 62.0
+      },
+      "footprint": "TestPoint:TestPoint_Pad_D1.5mm",
+      "pad_nets": {
+        "1": {
+          "net": "ESP_EN"
+        }
+      },
+      "connected_nets": [
+        "ESP_EN"
+      ]
+    },
+    {
+      "library": "MountingHole:MountingHole_3.2mm_M3",
+      "reference": "H1",
+      "value": "M3",
+      "mpn": "",
+      "x": 4.0,
+      "y": 4.0,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 1,
+      "courtyard": {
+        "min_x": 4.0,
+        "min_y": 4.0,
+        "max_x": 6.5,
+        "max_y": 4.0
+      },
+      "footprint": "MountingHole:MountingHole_3.2mm_M3",
+      "pad_nets": {},
+      "connected_nets": []
+    },
+    {
+      "library": "MountingHole:MountingHole_3.2mm_M3",
+      "reference": "H2",
+      "value": "M3",
+      "mpn": "",
+      "x": 96.0,
+      "y": 4.0,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 1,
+      "courtyard": {
+        "min_x": 96.0,
+        "min_y": 4.0,
+        "max_x": 98.5,
+        "max_y": 4.0
+      },
+      "footprint": "MountingHole:MountingHole_3.2mm_M3",
+      "pad_nets": {},
+      "connected_nets": []
+    },
+    {
+      "library": "MountingHole:MountingHole_3.2mm_M3",
+      "reference": "H3",
+      "value": "M3",
+      "mpn": "",
+      "x": 4.0,
+      "y": 66.0,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 1,
+      "courtyard": {
+        "min_x": 4.0,
+        "min_y": 66.0,
+        "max_x": 6.5,
+        "max_y": 66.0
+      },
+      "footprint": "MountingHole:MountingHole_3.2mm_M3",
+      "pad_nets": {},
+      "connected_nets": []
+    },
+    {
+      "library": "MountingHole:MountingHole_3.2mm_M3",
+      "reference": "H4",
+      "value": "M3",
+      "mpn": "",
+      "x": 96.0,
+      "y": 66.0,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 1,
+      "courtyard": {
+        "min_x": 96.0,
+        "min_y": 66.0,
+        "max_x": 98.5,
+        "max_y": 66.0
+      },
+      "footprint": "MountingHole:MountingHole_3.2mm_M3",
+      "pad_nets": {},
+      "connected_nets": []
+    }
+  ],
+  "tracks": {
+    "segment_count": 0,
+    "arc_count": 0,
+    "width_distribution": {},
+    "layer_distribution": {}
+  },
+  "vias": {
+    "count": 0,
+    "size_distribution": {}
+  },
+  "zones": [
+    {
+      "net": 1,
+      "net_name": "GND",
+      "layers": [
+        "F.Cu"
+      ],
+      "clearance": 0.3,
+      "min_thickness": 0.25,
+      "thermal_gap": 0.5,
+      "thermal_bridge_width": 0.5,
+      "outline_points": 4,
+      "outline_area_mm2": 6336.0,
+      "is_filled": true,
+      "outline_bbox": [
+        2.0,
+        2.0,
+        98.0,
+        68.0
+      ]
+    }
+  ],
+  "keepout_zones": [],
+  "connectivity": {
+    "total_nets_with_pads": 17,
+    "routed_nets": 1,
+    "unrouted_count": 16,
+    "routing_complete": false
+  },
+  "net_lengths": [],
+  "decoupling_placement": [
+    {
+      "ic": "U4",
+      "value": "AP2112K-3.3",
+      "layer": "F.Cu",
+      "nearby_caps": [
+        {
+          "cap": "C5",
+          "value": "10uF",
+          "distance_mm": 3.34,
+          "shared_nets": [
+            "+5V",
+            "GND"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C4",
+          "value": "100nF",
+          "distance_mm": 5.16,
+          "shared_nets": [
+            "+5V",
+            "GND"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C6",
+          "value": "100nF",
+          "distance_mm": 5.98,
+          "shared_nets": [
+            "+3V3",
+            "GND"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C9",
+          "value": "22uF",
+          "distance_mm": 9.5,
+          "shared_nets": [
+            "+5V",
+            "GND"
+          ],
+          "same_side": true
+        }
+      ],
+      "closest_cap_mm": 3.34
+    },
+    {
+      "ic": "U1",
+      "value": "ESP32-C6-WROOM-1-N8",
+      "layer": "F.Cu",
+      "nearby_caps": [
+        {
+          "cap": "C8",
+          "value": "1uF",
+          "distance_mm": 3.01,
+          "shared_nets": [
+            "ESP_EN",
+            "GND"
+          ],
+          "same_side": true
+        }
+      ],
+      "closest_cap_mm": 3.01
+    },
+    {
+      "ic": "U3",
+      "value": "LD2450",
+      "layer": "F.Cu",
+      "nearby_caps": [
+        {
+          "cap": "C2",
+          "value": "100nF",
+          "distance_mm": 2.83,
+          "shared_nets": [
+            "+5V",
+            "GND"
+          ],
+          "same_side": true
+        }
+      ],
+      "closest_cap_mm": 2.83
+    }
+  ],
+  "decoupling_proximity": [
+    {
+      "ic_ref": "U4",
+      "cap_ref": "C5",
+      "distance_mm": 3.34,
+      "cap_value": "10uF",
+      "same_side": true,
+      "shared_nets": [
+        "+5V",
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U4",
+      "cap_ref": "C4",
+      "distance_mm": 5.16,
+      "cap_value": "100nF",
+      "same_side": true,
+      "shared_nets": [
+        "+5V",
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U4",
+      "cap_ref": "C6",
+      "distance_mm": 5.98,
+      "cap_value": "100nF",
+      "same_side": true,
+      "shared_nets": [
+        "+3V3",
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U4",
+      "cap_ref": "C9",
+      "distance_mm": 9.5,
+      "cap_value": "22uF",
+      "same_side": true,
+      "shared_nets": [
+        "+5V",
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U1",
+      "cap_ref": "C8",
+      "distance_mm": 3.01,
+      "cap_value": "1uF",
+      "same_side": true,
+      "shared_nets": [
+        "ESP_EN",
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U3",
+      "cap_ref": "C2",
+      "distance_mm": 2.83,
+      "cap_value": "100nF",
+      "same_side": true,
+      "shared_nets": [
+        "+5V",
+        "GND"
+      ]
+    }
+  ],
+  "ground_domains": {
+    "domain_count": 1,
+    "domains": [
+      {
+        "net": "GND",
+        "net_number": 1,
+        "component_count": 21,
+        "components": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C5",
+          "C6",
+          "C7",
+          "C8",
+          "C9",
+          "J1",
+          "LED1",
+          "LED2",
+          "R2",
+          "R3",
+          "SW1",
+          "SW2",
+          "TP3",
+          "U1",
+          "U2",
+          "U3",
+          "U4"
+        ],
+        "has_zone": true,
+        "zone_layers": [
+          "F.Cu"
+        ]
+      }
+    ],
+    "multi_domain_components": []
+  },
+  "silkscreen": {
+    "board_text_count": 3,
+    "refs_visible_on_silk": 36,
+    "refs_hidden_on_silk": 0,
+    "board_texts": [
+      {
+        "text": "SHS-Z2M-Presence v2.0",
+        "layer": "F.SilkS",
+        "x": 50.0,
+        "y": 3.0
+      },
+      {
+        "text": "ESP32-C6 + LD2410C + LD2450",
+        "layer": "F.SilkS",
+        "x": 50.0,
+        "y": 6.5
+      },
+      {
+        "text": "ANTENNA",
+        "layer": "F.SilkS",
+        "x": 75.0,
+        "y": 10.0
+      }
+    ],
+    "documentation_warnings": [
+      {
+        "type": "missing_switch_labels",
+        "severity": "warning",
+        "components": [
+          "SW1",
+          "SW2"
+        ],
+        "message": "Switches without function labels on silkscreen: ['SW1', 'SW2']. Add ON/OFF, RESET, BOOT, or function description near each switch."
+      },
+      {
+        "type": "missing_connector_labels",
+        "severity": "suggestion",
+        "components": [
+          "J1"
+        ],
+        "message": "Connectors (3+ pins) without silkscreen labels: ['J1']. Consider adding pin names, signal names, or connector function labels."
+      }
+    ],
+    "fab_notes_completeness": {
+      "checks": {
+        "ipc_class": false,
+        "surface_finish": false,
+        "board_thickness": false,
+        "copper_weight": false,
+        "solder_mask": false,
+        "material": false
+      },
+      "missing": [
+        "ipc class",
+        "surface finish",
+        "board thickness",
+        "copper weight",
+        "solder mask",
+        "material"
+      ],
+      "completeness_pct": 0,
+      "status": "warning"
+    },
+    "silkscreen_completeness": {
+      "checks": {
+        "revision_marking": true,
+        "board_name": true,
+        "ref_designators_visible": true,
+        "connector_labels": false,
+        "polarity_markers": true
+      },
+      "missing": [
+        "connector labels"
+      ],
+      "completeness_pct": 80,
+      "status": "warning"
+    }
+  },
+  "board_metadata": {
+    "paper": "A3",
+    "title": "SHS-Z2M-Presence v2.0 Standalone",
+    "date": "2026-04-30",
+    "rev": "2.0",
+    "comments": {
+      "1": "ESP32-C6-WROOM-1-N8 + LD2410C + LD2450 Dual mmWave Zigbee Sensor"
+    }
+  },
+  "net_classes": [
+    {
+      "name": "Default",
+      "clearance": 0.2,
+      "track_width": 0.25,
+      "via_diameter": 0.8,
+      "via_drill": 0.4,
+      "diff_pair_width": 0.2,
+      "diff_pair_gap": 0.25
+    }
+  ],
+  "project_settings": {
+    "source": "SHS-Z2M-Presence-v2.kicad_pro",
+    "net_classes": [
+      {
+        "name": "Default",
+        "clearance": 0.2,
+        "track_width": 0.25,
+        "via_diameter": 0.8,
+        "via_drill": 0.4,
+        "diff_pair_width": 0.2,
+        "diff_pair_gap": 0.25
+      }
+    ],
+    "design_rules": {
+      "min_clearance": 0.2,
+      "min_connection": 0.0,
+      "min_copper_edge_clearance": 0.5,
+      "min_groove_width": 0.0,
+      "min_hole_clearance": 0.25,
+      "min_hole_to_hole": 0.25,
+      "min_microvia_diameter": 0.2,
+      "min_microvia_drill": 0.1,
+      "min_resolved_spokes": 2,
+      "min_silk_clearance": 0.0,
+      "min_text_height": 0.8,
+      "min_text_thickness": 0.08,
+      "min_through_hole_diameter": 0.3,
+      "min_track_width": 0.2,
+      "min_via_annular_width": 0.1,
+      "min_via_diameter": 0.6
+    },
+    "footprint_libs": [
+      {
+        "name": "SHS-Z2M-Presence-v2",
+        "type": "KiCad",
+        "uri": "${KIPRJMOD}/SHS-Z2M-Presence-v2.pretty",
+        "descr": "Project-local footprints"
+      }
+    ]
+  },
+  "design_rule_compliance": {
+    "compliant": true,
+    "rules_checked": 0,
+    "rules_source": "SHS-Z2M-Presence-v2.kicad_pro"
+  },
+  "dfm_summary": {
+    "dfm_tier": "standard",
+    "metrics": {
+      "board_width_mm": 100.0,
+      "board_height_mm": 70.0
+    },
+    "violation_count": 0
+  },
+  "placement_density": {
+    "board_area_cm2": 70.0,
+    "front_density_per_cm2": 0.5
+  },
+  "thermal_pad_scan": [
+    {
+      "component": "U1",
+      "pad": "29",
+      "pad_size_mm": [
+        15.0,
+        16.0
+      ],
+      "pad_area_mm2": 240.0,
+      "net": "GND",
+      "nearby_thermal_vias": 0,
+      "standalone_vias": 0,
+      "footprint_via_pads": 0,
+      "layer": "F.Cu",
+      "detector": "analyze_thermal_vias",
+      "rule_id": "TP-DET",
+      "category": "thermal",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Thermal pad: U1 pad 29 0 nearby vias",
+      "description": "Thermal pad on U1 pad 29: 0 nearby vias (0 standalone, 0 footprint).",
+      "components": [
+        "U1"
+      ],
+      "nets": [
+        "GND"
+      ],
+      "pins": [
+        "29"
+      ],
+      "recommendation": "",
+      "report_context": {
+        "section": "Thermal",
+        "impact": "Thermal dissipation",
+        "standard_ref": ""
+      }
+    }
+  ],
+  "findings": [
+    {
+      "side": "F.Cu",
+      "fiducial_count": 0,
+      "fiducial_refs": [],
+      "smd_component_count": 30,
+      "finest_smd_pad_dim_mm": 0.5,
+      "detector": "analyze_fiducials",
+      "rule_id": "FD-001",
+      "category": "assembly",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "No fiducials on F.Cu (30 SMD components) (finest pad dim 0.50mm \u2014 medium-pitch part present)",
+      "description": "F.Cu has 0 fiducial(s) but 30 SMD components. Assembly machines need >= 3 fiducials for accurate placement.",
+      "components": [],
+      "nets": [],
+      "pins": [],
+      "recommendation": "Add fiducial markers for pick-and-place alignment (3 per side with SMD).",
+      "report_context": {
+        "section": "Assembly",
+        "impact": "Pick-and-place alignment",
+        "standard_ref": "IPC-7351"
+      },
+      "stages": [
+        "pre_fab"
+      ]
+    },
+    {
+      "side": "F.Cu",
+      "total_passives": 17,
+      "majority_angle": 90,
+      "majority_count": 12,
+      "deviator_count": 5,
+      "deviator_refs": [
+        "C9",
+        "R6",
+        "LED2",
+        "R5",
+        "LED1"
+      ],
+      "detector": "analyze_orientation_consistency",
+      "rule_id": "OR-001",
+      "category": "assembly",
+      "severity": "info",
+      "confidence": "heuristic",
+      "evidence_source": "topology",
+      "summary": "Orientation: 5 passives on F.Cu deviate from 90 deg majority",
+      "description": "5 of 17 passives on F.Cu are not at the majority 90 deg orientation.",
+      "components": [
+        "C9",
+        "LED1",
+        "LED2",
+        "R5",
+        "R6"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "Align passive component orientations for consistent pick-and-place.",
+      "report_context": {
+        "section": "Assembly",
+        "impact": "Pick-and-place efficiency",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component_a": "C1",
+      "component_b": "U2",
+      "layer": "F.Cu",
+      "overlap_mm2": 0.336,
+      "detector": "analyze_placement",
+      "rule_id": "PM-001",
+      "category": "placement",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Courtyard overlap between C1 and U2 (0.336mm\u00b2)",
+      "description": "Components C1 and U2 have overlapping courtyards on F.Cu (0.336mm\u00b2 overlap area).",
+      "components": [
+        "C1",
+        "U2"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "Resolve courtyard overlap between C1 and U2 \u2014 move components apart or adjust courtyard geometry",
+      "report_context": {
+        "section": "Placement",
+        "impact": "assembly",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component_a": "C2",
+      "component_b": "U3",
+      "layer": "F.Cu",
+      "overlap_mm2": 1.402,
+      "detector": "analyze_placement",
+      "rule_id": "PM-001",
+      "category": "placement",
+      "severity": "error",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Courtyard overlap between C2 and U3 (1.402mm\u00b2)",
+      "description": "Components C2 and U3 have overlapping courtyards on F.Cu (1.402mm\u00b2 overlap area).",
+      "components": [
+        "C2",
+        "U3"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "Resolve courtyard overlap between C2 and U3 \u2014 move components apart or adjust courtyard geometry",
+      "report_context": {
+        "section": "Placement",
+        "impact": "assembly",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component_a": "C3",
+      "component_b": "U2",
+      "layer": "F.Cu",
+      "overlap_mm2": 0.336,
+      "detector": "analyze_placement",
+      "rule_id": "PM-001",
+      "category": "placement",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Courtyard overlap between C3 and U2 (0.336mm\u00b2)",
+      "description": "Components C3 and U2 have overlapping courtyards on F.Cu (0.336mm\u00b2 overlap area).",
+      "components": [
+        "C3",
+        "U2"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "Resolve courtyard overlap between C3 and U2 \u2014 move components apart or adjust courtyard geometry",
+      "report_context": {
+        "section": "Placement",
+        "impact": "assembly",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "net_number": 2,
+      "net_name": "+5V",
+      "pad_count": 12,
+      "pads": [
+        "J1.A4",
+        "C9.1",
+        "U4.1",
+        "U4.3",
+        "C4.1",
+        "C5.1",
+        "C1.1",
+        "C3.1",
+        "U2.5",
+        "C2.1",
+        "U3.1",
+        "TP1.1"
+      ],
+      "detector": "analyze_connectivity",
+      "rule_id": "RT-001",
+      "category": "connectivity",
+      "severity": "error",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Unrouted net +5V (12 pads)",
+      "description": "Net +5V has 12 pads but no routing (tracks, vias, or zones).",
+      "components": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5",
+        "C9",
+        "J1",
+        "TP1",
+        "U2",
+        "U3",
+        "U4"
+      ],
+      "nets": [
+        "+5V"
+      ],
+      "pins": [],
+      "recommendation": "Route net +5V to connect 12 pads",
+      "report_context": {
+        "section": "Connectivity",
+        "impact": "functionality",
+        "standard_ref": ""
+      },
+      "stages": [
+        "pre_fab"
+      ]
+    },
+    {
+      "net_number": 3,
+      "net_name": "+3V3",
+      "pad_count": 9,
+      "pads": [
+        "U4.4",
+        "U4.5",
+        "C6.1",
+        "C7.1",
+        "R6.1",
+        "R1.1",
+        "U1.2",
+        "R4.1",
+        "TP2.1"
+      ],
+      "detector": "analyze_connectivity",
+      "rule_id": "RT-001",
+      "category": "connectivity",
+      "severity": "error",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Unrouted net +3V3 (9 pads)",
+      "description": "Net +3V3 has 9 pads but no routing (tracks, vias, or zones).",
+      "components": [
+        "C6",
+        "C7",
+        "R1",
+        "R4",
+        "R6",
+        "TP2",
+        "U1",
+        "U4"
+      ],
+      "nets": [
+        "+3V3"
+      ],
+      "pins": [],
+      "recommendation": "Route net +3V3 to connect 9 pads",
+      "report_context": {
+        "section": "Connectivity",
+        "impact": "functionality",
+        "standard_ref": ""
+      },
+      "stages": [
+        "pre_fab"
+      ]
+    },
+    {
+      "net_number": 10,
+      "net_name": "ESP_EN",
+      "pad_count": 5,
+      "pads": [
+        "R1.2",
+        "C8.1",
+        "SW1.1",
+        "U1.3",
+        "TP8.1"
+      ],
+      "detector": "analyze_connectivity",
+      "rule_id": "RT-001",
+      "category": "connectivity",
+      "severity": "error",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Unrouted net ESP_EN (5 pads)",
+      "description": "Net ESP_EN has 5 pads but no routing (tracks, vias, or zones).",
+      "components": [
+        "C8",
+        "R1",
+        "SW1",
+        "TP8",
+        "U1"
+      ],
+      "nets": [
+        "ESP_EN"
+      ],
+      "pins": [],
+      "recommendation": "Route net ESP_EN to connect 5 pads",
+      "report_context": {
+        "section": "Connectivity",
+        "impact": "functionality",
+        "standard_ref": ""
+      },
+      "stages": [
+        "pre_fab"
+      ]
+    },
+    {
+      "net_number": 14,
+      "net_name": "CC1",
+      "pad_count": 2,
+      "pads": [
+        "J1.A5",
+        "R2.1"
+      ],
+      "detector": "analyze_connectivity",
+      "rule_id": "RT-001",
+      "category": "connectivity",
+      "severity": "error",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Unrouted net CC1 (2 pads)",
+      "description": "Net CC1 has 2 pads but no routing (tracks, vias, or zones).",
+      "components": [
+        "J1",
+        "R2"
+      ],
+      "nets": [
+        "CC1"
+      ],
+      "pins": [],
+      "recommendation": "Route net CC1 to connect 2 pads",
+      "report_context": {
+        "section": "Connectivity",
+        "impact": "functionality",
+        "standard_ref": ""
+      },
+      "stages": [
+        "pre_fab"
+      ]
+    },
+    {
+      "net_number": 15,
+      "net_name": "CC2",
+      "pad_count": 2,
+      "pads": [
+        "J1.B5",
+        "R3.1"
+      ],
+      "detector": "analyze_connectivity",
+      "rule_id": "RT-001",
+      "category": "connectivity",
+      "severity": "error",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Unrouted net CC2 (2 pads)",
+      "description": "Net CC2 has 2 pads but no routing (tracks, vias, or zones).",
+      "components": [
+        "J1",
+        "R3"
+      ],
+      "nets": [
+        "CC2"
+      ],
+      "pins": [],
+      "recommendation": "Route net CC2 to connect 2 pads",
+      "report_context": {
+        "section": "Connectivity",
+        "impact": "functionality",
+        "standard_ref": ""
+      },
+      "stages": [
+        "pre_fab"
+      ]
+    },
+    {
+      "net_number": 4,
+      "net_name": "USB_DM",
+      "pad_count": 2,
+      "pads": [
+        "J1.B7",
+        "U1.13"
+      ],
+      "detector": "analyze_connectivity",
+      "rule_id": "RT-001",
+      "category": "connectivity",
+      "severity": "error",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Unrouted net USB_DM (2 pads)",
+      "description": "Net USB_DM has 2 pads but no routing (tracks, vias, or zones).",
+      "components": [
+        "J1",
+        "U1"
+      ],
+      "nets": [
+        "USB_DM"
+      ],
+      "pins": [],
+      "recommendation": "Route net USB_DM to connect 2 pads",
+      "report_context": {
+        "section": "Connectivity",
+        "impact": "functionality",
+        "standard_ref": ""
+      },
+      "stages": [
+        "pre_fab"
+      ]
+    },
+    {
+      "net_number": 5,
+      "net_name": "USB_DP",
+      "pad_count": 2,
+      "pads": [
+        "J1.B6",
+        "U1.14"
+      ],
+      "detector": "analyze_connectivity",
+      "rule_id": "RT-001",
+      "category": "connectivity",
+      "severity": "error",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Unrouted net USB_DP (2 pads)",
+      "description": "Net USB_DP has 2 pads but no routing (tracks, vias, or zones).",
+      "components": [
+        "J1",
+        "U1"
+      ],
+      "nets": [
+        "USB_DP"
+      ],
+      "pins": [],
+      "recommendation": "Route net USB_DP to connect 2 pads",
+      "report_context": {
+        "section": "Connectivity",
+        "impact": "functionality",
+        "standard_ref": ""
+      },
+      "stages": [
+        "pre_fab"
+      ]
+    },
+    {
+      "net_number": 16,
+      "net_name": "Net-R5-A",
+      "pad_count": 2,
+      "pads": [
+        "R5.2",
+        "LED1.2"
+      ],
+      "detector": "analyze_connectivity",
+      "rule_id": "RT-001",
+      "category": "connectivity",
+      "severity": "error",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Unrouted net Net-R5-A (2 pads)",
+      "description": "Net Net-R5-A has 2 pads but no routing (tracks, vias, or zones).",
+      "components": [
+        "LED1",
+        "R5"
+      ],
+      "nets": [
+        "Net-R5-A"
+      ],
+      "pins": [],
+      "recommendation": "Route net Net-R5-A to connect 2 pads",
+      "report_context": {
+        "section": "Connectivity",
+        "impact": "functionality",
+        "standard_ref": ""
+      },
+      "stages": [
+        "pre_fab"
+      ]
+    },
+    {
+      "net_number": 17,
+      "net_name": "Net-R6-A",
+      "pad_count": 2,
+      "pads": [
+        "R6.2",
+        "LED2.2"
+      ],
+      "detector": "analyze_connectivity",
+      "rule_id": "RT-001",
+      "category": "connectivity",
+      "severity": "error",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Unrouted net Net-R6-A (2 pads)",
+      "description": "Net Net-R6-A has 2 pads but no routing (tracks, vias, or zones).",
+      "components": [
+        "LED2",
+        "R6"
+      ],
+      "nets": [
+        "Net-R6-A"
+      ],
+      "pins": [],
+      "recommendation": "Route net Net-R6-A to connect 2 pads",
+      "report_context": {
+        "section": "Connectivity",
+        "impact": "functionality",
+        "standard_ref": ""
+      },
+      "stages": [
+        "pre_fab"
+      ]
+    },
+    {
+      "net_number": 11,
+      "net_name": "BOOT",
+      "pad_count": 3,
+      "pads": [
+        "U1.15",
+        "R4.2",
+        "SW2.1"
+      ],
+      "detector": "analyze_connectivity",
+      "rule_id": "RT-001",
+      "category": "connectivity",
+      "severity": "error",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Unrouted net BOOT (3 pads)",
+      "description": "Net BOOT has 3 pads but no routing (tracks, vias, or zones).",
+      "components": [
+        "R4",
+        "SW2",
+        "U1"
+      ],
+      "nets": [
+        "BOOT"
+      ],
+      "pins": [],
+      "recommendation": "Route net BOOT to connect 3 pads",
+      "report_context": {
+        "section": "Connectivity",
+        "impact": "functionality",
+        "standard_ref": ""
+      },
+      "stages": [
+        "pre_fab"
+      ]
+    },
+    {
+      "net_number": 12,
+      "net_name": "STAT_LED",
+      "pad_count": 2,
+      "pads": [
+        "U1.27",
+        "R5.1"
+      ],
+      "detector": "analyze_connectivity",
+      "rule_id": "RT-001",
+      "category": "connectivity",
+      "severity": "error",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Unrouted net STAT_LED (2 pads)",
+      "description": "Net STAT_LED has 2 pads but no routing (tracks, vias, or zones).",
+      "components": [
+        "R5",
+        "U1"
+      ],
+      "nets": [
+        "STAT_LED"
+      ],
+      "pins": [],
+      "recommendation": "Route net STAT_LED to connect 2 pads",
+      "report_context": {
+        "section": "Connectivity",
+        "impact": "functionality",
+        "standard_ref": ""
+      },
+      "stages": [
+        "pre_fab"
+      ]
+    },
+    {
+      "net_number": 6,
+      "net_name": "UART1_TX",
+      "pad_count": 3,
+      "pads": [
+        "U1.4",
+        "U2.2",
+        "TP4.1"
+      ],
+      "detector": "analyze_connectivity",
+      "rule_id": "RT-001",
+      "category": "connectivity",
+      "severity": "error",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Unrouted net UART1_TX (3 pads)",
+      "description": "Net UART1_TX has 3 pads but no routing (tracks, vias, or zones).",
+      "components": [
+        "TP4",
+        "U1",
+        "U2"
+      ],
+      "nets": [
+        "UART1_TX"
+      ],
+      "pins": [],
+      "recommendation": "Route net UART1_TX to connect 3 pads",
+      "report_context": {
+        "section": "Connectivity",
+        "impact": "functionality",
+        "standard_ref": ""
+      },
+      "stages": [
+        "pre_fab"
+      ]
+    },
+    {
+      "net_number": 7,
+      "net_name": "UART1_RX",
+      "pad_count": 3,
+      "pads": [
+        "U1.5",
+        "U2.1",
+        "TP5.1"
+      ],
+      "detector": "analyze_connectivity",
+      "rule_id": "RT-001",
+      "category": "connectivity",
+      "severity": "error",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Unrouted net UART1_RX (3 pads)",
+      "description": "Net UART1_RX has 3 pads but no routing (tracks, vias, or zones).",
+      "components": [
+        "TP5",
+        "U1",
+        "U2"
+      ],
+      "nets": [
+        "UART1_RX"
+      ],
+      "pins": [],
+      "recommendation": "Route net UART1_RX to connect 3 pads",
+      "report_context": {
+        "section": "Connectivity",
+        "impact": "functionality",
+        "standard_ref": ""
+      },
+      "stages": [
+        "pre_fab"
+      ]
+    },
+    {
+      "net_number": 8,
+      "net_name": "UART0_TX",
+      "pad_count": 3,
+      "pads": [
+        "U1.16",
+        "U3.2",
+        "TP6.1"
+      ],
+      "detector": "analyze_connectivity",
+      "rule_id": "RT-001",
+      "category": "connectivity",
+      "severity": "error",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Unrouted net UART0_TX (3 pads)",
+      "description": "Net UART0_TX has 3 pads but no routing (tracks, vias, or zones).",
+      "components": [
+        "TP6",
+        "U1",
+        "U3"
+      ],
+      "nets": [
+        "UART0_TX"
+      ],
+      "pins": [],
+      "recommendation": "Route net UART0_TX to connect 3 pads",
+      "report_context": {
+        "section": "Connectivity",
+        "impact": "functionality",
+        "standard_ref": ""
+      },
+      "stages": [
+        "pre_fab"
+      ]
+    },
+    {
+      "net_number": 9,
+      "net_name": "UART0_RX",
+      "pad_count": 3,
+      "pads": [
+        "U1.17",
+        "U3.3",
+        "TP7.1"
+      ],
+      "detector": "analyze_connectivity",
+      "rule_id": "RT-001",
+      "category": "connectivity",
+      "severity": "error",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Unrouted net UART0_RX (3 pads)",
+      "description": "Net UART0_RX has 3 pads but no routing (tracks, vias, or zones).",
+      "components": [
+        "TP7",
+        "U1",
+        "U3"
+      ],
+      "nets": [
+        "UART0_RX"
+      ],
+      "pins": [],
+      "recommendation": "Route net UART0_RX to connect 3 pads",
+      "report_context": {
+        "section": "Connectivity",
+        "impact": "functionality",
+        "standard_ref": ""
+      },
+      "stages": [
+        "pre_fab"
+      ]
+    },
+    {
+      "net_number": 13,
+      "net_name": "RADAR_OUT",
+      "pad_count": 2,
+      "pads": [
+        "U1.26",
+        "U2.3"
+      ],
+      "detector": "analyze_connectivity",
+      "rule_id": "RT-001",
+      "category": "connectivity",
+      "severity": "error",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Unrouted net RADAR_OUT (2 pads)",
+      "description": "Net RADAR_OUT has 2 pads but no routing (tracks, vias, or zones).",
+      "components": [
+        "U1",
+        "U2"
+      ],
+      "nets": [
+        "RADAR_OUT"
+      ],
+      "pins": [],
+      "recommendation": "Route net RADAR_OUT to connect 2 pads",
+      "report_context": {
+        "section": "Connectivity",
+        "impact": "functionality",
+        "standard_ref": ""
+      },
+      "stages": [
+        "pre_fab"
+      ]
+    },
+    {
+      "component": "C1",
+      "value": "100nF",
+      "package": "0402",
+      "layer": "F.Cu",
+      "risk_level": "medium",
+      "pad_1_net": "+5V",
+      "pad_2_net": "GND",
+      "reasons": [
+        "pad 2 connected to zone net (GND), other pad is signal-only \u2014 thermal asymmetry",
+        "pad 2 is GND (likely ground pour), other pad is signal \u2014 thermal asymmetry risk"
+      ],
+      "detector": "analyze_tombstoning_risk",
+      "rule_id": "TB-001",
+      "category": "dfm",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "C1 (0402) tombstoning risk: medium",
+      "description": "C1 (0402, 100nF) has medium tombstoning risk due to thermal asymmetry between pads.",
+      "components": [
+        "C1"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "pad 2 connected to zone net (GND), other pad is signal-only \u2014 thermal asymmetry; pad 2 is GND (likely ground pour), other pad is signal \u2014 thermal asymmetry risk",
+      "report_context": {
+        "section": "DFM",
+        "impact": "assembly",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "C2",
+      "value": "100nF",
+      "package": "0402",
+      "layer": "F.Cu",
+      "risk_level": "medium",
+      "pad_1_net": "+5V",
+      "pad_2_net": "GND",
+      "reasons": [
+        "pad 2 connected to zone net (GND), other pad is signal-only \u2014 thermal asymmetry",
+        "pad 2 is GND (likely ground pour), other pad is signal \u2014 thermal asymmetry risk"
+      ],
+      "detector": "analyze_tombstoning_risk",
+      "rule_id": "TB-001",
+      "category": "dfm",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "C2 (0402) tombstoning risk: medium",
+      "description": "C2 (0402, 100nF) has medium tombstoning risk due to thermal asymmetry between pads.",
+      "components": [
+        "C2"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "pad 2 connected to zone net (GND), other pad is signal-only \u2014 thermal asymmetry; pad 2 is GND (likely ground pour), other pad is signal \u2014 thermal asymmetry risk",
+      "report_context": {
+        "section": "DFM",
+        "impact": "assembly",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "C3",
+      "value": "10uF",
+      "package": "0402",
+      "layer": "F.Cu",
+      "risk_level": "medium",
+      "pad_1_net": "+5V",
+      "pad_2_net": "GND",
+      "reasons": [
+        "pad 2 connected to zone net (GND), other pad is signal-only \u2014 thermal asymmetry",
+        "pad 2 is GND (likely ground pour), other pad is signal \u2014 thermal asymmetry risk"
+      ],
+      "detector": "analyze_tombstoning_risk",
+      "rule_id": "TB-001",
+      "category": "dfm",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "C3 (0402) tombstoning risk: medium",
+      "description": "C3 (0402, 10uF) has medium tombstoning risk due to thermal asymmetry between pads.",
+      "components": [
+        "C3"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "pad 2 connected to zone net (GND), other pad is signal-only \u2014 thermal asymmetry; pad 2 is GND (likely ground pour), other pad is signal \u2014 thermal asymmetry risk",
+      "report_context": {
+        "section": "DFM",
+        "impact": "assembly",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "C4",
+      "value": "100nF",
+      "package": "0402",
+      "layer": "F.Cu",
+      "risk_level": "medium",
+      "pad_1_net": "+5V",
+      "pad_2_net": "GND",
+      "reasons": [
+        "pad 2 connected to zone net (GND), other pad is signal-only \u2014 thermal asymmetry",
+        "pad 2 is GND (likely ground pour), other pad is signal \u2014 thermal asymmetry risk"
+      ],
+      "detector": "analyze_tombstoning_risk",
+      "rule_id": "TB-001",
+      "category": "dfm",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "C4 (0402) tombstoning risk: medium",
+      "description": "C4 (0402, 100nF) has medium tombstoning risk due to thermal asymmetry between pads.",
+      "components": [
+        "C4"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "pad 2 connected to zone net (GND), other pad is signal-only \u2014 thermal asymmetry; pad 2 is GND (likely ground pour), other pad is signal \u2014 thermal asymmetry risk",
+      "report_context": {
+        "section": "DFM",
+        "impact": "assembly",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "C5",
+      "value": "10uF",
+      "package": "0402",
+      "layer": "F.Cu",
+      "risk_level": "medium",
+      "pad_1_net": "+5V",
+      "pad_2_net": "GND",
+      "reasons": [
+        "pad 2 connected to zone net (GND), other pad is signal-only \u2014 thermal asymmetry",
+        "pad 2 is GND (likely ground pour), other pad is signal \u2014 thermal asymmetry risk"
+      ],
+      "detector": "analyze_tombstoning_risk",
+      "rule_id": "TB-001",
+      "category": "dfm",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "C5 (0402) tombstoning risk: medium",
+      "description": "C5 (0402, 10uF) has medium tombstoning risk due to thermal asymmetry between pads.",
+      "components": [
+        "C5"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "pad 2 connected to zone net (GND), other pad is signal-only \u2014 thermal asymmetry; pad 2 is GND (likely ground pour), other pad is signal \u2014 thermal asymmetry risk",
+      "report_context": {
+        "section": "DFM",
+        "impact": "assembly",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "C6",
+      "value": "100nF",
+      "package": "0402",
+      "layer": "F.Cu",
+      "risk_level": "medium",
+      "pad_1_net": "+3V3",
+      "pad_2_net": "GND",
+      "reasons": [
+        "pad 2 connected to zone net (GND), other pad is signal-only \u2014 thermal asymmetry",
+        "pad 2 is GND (likely ground pour), other pad is signal \u2014 thermal asymmetry risk"
+      ],
+      "detector": "analyze_tombstoning_risk",
+      "rule_id": "TB-001",
+      "category": "dfm",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "C6 (0402) tombstoning risk: medium",
+      "description": "C6 (0402, 100nF) has medium tombstoning risk due to thermal asymmetry between pads.",
+      "components": [
+        "C6"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "pad 2 connected to zone net (GND), other pad is signal-only \u2014 thermal asymmetry; pad 2 is GND (likely ground pour), other pad is signal \u2014 thermal asymmetry risk",
+      "report_context": {
+        "section": "DFM",
+        "impact": "assembly",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "C7",
+      "value": "10uF",
+      "package": "0402",
+      "layer": "F.Cu",
+      "risk_level": "medium",
+      "pad_1_net": "+3V3",
+      "pad_2_net": "GND",
+      "reasons": [
+        "pad 2 connected to zone net (GND), other pad is signal-only \u2014 thermal asymmetry",
+        "pad 2 is GND (likely ground pour), other pad is signal \u2014 thermal asymmetry risk"
+      ],
+      "detector": "analyze_tombstoning_risk",
+      "rule_id": "TB-001",
+      "category": "dfm",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "C7 (0402) tombstoning risk: medium",
+      "description": "C7 (0402, 10uF) has medium tombstoning risk due to thermal asymmetry between pads.",
+      "components": [
+        "C7"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "pad 2 connected to zone net (GND), other pad is signal-only \u2014 thermal asymmetry; pad 2 is GND (likely ground pour), other pad is signal \u2014 thermal asymmetry risk",
+      "report_context": {
+        "section": "DFM",
+        "impact": "assembly",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "C8",
+      "value": "1uF",
+      "package": "0402",
+      "layer": "F.Cu",
+      "risk_level": "medium",
+      "pad_1_net": "ESP_EN",
+      "pad_2_net": "GND",
+      "reasons": [
+        "pad 2 connected to zone net (GND), other pad is signal-only \u2014 thermal asymmetry",
+        "pad 2 is GND (likely ground pour), other pad is signal \u2014 thermal asymmetry risk"
+      ],
+      "detector": "analyze_tombstoning_risk",
+      "rule_id": "TB-001",
+      "category": "dfm",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "C8 (0402) tombstoning risk: medium",
+      "description": "C8 (0402, 1uF) has medium tombstoning risk due to thermal asymmetry between pads.",
+      "components": [
+        "C8"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "pad 2 connected to zone net (GND), other pad is signal-only \u2014 thermal asymmetry; pad 2 is GND (likely ground pour), other pad is signal \u2014 thermal asymmetry risk",
+      "report_context": {
+        "section": "DFM",
+        "impact": "assembly",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "R2",
+      "value": "5.1k",
+      "package": "0402",
+      "layer": "F.Cu",
+      "risk_level": "medium",
+      "pad_1_net": "CC1",
+      "pad_2_net": "GND",
+      "reasons": [
+        "pad 2 connected to zone net (GND), other pad is signal-only \u2014 thermal asymmetry",
+        "pad 2 is GND (likely ground pour), other pad is signal \u2014 thermal asymmetry risk"
+      ],
+      "detector": "analyze_tombstoning_risk",
+      "rule_id": "TB-001",
+      "category": "dfm",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "R2 (0402) tombstoning risk: medium",
+      "description": "R2 (0402, 5.1k) has medium tombstoning risk due to thermal asymmetry between pads.",
+      "components": [
+        "R2"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "pad 2 connected to zone net (GND), other pad is signal-only \u2014 thermal asymmetry; pad 2 is GND (likely ground pour), other pad is signal \u2014 thermal asymmetry risk",
+      "report_context": {
+        "section": "DFM",
+        "impact": "assembly",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "R3",
+      "value": "5.1k",
+      "package": "0402",
+      "layer": "F.Cu",
+      "risk_level": "medium",
+      "pad_1_net": "CC2",
+      "pad_2_net": "GND",
+      "reasons": [
+        "pad 2 connected to zone net (GND), other pad is signal-only \u2014 thermal asymmetry",
+        "pad 2 is GND (likely ground pour), other pad is signal \u2014 thermal asymmetry risk"
+      ],
+      "detector": "analyze_tombstoning_risk",
+      "rule_id": "TB-001",
+      "category": "dfm",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "R3 (0402) tombstoning risk: medium",
+      "description": "R3 (0402, 5.1k) has medium tombstoning risk due to thermal asymmetry between pads.",
+      "components": [
+        "R3"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "pad 2 connected to zone net (GND), other pad is signal-only \u2014 thermal asymmetry; pad 2 is GND (likely ground pour), other pad is signal \u2014 thermal asymmetry risk",
+      "report_context": {
+        "section": "DFM",
+        "impact": "assembly",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "total_signal_nets": 14,
+      "nets_with_test_points": 5,
+      "coverage_pct": 35.7,
+      "test_point_count": 8,
+      "detector": "analyze_test_point_coverage",
+      "rule_id": "TE-001",
+      "category": "testability",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Test point coverage: 5/14 nets (36%)",
+      "description": "5 of 14 signal nets have test points (36% coverage).",
+      "components": [],
+      "nets": [],
+      "pins": [],
+      "recommendation": "Add test points to improve ICT/flying probe coverage.",
+      "report_context": {
+        "section": "Testability",
+        "impact": "ICT accessibility",
+        "standard_ref": ""
+      },
+      "stages": [
+        "pre_fab"
+      ]
+    },
+    {
+      "component": "U1",
+      "value": "ESP32-C6-WROOM-1-N8",
+      "library": "SHS-Z2M-Presence-v2:ESP32_C6_WROOM1_N8",
+      "layer": "F.Cu",
+      "pad_number": "29",
+      "pad_size_mm": [
+        15.0,
+        16.0
+      ],
+      "pad_area_mm2": 240.0,
+      "net": "GND",
+      "via_count": 0,
+      "effective_via_count": 0.0,
+      "standalone_vias": 0,
+      "footprint_via_pads": 0,
+      "nearby_verified_vias": 0,
+      "nearby_unverified_vias": 0,
+      "nearby_search_radius_mm": 34.0,
+      "total_verified_via_count": 0,
+      "total_effective_verified_vias": 0.0,
+      "adequacy_source": "none",
+      "via_density_per_mm2": 0.0,
+      "vias_tented": 0,
+      "vias_untented": 0,
+      "recommended_min_vias": 120,
+      "recommended_ideal_vias": 192,
+      "adequacy": "none",
+      "raw_adequacy": "none",
+      "detector": "analyze_thermal_pad_vias",
+      "rule_id": "TV-001",
+      "category": "thermal",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Thermal vias: U1 none (0/120 min)",
+      "description": "Thermal pad on U1 pad 29: none (0 vias, 120 recommended).",
+      "components": [
+        "U1"
+      ],
+      "nets": [
+        "GND"
+      ],
+      "pins": [],
+      "recommendation": "Add thermal vias under U1 (need 120, have 0).",
+      "report_context": {
+        "section": "Thermal",
+        "impact": "Thermal dissipation",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    }
+  ],
+  "trust_summary": {
+    "total_findings": 33,
+    "trust_level": "high",
+    "by_confidence": {
+      "deterministic": 32,
+      "heuristic": 1,
+      "datasheet-backed": 0
+    },
+    "by_evidence_source": {
+      "datasheet": 0,
+      "topology": 33,
+      "heuristic_rule": 0,
+      "symbol_footprint": 0,
+      "bom": 0,
+      "geometry": 0,
+      "api_lookup": 0
+    },
+    "provenance_coverage_pct": 0.0
+  },
+  "summary": {
+    "total_findings": 33,
+    "by_severity": {
+      "error": 17,
+      "warning": 5,
+      "info": 11
+    }
+  },
+  "design_intent": {
+    "product_class": "prototype",
+    "ipc_class": 2,
+    "target_market": "hobby",
+    "expected_lifetime_years": 5,
+    "operating_temp_range": [
+      -10,
+      70
+    ],
+    "preferred_passive_size": "0603",
+    "test_coverage_target": 0.85,
+    "approved_manufacturers": [],
+    "confidence": 0.4,
+    "detection_signals": [
+      "8 test points (TP*) detected"
+    ],
+    "source": {
+      "ipc_class": "auto",
+      "product_class": "auto",
+      "target_market": "auto",
+      "expected_lifetime_years": "auto",
+      "operating_temp_range": "auto",
+      "preferred_passive_size": "auto",
+      "test_coverage_target": "auto",
+      "approved_manufacturers": "auto"
+    }
+  },
+  "audience_summary": {
+    "designer": {
+      "total_findings": 33,
+      "by_severity": {
+        "error": 17,
+        "warning": 5,
+        "info": 11
+      },
+      "by_category": {
+        "assembly": 2,
+        "placement": 3,
+        "connectivity": 16,
+        "dfm": 10,
+        "testability": 1,
+        "thermal": 1
+      },
+      "top_issues": [
+        {
+          "component_a": "C2",
+          "component_b": "U3",
+          "layer": "F.Cu",
+          "overlap_mm2": 1.402,
+          "detector": "analyze_placement",
+          "rule_id": "PM-001",
+          "category": "placement",
+          "severity": "error",
+          "confidence": "deterministic",
+          "evidence_source": "topology",
+          "summary": "Courtyard overlap between C2 and U3 (1.402mm\u00b2)",
+          "description": "Components C2 and U3 have overlapping courtyards on F.Cu (1.402mm\u00b2 overlap area).",
+          "components": [
+            "C2",
+            "U3"
+          ],
+          "nets": [],
+          "pins": [],
+          "recommendation": "Resolve courtyard overlap between C2 and U3 \u2014 move components apart or adjust courtyard geometry",
+          "report_context": {
+            "section": "Placement",
+            "impact": "assembly",
+            "standard_ref": ""
+          },
+          "stages": [
+            "layout"
+          ]
+        },
+        {
+          "net_number": 2,
+          "net_name": "+5V",
+          "pad_count": 12,
+          "pads": [
+            "J1.A4",
+            "C9.1",
+            "U4.1",
+            "U4.3",
+            "C4.1",
+            "C5.1",
+            "C1.1",
+            "C3.1",
+            "U2.5",
+            "C2.1",
+            "U3.1",
+            "TP1.1"
+          ],
+          "detector": "analyze_connectivity",
+          "rule_id": "RT-001",
+          "category": "connectivity",
+          "severity": "error",
+          "confidence": "deterministic",
+          "evidence_source": "topology",
+          "summary": "Unrouted net +5V (12 pads)",
+          "description": "Net +5V has 12 pads but no routing (tracks, vias, or zones).",
+          "components": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5",
+            "C9",
+            "J1",
+            "TP1",
+            "U2",
+            "U3",
+            "U4"
+          ],
+          "nets": [
+            "+5V"
+          ],
+          "pins": [],
+          "recommendation": "Route net +5V to connect 12 pads",
+          "report_context": {
+            "section": "Connectivity",
+            "impact": "functionality",
+            "standard_ref": ""
+          },
+          "stages": [
+            "pre_fab"
+          ]
+        },
+        {
+          "net_number": 3,
+          "net_name": "+3V3",
+          "pad_count": 9,
+          "pads": [
+            "U4.4",
+            "U4.5",
+            "C6.1",
+            "C7.1",
+            "R6.1",
+            "R1.1",
+            "U1.2",
+            "R4.1",
+            "TP2.1"
+          ],
+          "detector": "analyze_connectivity",
+          "rule_id": "RT-001",
+          "category": "connectivity",
+          "severity": "error",
+          "confidence": "deterministic",
+          "evidence_source": "topology",
+          "summary": "Unrouted net +3V3 (9 pads)",
+          "description": "Net +3V3 has 9 pads but no routing (tracks, vias, or zones).",
+          "components": [
+            "C6",
+            "C7",
+            "R1",
+            "R4",
+            "R6",
+            "TP2",
+            "U1",
+            "U4"
+          ],
+          "nets": [
+            "+3V3"
+          ],
+          "pins": [],
+          "recommendation": "Route net +3V3 to connect 9 pads",
+          "report_context": {
+            "section": "Connectivity",
+            "impact": "functionality",
+            "standard_ref": ""
+          },
+          "stages": [
+            "pre_fab"
+          ]
+        },
+        {
+          "net_number": 10,
+          "net_name": "ESP_EN",
+          "pad_count": 5,
+          "pads": [
+            "R1.2",
+            "C8.1",
+            "SW1.1",
+            "U1.3",
+            "TP8.1"
+          ],
+          "detector": "analyze_connectivity",
+          "rule_id": "RT-001",
+          "category": "connectivity",
+          "severity": "error",
+          "confidence": "deterministic",
+          "evidence_source": "topology",
+          "summary": "Unrouted net ESP_EN (5 pads)",
+          "description": "Net ESP_EN has 5 pads but no routing (tracks, vias, or zones).",
+          "components": [
+            "C8",
+            "R1",
+            "SW1",
+            "TP8",
+            "U1"
+          ],
+          "nets": [
+            "ESP_EN"
+          ],
+          "pins": [],
+          "recommendation": "Route net ESP_EN to connect 5 pads",
+          "report_context": {
+            "section": "Connectivity",
+            "impact": "functionality",
+            "standard_ref": ""
+          },
+          "stages": [
+            "pre_fab"
+          ]
+        },
+        {
+          "net_number": 14,
+          "net_name": "CC1",
+          "pad_count": 2,
+          "pads": [
+            "J1.A5",
+            "R2.1"
+          ],
+          "detector": "analyze_connectivity",
+          "rule_id": "RT-001",
+          "category": "connectivity",
+          "severity": "error",
+          "confidence": "deterministic",
+          "evidence_source": "topology",
+          "summary": "Unrouted net CC1 (2 pads)",
+          "description": "Net CC1 has 2 pads but no routing (tracks, vias, or zones).",
+          "components": [
+            "J1",
+            "R2"
+          ],
+          "nets": [
+            "CC1"
+          ],
+          "pins": [],
+          "recommendation": "Route net CC1 to connect 2 pads",
+          "report_context": {
+            "section": "Connectivity",
+            "impact": "functionality",
+            "standard_ref": ""
+          },
+          "stages": [
+            "pre_fab"
+          ]
+        },
+        {
+          "net_number": 15,
+          "net_name": "CC2",
+          "pad_count": 2,
+          "pads": [
+            "J1.B5",
+            "R3.1"
+          ],
+          "detector": "analyze_connectivity",
+          "rule_id": "RT-001",
+          "category": "connectivity",
+          "severity": "error",
+          "confidence": "deterministic",
+          "evidence_source": "topology",
+          "summary": "Unrouted net CC2 (2 pads)",
+          "description": "Net CC2 has 2 pads but no routing (tracks, vias, or zones).",
+          "components": [
+            "J1",
+            "R3"
+          ],
+          "nets": [
+            "CC2"
+          ],
+          "pins": [],
+          "recommendation": "Route net CC2 to connect 2 pads",
+          "report_context": {
+            "section": "Connectivity",
+            "impact": "functionality",
+            "standard_ref": ""
+          },
+          "stages": [
+            "pre_fab"
+          ]
+        },
+        {
+          "net_number": 4,
+          "net_name": "USB_DM",
+          "pad_count": 2,
+          "pads": [
+            "J1.B7",
+            "U1.13"
+          ],
+          "detector": "analyze_connectivity",
+          "rule_id": "RT-001",
+          "category": "connectivity",
+          "severity": "error",
+          "confidence": "deterministic",
+          "evidence_source": "topology",
+          "summary": "Unrouted net USB_DM (2 pads)",
+          "description": "Net USB_DM has 2 pads but no routing (tracks, vias, or zones).",
+          "components": [
+            "J1",
+            "U1"
+          ],
+          "nets": [
+            "USB_DM"
+          ],
+          "pins": [],
+          "recommendation": "Route net USB_DM to connect 2 pads",
+          "report_context": {
+            "section": "Connectivity",
+            "impact": "functionality",
+            "standard_ref": ""
+          },
+          "stages": [
+            "pre_fab"
+          ]
+        },
+        {
+          "net_number": 5,
+          "net_name": "USB_DP",
+          "pad_count": 2,
+          "pads": [
+            "J1.B6",
+            "U1.14"
+          ],
+          "detector": "analyze_connectivity",
+          "rule_id": "RT-001",
+          "category": "connectivity",
+          "severity": "error",
+          "confidence": "deterministic",
+          "evidence_source": "topology",
+          "summary": "Unrouted net USB_DP (2 pads)",
+          "description": "Net USB_DP has 2 pads but no routing (tracks, vias, or zones).",
+          "components": [
+            "J1",
+            "U1"
+          ],
+          "nets": [
+            "USB_DP"
+          ],
+          "pins": [],
+          "recommendation": "Route net USB_DP to connect 2 pads",
+          "report_context": {
+            "section": "Connectivity",
+            "impact": "functionality",
+            "standard_ref": ""
+          },
+          "stages": [
+            "pre_fab"
+          ]
+        },
+        {
+          "net_number": 16,
+          "net_name": "Net-R5-A",
+          "pad_count": 2,
+          "pads": [
+            "R5.2",
+            "LED1.2"
+          ],
+          "detector": "analyze_connectivity",
+          "rule_id": "RT-001",
+          "category": "connectivity",
+          "severity": "error",
+          "confidence": "deterministic",
+          "evidence_source": "topology",
+          "summary": "Unrouted net Net-R5-A (2 pads)",
+          "description": "Net Net-R5-A has 2 pads but no routing (tracks, vias, or zones).",
+          "components": [
+            "LED1",
+            "R5"
+          ],
+          "nets": [
+            "Net-R5-A"
+          ],
+          "pins": [],
+          "recommendation": "Route net Net-R5-A to connect 2 pads",
+          "report_context": {
+            "section": "Connectivity",
+            "impact": "functionality",
+            "standard_ref": ""
+          },
+          "stages": [
+            "pre_fab"
+          ]
+        },
+        {
+          "net_number": 17,
+          "net_name": "Net-R6-A",
+          "pad_count": 2,
+          "pads": [
+            "R6.2",
+            "LED2.2"
+          ],
+          "detector": "analyze_connectivity",
+          "rule_id": "RT-001",
+          "category": "connectivity",
+          "severity": "error",
+          "confidence": "deterministic",
+          "evidence_source": "topology",
+          "summary": "Unrouted net Net-R6-A (2 pads)",
+          "description": "Net Net-R6-A has 2 pads but no routing (tracks, vias, or zones).",
+          "components": [
+            "LED2",
+            "R6"
+          ],
+          "nets": [
+            "Net-R6-A"
+          ],
+          "pins": [],
+          "recommendation": "Route net Net-R6-A to connect 2 pads",
+          "report_context": {
+            "section": "Connectivity",
+            "impact": "functionality",
+            "standard_ref": ""
+          },
+          "stages": [
+            "pre_fab"
+          ]
+        }
+      ]
+    },
+    "reviewer": {
+      "total_findings": 22,
+      "by_category": {
+        "assembly": 1,
+        "placement": 3,
+        "connectivity": 16,
+        "testability": 1,
+        "thermal": 1
+      },
+      "top_issues": [
+        {
+          "rule_id": "PM-001",
+          "severity": "error",
+          "summary": "Courtyard overlap between C2 and U3 (1.402mm\u00b2)",
+          "recommendation": "Resolve courtyard overlap between C2 and U3 \u2014 move components apart or adjust courtyard geometry",
+          "category": "placement"
+        },
+        {
+          "rule_id": "RT-001",
+          "severity": "error",
+          "summary": "Unrouted net +5V (12 pads)",
+          "recommendation": "Route net +5V to connect 12 pads",
+          "category": "connectivity"
+        },
+        {
+          "rule_id": "RT-001",
+          "severity": "error",
+          "summary": "Unrouted net +3V3 (9 pads)",
+          "recommendation": "Route net +3V3 to connect 9 pads",
+          "category": "connectivity"
+        },
+        {
+          "rule_id": "RT-001",
+          "severity": "error",
+          "summary": "Unrouted net ESP_EN (5 pads)",
+          "recommendation": "Route net ESP_EN to connect 5 pads",
+          "category": "connectivity"
+        },
+        {
+          "rule_id": "RT-001",
+          "severity": "error",
+          "summary": "Unrouted net CC1 (2 pads)",
+          "recommendation": "Route net CC1 to connect 2 pads",
+          "category": "connectivity"
+        },
+        {
+          "rule_id": "RT-001",
+          "severity": "error",
+          "summary": "Unrouted net CC2 (2 pads)",
+          "recommendation": "Route net CC2 to connect 2 pads",
+          "category": "connectivity"
+        },
+        {
+          "rule_id": "RT-001",
+          "severity": "error",
+          "summary": "Unrouted net USB_DM (2 pads)",
+          "recommendation": "Route net USB_DM to connect 2 pads",
+          "category": "connectivity"
+        },
+        {
+          "rule_id": "RT-001",
+          "severity": "error",
+          "summary": "Unrouted net USB_DP (2 pads)",
+          "recommendation": "Route net USB_DP to connect 2 pads",
+          "category": "connectivity"
+        },
+        {
+          "rule_id": "RT-001",
+          "severity": "error",
+          "summary": "Unrouted net Net-R5-A (2 pads)",
+          "recommendation": "Route net Net-R5-A to connect 2 pads",
+          "category": "connectivity"
+        },
+        {
+          "rule_id": "RT-001",
+          "severity": "error",
+          "summary": "Unrouted net Net-R6-A (2 pads)",
+          "recommendation": "Route net Net-R6-A to connect 2 pads",
+          "category": "connectivity"
+        },
+        {
+          "rule_id": "RT-001",
+          "severity": "error",
+          "summary": "Unrouted net BOOT (3 pads)",
+          "recommendation": "Route net BOOT to connect 3 pads",
+          "category": "connectivity"
+        },
+        {
+          "rule_id": "RT-001",
+          "severity": "error",
+          "summary": "Unrouted net STAT_LED (2 pads)",
+          "recommendation": "Route net STAT_LED to connect 2 pads",
+          "category": "connectivity"
+        },
+        {
+          "rule_id": "RT-001",
+          "severity": "error",
+          "summary": "Unrouted net UART1_TX (3 pads)",
+          "recommendation": "Route net UART1_TX to connect 3 pads",
+          "category": "connectivity"
+        },
+        {
+          "rule_id": "RT-001",
+          "severity": "error",
+          "summary": "Unrouted net UART1_RX (3 pads)",
+          "recommendation": "Route net UART1_RX to connect 3 pads",
+          "category": "connectivity"
+        },
+        {
+          "rule_id": "RT-001",
+          "severity": "error",
+          "summary": "Unrouted net UART0_TX (3 pads)",
+          "recommendation": "Route net UART0_TX to connect 3 pads",
+          "category": "connectivity"
+        },
+        {
+          "rule_id": "RT-001",
+          "severity": "error",
+          "summary": "Unrouted net UART0_RX (3 pads)",
+          "recommendation": "Route net UART0_RX to connect 3 pads",
+          "category": "connectivity"
+        },
+        {
+          "rule_id": "RT-001",
+          "severity": "error",
+          "summary": "Unrouted net RADAR_OUT (2 pads)",
+          "recommendation": "Route net RADAR_OUT to connect 2 pads",
+          "category": "connectivity"
+        },
+        {
+          "rule_id": "FD-001",
+          "severity": "warning",
+          "summary": "No fiducials on F.Cu (30 SMD components) (finest pad dim 0.50mm \u2014 medium-pitch part present)",
+          "recommendation": "Add fiducial markers for pick-and-place alignment (3 per side with SMD).",
+          "category": "assembly"
+        },
+        {
+          "rule_id": "PM-001",
+          "severity": "warning",
+          "summary": "Courtyard overlap between C1 and U2 (0.336mm\u00b2)",
+          "recommendation": "Resolve courtyard overlap between C1 and U2 \u2014 move components apart or adjust courtyard geometry",
+          "category": "placement"
+        },
+        {
+          "rule_id": "PM-001",
+          "severity": "warning",
+          "summary": "Courtyard overlap between C3 and U2 (0.336mm\u00b2)",
+          "recommendation": "Resolve courtyard overlap between C3 and U2 \u2014 move components apart or adjust courtyard geometry",
+          "category": "placement"
+        },
+        {
+          "rule_id": "TE-001",
+          "severity": "warning",
+          "summary": "Test point coverage: 5/14 nets (36%)",
+          "recommendation": "Add test points to improve ICT/flying probe coverage.",
+          "category": "testability"
+        },
+        {
+          "rule_id": "TV-001",
+          "severity": "warning",
+          "summary": "Thermal vias: U1 none (0/120 min)",
+          "recommendation": "Add thermal vias under U1 (need 120, have 0).",
+          "category": "thermal"
+        }
+      ]
+    },
+    "manager": {
+      "risk_level": "high",
+      "blocker_count": 17,
+      "warning_count": 5,
+      "stage_readiness": {
+        "schematic": "pass",
+        "layout": "needs_work",
+        "pre_fab": "needs_work",
+        "bring_up": "pass"
+      },
+      "one_liner": "17 errors, 5 warnings across 5 categories. Layout, pre-fab stages have blockers."
+    }
+  }
+}
