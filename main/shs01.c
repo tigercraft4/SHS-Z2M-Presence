@@ -708,7 +708,12 @@ static void shs_on_state_change(const ld2410_state_t *state) {
      * The LD2450 is more accurate and doesn't suffer from the same noise issues.
      * This effectively uses LD2450 as a "sanity check" for LD2410.
      */
-    if (shs_ld2450_target_count == 0) {
+    uint8_t ld2450_count = 0;
+    if (xSemaphoreTake(target_data_mutex, pdMS_TO_TICKS(5)) == pdTRUE) {
+        ld2450_count = shs_ld2450_target_count;
+        xSemaphoreGive(target_data_mutex);
+    }
+    if (ld2450_count == 0) {
         raw_moving = false;
         raw_static = false;
     }
@@ -958,10 +963,18 @@ static void shs_on_ld2450_target_update(const ld2450_target_t *targets, uint8_t 
 
     /* Update target count using effective count (excludes interference zones)
      * Only update local state if Zigbee report succeeds to prevent desync */
-    if (shs_ld2450_target_count != effective_count) {
+    uint8_t old_target_count = effective_count; /* fallback: assume same */
+    if (xSemaphoreTake(target_data_mutex, pdMS_TO_TICKS(5)) == pdTRUE) {
+        old_target_count = shs_ld2450_target_count;
+        xSemaphoreGive(target_data_mutex);
+    }
+    if (old_target_count != effective_count) {
         if (shs_zb_set_analog_value(SHS_EP_LD2450_TARGET_COUNT, (float)effective_count) &&
             shs_zb_report_analog_attr(SHS_EP_LD2450_TARGET_COUNT)) {
-            shs_ld2450_target_count = effective_count;
+            if (xSemaphoreTake(target_data_mutex, pdMS_TO_TICKS(5)) == pdTRUE) {
+                shs_ld2450_target_count = effective_count;
+                xSemaphoreGive(target_data_mutex);
+            }
             ESP_LOGI(SHS_TAG, "LD2450 target count: %d (raw: %d, filtered: %d in interference)",
                      effective_count, active_count, active_count - effective_count);
         } else if (shs_zb_ready) {
