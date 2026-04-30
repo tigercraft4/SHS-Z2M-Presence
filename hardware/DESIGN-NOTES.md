@@ -22,6 +22,8 @@
 - USB-C direto (GCT USB4085) com CC pull-downs 5.1k
 - AP2112K-3.3 LDO (5V -> 3.3V)
 - LD2410C + LD2450 mesmos sensores radar
+- 4 camadas: F.Cu (sensores THT), In1.Cu (GND plane), In2.Cu (+3V3), B.Cu (SMD)
+- Board compacta 39x49mm (vs 54.5x76mm v1)
 - Ficheiros em `hardware/v2/`
 
 ## Analise da v2 — Problemas Encontrados e Correcoes
@@ -60,7 +62,7 @@
 - **Sem test points** (debug via USB serial)
 - **Sensores (LD2410C + LD2450) com headers THT em F.Cu** (frente)
 - **Tudo o resto em B.Cu** (ESP32, LDO, caps, resistors, LEDs, switches)
-- **2 camadas obrigatorio**
+- **4 camadas** — F.Cu (sensores), In1.Cu (GND plane RF), In2.Cu (+3V3 power plane), B.Cu (SMD)
 
 ### Orientacao dos sensores (CRITICO)
 - Do projeto GitHub: "The 4 antenna patches (gold squares) must be positioned at the top of the enclosure"

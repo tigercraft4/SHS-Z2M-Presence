@@ -7,4 +7,4 @@ sdkconfig.old
 __pycache__/
 .DS_Store
 *.log
-
+.history/
