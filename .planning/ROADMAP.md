@@ -45,7 +45,7 @@ Plans:
 **Plans:** 2 plans
 Plans:
 - [x] 02-01-PLAN.md — EMA smoothing, LD2410C standalone filter, int16 coordinate encoding ✓ 2026-04-30
-- [ ] 02-02-PLAN.md — Z2M converter bias removal (.js + .mjs)
+- [x] 02-02-PLAN.md — Z2M converter bias removal (.js + .mjs) ✓ 2026-04-30
 
 ### Phase 3: Reliability & Diagnostics
 **Goal**: Device self-monitors, recovers from sensor failures, and exposes health status
