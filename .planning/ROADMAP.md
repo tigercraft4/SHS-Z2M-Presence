@@ -44,7 +44,7 @@ Plans:
   4. Z2M external converter decodes all attributes correctly after int16 encoding change
 **Plans:** 2 plans
 Plans:
-- [ ] 02-01-PLAN.md — EMA smoothing, LD2410C standalone filter, int16 coordinate encoding
+- [x] 02-01-PLAN.md — EMA smoothing, LD2410C standalone filter, int16 coordinate encoding ✓ 2026-04-30
 - [ ] 02-02-PLAN.md — Z2M converter bias removal (.js + .mjs)
 
 ### Phase 3: Reliability & Diagnostics
