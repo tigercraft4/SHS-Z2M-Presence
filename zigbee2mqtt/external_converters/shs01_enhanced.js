@@ -211,17 +211,15 @@ const definition = {
                 }
 
                 // EP8-16: Position data (X/Y/Distance for 3 targets, in mm)
-                // WORKAROUND: X coordinates are transmitted with +3000 bias to avoid
-                // negative float issues in Zigbee stack. Subtract 3000 to restore original.
                 if (msg.data.hasOwnProperty('presentValue')) {
                     switch (ep) {
-                        case EP_T1_X: result.target1_x = Math.round(value) - 3000; break;
+                        case EP_T1_X: result.target1_x = Math.round(value); break;
                         case EP_T1_Y: result.target1_y = Math.round(value); break;
                         case EP_T1_DIST: result.target1_distance = Math.round(value); break;
-                        case EP_T2_X: result.target2_x = Math.round(value) - 3000; break;
+                        case EP_T2_X: result.target2_x = Math.round(value); break;
                         case EP_T2_Y: result.target2_y = Math.round(value); break;
                         case EP_T2_DIST: result.target2_distance = Math.round(value); break;
-                        case EP_T3_X: result.target3_x = Math.round(value) - 3000; break;
+                        case EP_T3_X: result.target3_x = Math.round(value); break;
                         case EP_T3_Y: result.target3_y = Math.round(value); break;
                         case EP_T3_DIST: result.target3_distance = Math.round(value); break;
                         // EP19/20/21/24/25: Zone target counts (from firmware)
