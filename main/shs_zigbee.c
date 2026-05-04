@@ -394,7 +394,7 @@ void shs_ld2410c_force_update(void) {
         esp_zb_zcl_set_attribute_val(SHS_EP_LIGHT, SHS_CL_CFG_ID, ESP_ZB_ZCL_CLUSTER_SERVER_ROLE,
             SHS_ATTR_STATIC_MAX_GATE, &s_state->static_max_gate, true);
         esp_zb_zcl_set_attribute_val(SHS_EP_LIGHT, SHS_CL_CFG_ID, ESP_ZB_ZCL_CLUSTER_SERVER_ROLE,
-            SHS_ATTR_POSITION_REPORTING, &s_state->position_reporting, true);
+            SHS_ATTR_POSITION_REPORTING, (void *)&s_state->position_reporting, true);
         esp_zb_lock_release();
     }
 
@@ -629,7 +629,7 @@ void shs_zigbee_task(void *pvParameters) {
         esp_zb_custom_cluster_add_custom_attr(cfg_cl, SHS_ATTR_STATIC_MAX_GATE,
             ESP_ZB_ZCL_ATTR_TYPE_U16, ESP_ZB_ZCL_ATTR_ACCESS_READ_WRITE, &s_state->static_max_gate);
         esp_zb_custom_cluster_add_custom_attr(cfg_cl, SHS_ATTR_POSITION_REPORTING,
-            ESP_ZB_ZCL_ATTR_TYPE_BOOL, ESP_ZB_ZCL_ATTR_ACCESS_READ_WRITE, &s_state->position_reporting);
+            ESP_ZB_ZCL_ATTR_TYPE_BOOL, ESP_ZB_ZCL_ATTR_ACCESS_READ_WRITE, (void *)&s_state->position_reporting);
         esp_zb_custom_cluster_add_custom_attr(cfg_cl, SHS_ATTR_MIN_MOVING_ENERGY,
             ESP_ZB_ZCL_ATTR_TYPE_U16, ESP_ZB_ZCL_ATTR_ACCESS_READ_WRITE, &s_state->min_moving_energy);
         esp_zb_custom_cluster_add_custom_attr(cfg_cl, SHS_ATTR_MIN_STATIC_ENERGY,

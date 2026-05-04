@@ -44,7 +44,7 @@ typedef struct zcl_basic_manufacturer_info_s {
  *      - ESP_OK: On success
  *      - ESP_ERR_INVALID_ARG: Invalid argument
  */
-esp_err_t esp_zcl_utility_add_ep_basic_manufacturer_info(esp_zb_ep_list_t *ep_list, uint8_t endpoint_id, zcl_basic_manufacturer_info_t *info);
+esp_err_t esp_zcl_utility_add_ep_basic_manufacturer_info(esp_zb_ep_list_t *ep_list, uint8_t endpoint_id, const zcl_basic_manufacturer_info_t *info);
 
 #ifdef __cplusplus
 } // extern "C"

@@ -160,7 +160,7 @@ void shs_boot_button_task(void *pv) {
                             SHS_CL_CFG_ID,
                             ESP_ZB_ZCL_CLUSTER_SERVER_ROLE,
                             SHS_ATTR_POSITION_REPORTING,
-                            &s_state->position_reporting,
+                            (void *)&s_state->position_reporting,
                             true
                         );
                         esp_zb_lock_release();

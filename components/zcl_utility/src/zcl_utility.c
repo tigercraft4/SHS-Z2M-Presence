@@ -19,7 +19,7 @@
 
 static const char *TAG = "ZCL_UTILITY";
 
-esp_err_t esp_zcl_utility_add_ep_basic_manufacturer_info(esp_zb_ep_list_t *ep_list, uint8_t endpoint_id, zcl_basic_manufacturer_info_t *info)
+esp_err_t esp_zcl_utility_add_ep_basic_manufacturer_info(esp_zb_ep_list_t *ep_list, uint8_t endpoint_id, const zcl_basic_manufacturer_info_t *info)
 {
     esp_err_t ret = ESP_OK;
     esp_zb_cluster_list_t *cluster_list = NULL;
